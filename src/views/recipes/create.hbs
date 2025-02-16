@@ -1,0 +1,22 @@
+<section class="form-container">
+    <h2>Create Recipe</h2>
+    <form method="POST">
+        <label for="title">Recipe Title:</label>
+        <input type="text" id="title" name="title" value="{{product.title}}">
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description">{{product.description}}</textarea>
+        {{!-- The value attribute is not valid for <textarea> elements in HTML --}}
+
+        <label for="ingredients">Ingredients:</label>
+        <textarea id="ingredients" name="ingredients">{{product.ingredients}}</textarea>
+
+        <label for="instructions">Instructions:</label>
+        <textarea id="instructions" name="instructions">{{product.instructions}}</textarea>
+
+        <label for="image">Image URL:</label>
+        <input type="url" id="image" name="image" value="{{product.image}}">
+
+        <button type="submit">Create Recipe</button>
+    </form>
+</section>

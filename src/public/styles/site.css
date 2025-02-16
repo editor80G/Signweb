@@ -1,0 +1,148 @@
+body
+{
+    font-size: .85em;
+    font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
+    color: #232323;
+    background-color: #fff;
+    
+    font-family: 'Roboto Condensed', sans-serif;   
+    
+}
+
+header,
+footer,
+nav,
+section {
+    display: block;
+}
+
+/*Custom styles*/
+#page
+{
+    width: 980px;
+    margin: 0 auto 0;
+    padding: 0;
+    position: relative;
+    background: #ffffff;
+    height:auto;
+    
+}
+
+#header
+{
+    width: auto;
+    margin: 0 auto 0;
+    padding:20px 10px 20px 10px;
+    position: relative;
+    background: #ffffff; 
+      
+}
+#logo
+{
+    -webkit-box-shadow: 3px 3px 15px 0px rgba(50, 50, 50, 0.75);
+-moz-box-shadow:    3px 3px 15px 0px rgba(50, 50, 50, 0.75);
+box-shadow:         3px 3px 15px 0px rgba(50, 50, 50, 0.75);
+}
+
+.clear{
+  clear: left;
+}
+
+#left-block
+{
+    float:left;
+    width: 550px;
+    margin: 0 0 0 0 ;
+    padding: 10px 10px 10px 10px;
+    display:inline;
+    
+}
+
+#right-block
+{
+    float:left;
+    width: 350px;
+    margin: 0 0 0 0 ;
+    display:inline;
+    padding-left:25px;
+}
+
+
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+
+fieldset 
+{
+    border:1px solid #ddd;
+    padding:0 1.4em 1.4em 1.4em;
+    margin:0 0 1.5em 0;
+}
+
+legend 
+{
+    font-size:1.2em;
+    font-weight: bold;
+}
+
+textarea 
+{
+    min-height: 75px;
+}
+
+.editor-label 
+{
+    margin: 1em 0 0 0;
+}
+
+.editor-field 
+{
+    margin:0.5em 0 0 0;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+/* Check Email Aviability */
+ #status
+  {
+  font-size:11px;
+  margin:10px;
+  }
+  .availablecss
+  {
+  background-color:#CEFFCE;
+  border:1px solid green;
+  }
+  .notavailablecss
+  {
+  background-color:#FFD9D9;
+  border:1px solid red;
+  }

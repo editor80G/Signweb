@@ -1,0 +1,21 @@
+<section class="hero">
+    <h2>Welcome to Home Cooking Recipes</h2>
+    <p>Your go-to place for delicious and easy-to-make recipes.</p>
+    <a href="/recipes" class="btn">Explore Recipes</a>
+</section>
+<section class="featured-recipes">
+    <h2>Featured Recipes</h2>
+    <div class="recipes">
+        {{#each recipes}}
+        <article class="recipe">
+            <img src="{{this.image}}" alt="{{this.title}}">
+            <h3>{{this.title}}</h3>
+            <p>{{this.description}}</p>
+            <a href="/recipes/details/{{this._id}}">Read More</a>
+        </article>
+        {{else}}
+        <p class="no-post">There are no recipes found yet!</p>
+        {{/each}}
+        </article>
+    </div>
+</section>
