@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { getErrorMessage } from '../utils/errorUtils.js';
 import { isAuth } from '../middlewares/authMiddleware.js';
-import * as recipesService from '../services/recipesService.js';
+import * as recipesService from '../services/pubService.js';
 
 const recipesController = Router();
 

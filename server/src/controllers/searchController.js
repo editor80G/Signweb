@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { getErrorMessage } from '../utils/errorUtils.js';
 
-import * as recipesService from '../services/recipesService.js';
+import * as recipesService from '../services/pubService.js';
 
 const searchController = Router();
 
