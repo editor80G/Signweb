@@ -1,14 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './components/Register';
+import Layout from './components/Layout';
 
 const App = () => {
   return (
     <Router>
-      <Routes>
-        <Route path="/register" element={<Register />} />
-        {/* Add other routes here */}
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path="/register" element={<Register />} />
+          {/* Add other routes here */}
+        </Routes>
+      </Layout>
     </Router>
   );
 };
