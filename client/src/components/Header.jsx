@@ -1,10 +1,10 @@
 import React from 'react';
+import logo from '../assets/images/logo-sign-magazine.jpg';
 
 const Header = () => {
     return (
-        <header>
-            <h1>My Application</h1>
-            {/* Add navigation links or other header content here */}
+        <header id="header">
+            <img id="logo" src={logo} alt="Logo" />
         </header>
     );
 };

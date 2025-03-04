@@ -3,11 +3,10 @@ node_modules/
 
 # Ignore public/files folder
 public/files/
-
 public/images/covers
 
 # Ignore log files
 *.log
 
 # Ignore .env file
-.env    // This is a file that contains sensitive information, such as API keys, that should not be shared in a public repository.
+.env    

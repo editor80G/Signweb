@@ -23,8 +23,14 @@ const Nav = () => {
         <nav>
             <ul>
                 <li><Link to="/">Home</Link></li>
-                <li><Link to="/publications">Publications</Link></li>
-                {!isAuthenticated && <li><Link to="/register">Register</Link></li>}
+                <li className="dropdown">
+                    <li>Наши издания</li>
+                    <ul className="dropdown-content">
+                        <li><Link to="/magazines">Журнал "Наружка"</Link></li>
+                        <li><Link to="/catalogs">Каталог "Реклама и дизайн в Украине"</Link></li>
+                    </ul>
+                </li>
+                {!isAuthenticated && <li><Link to="/register">Регистрация</Link></li>}
                 {/* Add other navigation links here */}
             </ul>
         </nav>
