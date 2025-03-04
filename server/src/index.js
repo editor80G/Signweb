@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+dotenv.config();
+import process from 'process';
+
 import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
@@ -9,14 +13,14 @@ import { tempData } from './middlewares/tempDataMiddleware.js';
 // React related imports
 import path from 'path';
 import { fileURLToPath } from 'url';
+import cors from 'cors';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
 const app = express();
-const PORT = 3000;
-const DB_URI = 'mongodb://localhost:27017/signweb'; // TODO: Change this to enviroment var DB_URI in .env file
+const PORT = process.env.PORT || 3000;
+const DB_URI = process.env.DB_URI;
 
 // Db setup
 (async () => {
@@ -28,37 +32,17 @@ const DB_URI = 'mongodb://localhost:27017/signweb'; // TODO: Change this to envi
     }
 })();
 
-// Serve React build files
-app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
-});
-
-// Hadlebars setup
-// app.engine('hbs', handlebars.engine({
-//     extname: '.hbs',
-//     defaultLayout: 'main',
-//     layoutsDir: 'src/views/layouts/',
-//     runtimeOptions: {
-//         allowProtoMethodsByDefault: true,
-//     },
-//     helpers: {
-//         setTitle(title) {
-//             this.title = title;
-//         }
-
-//     }
-// }));
-// app.set('view engine', 'hbs');
-// app.set('views', 'src/views');
-
 // Express setup
+app.use(cors({
+    origin: 'http://localhost:5173', // Replace with your client's origin
+    credentials: true // Allow credentials (cookies) to be sent
+})); // ensure that the CORS middleware is applied before any other middleware that handles requests
+app.use(express.json());
 app.use(express.static('src/public'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(expressSession({
-    secret: 'secret12345', // TODO: Change this to enviroment var SESSION_SECRET in .env file
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false, httpOnly: true, maxAge: 3600000 }
@@ -67,16 +51,16 @@ app.use(auth);
 app.use(tempData);
 app.use(routes);
 
-// Routes
-// The app.use(routes); middleware is handling the root URL (/) before it reaches this route handler.
-// app.get('/', (req, res) => {
-//     console.log('Root URL accessed');
-//     res.send('Hello, world!');
-// });
+// Serve Vite build files (apply after CORS middleware)
+app.use(express.static(path.join(__dirname, '..', '..', 'client', 'dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', '..', 'client', 'dist', 'index.html'));
+});
 
 // Catch-all route for 404 errors
 app.use((req, res) => {
-    res.status(404).render('404');
+    res.status(404).json({ error: 'Not Found' });
 });
 
 // Start the server

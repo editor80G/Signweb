@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getRecentPublications } from '../../services/pubService.js';
+import { getRecentPublications } from '../services/pubService.js';
 
 const homeController = Router();
 

@@ -1,4 +1,4 @@
-import Publication from '../src/models/Publication.js';
+import Publication from '../models/Publication.js';
 
 // Create a new publication
 export async function createPublication(data) {

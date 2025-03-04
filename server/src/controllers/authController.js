@@ -1,46 +1,40 @@
 import { Router } from 'express';
-import authService from '../../services/authService.js';
+import authService from '../services/authService.js';
 import { AUTH_COOKIE_NAME } from '../config.js';
-import { isAuth, isGuest } from '../middlewares/authMiddleware.js';
+import { auth, isAuth, isGuest } from '../middlewares/authMiddleware.js';
 import { getErrorMessage } from '../utils/errorUtils.js';
+import captureIpMiddleware from '../middlewares/captureIpMiddleware.js';
 
 const authController = Router();
 
-// REGISTER page (all users)
-// GET method
-authController.get('/register', isGuest, (req, res) => {
-    res.json({ title: 'Register Page' });
+// Endpoint to check authentication status
+authController.get('/status', auth, (req, res) => {
+    if (req.user) {
+        return res.json({ isAuthenticated: true });
+    } else {
+        return res.json({ isAuthenticated: false });
+    }
 });
 
+// REGISTER page (all users)
+// GET method
+// authController.get('/register', isGuest, (req, res) => {
+//     res.json({ title: 'Register Page' });
+// });
+
 // POST method
-authController.post('/register', isGuest, async (req, res) => {
+authController.post('/register', isGuest, captureIpMiddleware, async (req, res) => {
     const userData = req.body;
     try {
         const token = await authService.register(userData);
-        res.cookie(AUTH_COOKIE_NAME, token, { httpOnly: true });
+        res.cookie(AUTH_COOKIE_NAME, token, { httpOnly: true, secure: false, maxAge: 3600000 });
         res.status(201).json({ message: 'Registration successful', token });
     } catch (error) {
         res.status(400).json({ title: 'Register Page', error: getErrorMessage(error), user: userData });
     }
 });
 
-// // REGISTER page (all users)
-// // GET method
-// authController.get('/register', isGuest, (req, res) => {
-//     res.render('auth/register', { title: 'Register Page' });
-// });
 
-// // POST method
-// authController.post('/register', isGuest, async (req, res) => {
-//     const userData = req.body;
-//     try {
-//         const token = await authService.register(userData);
-//         res.cookie(AUTH_COOKIE_NAME, token, { httpOnly: true });
-//         res.redirect('/');
-//     } catch (error) {
-//         res.render('auth/register', { title: 'Register Page', error: getErrorMessage(error), user: userData }); // Pass the error message and the user data back to the view
-//     }
-// });
 
 // LOGIN page (not authenticated users)
 // GET method
