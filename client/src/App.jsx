@@ -1,30 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import Register from './components/Registration';
+import Providers from './Providers';
 import Layout from './components/Layout';
-import Publications from './components/Publications';
-import Home from './components/Home';
-import Form from './components/Form';
+import AppRoutes from './routes/Routes';
+
 
 // import './App.css';
 import './assets/css/Site.css'; // Import the CSS file
 
 const App = () => {
   return (
-    <AuthProvider>
+    <Providers>
       <Router>
         <Layout>
-          <Routes>
-            <Route path="/register" element={<Register />} />
-            <Route path="/publications" element={<Publications />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/" element={<Form />} />
-            {/* Add other routes here */}
-          </Routes>
+          <AppRoutes />
         </Layout>
       </Router>
-    </AuthProvider>
+    </Providers>
   );
 };
 

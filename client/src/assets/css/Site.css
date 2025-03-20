@@ -73,6 +73,10 @@ section {
 nav {
     background-color: #343a40;
     padding: 10px;
+    margin-top: 120px;
+    width: 100%;
+    position: fixed;
+
 }
 
 nav ul {
@@ -150,15 +154,26 @@ nav ul li .dropdown-title:hover {
 }
 
 #header {
-    width: auto;
+    width: 100%;
     margin: 0 auto 0;
-    padding: 20px 10px 20px 10px;
-    position: relative;
+    padding: 40px 0px 40px 0px;
+    height: 70px;
+    position: fixed;
+    background-color: #f8f9fa;
+    /* position: relative; */
     /* background: #ffffff; */
 }
 
 #logo {
     width: 300px;
+    margin-left: 110px;
+    vertical-align: middle;
+
+
+
+    float: left;
+    /* display: block; */
+    /* margin-bottom: 10px; */
     -webkit-box-shadow: 3px 3px 15px 0px rgba(50, 50, 50, 0.75);
     -moz-box-shadow: 3px 3px 15px 0px rgba(50, 50, 50, 0.75);
     box-shadow: 3px 3px 15px 0px rgba(50, 50, 50, 0.75);
@@ -259,4 +274,111 @@ textarea {
 .notavailablecss {
     background-color: #FFD9D9;
     border: 1px solid red;
+}
+
+
+/* Home page CSS */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    padding-top: 200px;
+}
+
+.home-content {
+    /* display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start; */
+
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    /* Две колонки: 2 части для home-intro, 1 часть для home-outlet */
+    gap: 20px;
+    /* Расстояние между колонками */
+    align-items: start;
+    /* Выравнивание по верхнему краю */
+
+}
+
+.home-intro {
+    /* display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px; */
+    flex: 2;
+    /* Задаёт относительную ширину для home-intro */
+    /* margin-right: 50px; */
+    width: 80%;
+    text-align: left;
+    padding-left: 90px;
+
+    /* Отступ справа */
+}
+
+.home-title {
+    font-size: 37px;
+    font-weight: bold;
+    line-height: 130%;
+
+    margin-bottom: 20px;
+
+}
+
+.home-left {
+    flex: 1;
+    /* max-width: 600px; */
+    max-width: 70%;
+    margin-right: 20px;
+    font-size: 18px;
+    /* display: flex; */
+
+}
+
+.home-subtitle {
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.home-right {
+    flex: 1;
+    /* max-width: 300px; */
+    max-width: 30%;
+    float: right;
+    /* display: flex; */
+    /* text-align: center;
+    margin-left: 20px; */
+    /* Add margin to create space between home-left and home-right */
+}
+
+.home-image {
+    width: 100%;
+    max-width: 250px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.home-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.home-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.home-link:hover {
+    text-decoration: underline;
+}
+
+.home-outlet {
+    /* margin-top: 20px; */
+    flex: 1;
+    /* Задаёт относительную ширину для home-outlet */
+    width: 40%;
+    /* Ограничение максимальной ширины */
 }
