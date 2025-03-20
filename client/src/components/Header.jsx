@@ -5,9 +5,12 @@ import LanguageSwitcher from './LanguageSwitcher';
 const Header = () => {
     return (
         <header id="header">
-            <img id="logo" src={logo} alt="Logo" />
-            {/* TODO: Add LanguageSwitcher component here */}
             <LanguageSwitcher />
+            <div className="header-container">
+                <img id="logo" src={logo} alt="Logo" />
+
+            </div>
+
         </header>
     );
 };

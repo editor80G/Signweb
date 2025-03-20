@@ -6,7 +6,7 @@ const LanguageSwitcher = () => {
     const { language, setLanguage } = useLanguage();
 
     return (
-        <div>
+        <div className="language-switcher">
             <button
                 onClick={() => setLanguage('en')}
                 style={{ fontWeight: language === 'en' ? 'bold' : 'normal' }}

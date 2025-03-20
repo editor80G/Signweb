@@ -74,7 +74,7 @@ section {
 nav {
     background-color: #343a40;
     padding: 10px;
-    margin-top: 120px;
+    margin-top: 150px;
     width: 100%;
     position: fixed;
 
@@ -157,8 +157,8 @@ nav ul li .dropdown-title:hover {
 #header {
     width: 100%;
     margin: 0 auto 0;
-    padding: 40px 0px 40px 0px;
-    height: 70px;
+    /* padding: 40px 0px 40px 0px; */
+    height: 150px;
     position: fixed;
     background-color: #f8f9fa;
     /* position: relative; */
@@ -277,6 +277,14 @@ textarea {
     border: 1px solid red;
 }
 
+.language-switcher {
+    display: flex;
+    justify-content: right;
+    align-items: left;
+    gap: 10px;
+    margin-top: 10px;
+}
+
 
 /* Home page CSS */
 .home-container {
@@ -285,6 +293,7 @@ textarea {
     align-items: center;
     padding: 20px;
     padding-top: 200px;
+    width: 100%;
 }
 
 .home-content {
@@ -301,21 +310,23 @@ textarea {
     /* Расстояние между колонками */
     align-items: start;
     /* Выравнивание по верхнему краю */
+    width: 100%;
 
 }
 
-.home-intro {
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 20px; */
-    /* flex: 2; */
+/* .home-intro {
     display: flex;
     width: 80%;
     text-align: left;
     padding-left: 90px;
+} */
 
-    /* Отступ справа */
+.home-intro {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
 .home-title {
@@ -330,9 +341,11 @@ textarea {
 .home-left {
     flex: 1;
     /* max-width: 600px; */
-    max-width: 70%;
-    margin-right: 20px;
+    /* max-width: 40%; */
+    margin-right: 5px;
+    margin-left: 70px;
     font-size: 18px;
+    text-align: left;
     /* display: flex; */
 
 }
@@ -357,8 +370,10 @@ textarea {
     /* width: 100%; */
     width: 350px;
     margin-bottom: 10px;
-    margin-top: 500px;
+    margin-top: 400px;
     position: relative;
+    /* max-width: 30%; */
+
 }
 
 .home-links {
@@ -382,4 +397,108 @@ textarea {
     /* Задаёт относительную ширину для home-outlet */
     width: 100%;
     /* Ограничение максимальной ширины */
+    margin-right: 70px;
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+    .home-content {
+        flex-direction: column;
+        /* Переключаем на вертикальное расположение */
+    }
+
+    .home-intro {
+        flex-direction: column;
+        /* Располагаем элементы вертикально */
+        align-items: center;
+    }
+
+    .home-left {
+        max-width: 100%;
+        /* Занимает всю ширину */
+        margin-bottom: 20px;
+        /* Отступ снизу для разделения с home-right */
+    }
+
+    .home-right {
+        /* max-width: 100%; */
+        /* Занимает всю ширину */
+        display: flex;
+        justify-content: center;
+        /* Центрируем содержимое по горизонтали */
+        align-items: center;
+        /* Центрируем содержимое по вертикали */
+        width: 100%;
+    }
+
+    .home-outlet {
+        /* margin-top: 20px;
+        max-width: 100%; */
+        /* Отступ сверху */
+        display: flex;
+        justify-content: center;
+        /* Центрируем содержимое по горизонтали */
+        align-items: center;
+        width: 100%;
+
+    }
+
+
+    .home-image {
+        /* width: 100%; */
+        /* width: 100%; */
+        margin-bottom: 10px;
+        margin-top: 10px;
+        position: relative;
+    }
+
+
+    .header-container {
+        display: flex;
+        justify-content: center;
+        /* Центрируем содержимое по горизонтали */
+        align-items: center;
+        /* Центрируем содержимое по вертикали */
+        width: 100%;
+        /* Контейнер занимает всю ширину */
+        /*padding: 20px;*/
+        /* Отступы вокруг логотипа */
+    }
+
+    #logo {
+        width: 300px;
+        /* Ширина логотипа */
+        margin-left: 0;
+        /* Отступ слева */
+    }
+
+    #header {
+        width: 100%;
+        /* Ширина шапки */
+        margin: 0 auto 0;
+        /* Отступы сверху и снизу */
+        padding: 20px 0px 20px 0px;
+        /* Отступы внутри шапки */
+        height: 100px;
+        /* Высота шапки */
+        position: fixed;
+        /* Фиксированное позиционирование */
+        background-color: #f8f9fa;
+        /* Цвет фона */
+    }
+
+    nav {
+        /* background-color: #343a40;
+        padding: 10px; */
+        margin-top: 135px;
+        /* Отступ равен высоте #header */
+        width: 100%;
+        position: fixed;
+        /* top: 0; */
+        /* Убедитесь, что nav не перекрывает header */
+        z-index: 9;
+        /* Убедитесь, что nav находится ниже header */
+    }
+
+
 }

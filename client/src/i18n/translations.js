@@ -27,6 +27,29 @@ export const translations = {
         ACCOUNT_PLACEHOLDER_BUSINESS_TYPE: 'Выберите тип бизнеса',
         ACCOUNT_PLACEHOLDER_JOB_TITLE: 'Выберите должность или ',
         ACCOUNT_SUBMIT: 'Зарегистрироваться',
+        ACCOUNT_VALIDATION_EMAIL: 'Пожалуйста, введите адрес электронной почты!',
+        ACCOUNT_VALIDATION_PASSWORD: 'Пожалуйста, введите пароль!',
+        ACCOUNT_VALIDATION_PASSWORD_CONFIRM: 'Пожалуйста, подтвердите пароль!',
+        ACCOUNT_VALIDATION_BUSINESS_TYPE: 'Пожалуйста, выберите тип бизнеса!',
+        ACCOUNT_VALIDATION_JOB_TITLE: 'Пожалуйста, выберите должность!',
+
+        HOME_TITLE: 'Журнал НАРУЖКА украинский выпуск поможет ориентироваться в технологиях и материалах для наружной рекламы, найти надежных партнеров!',
+        HOME_SUBSCRIBE_CALL_TO_ACTION: 'Оформите БЕСПЛАТНУЮ подписку сейчас!',
+        HOME_INTRO: 'Журнал НАРУЖКА рассчитан на изготовителей визуальной рекламы, продавцов материалов и оборудования для рекламы, заказчиков наружной рекламы. Это компетентный источник информации для всех представителей индустрии визуальной рекламы. Это информация о новых материалах для производства вывесок, оборудовании для широкоформатной печати.В каждом номере публикуются идеи по рекламному оформлению, новости о реализованных проектах, список поставщиков услуг, материалов и оборудования.',
+        HOME_SECTIONS_TITLE: 'Постоянные разделы номера:',
+        HOME_SECTIONS: [
+            'События индустрии',
+            'Фотогалерея реализованных проектов',
+            'Светотехника',
+            'Материалы и оборудование для рекламы',
+        ],
+        HOME_MORE: '...и многое другое!',
+        HOME_SUBSCRIPTION: 'Для Украины существует подписка на печатную версию, для других стран подписка только на электронную версию. Подписка на БЕСПЛАТНУЮ печатную версию не гарантирует регулярного получения, номера будут присылаться выборочно на усмотрение редакции.',
+
+        NAV_HOME: 'Главная',
+        NAV_OUR_PUBLICATIONS: 'Наши издания',
+        NAV_OUR_PUBLICATIONS_OUTDOOR: 'Журнал "НАРУЖКА"',
+        NAV_OUR_PUBLICATIONS_CATALOG: 'Каталог"Реклама и дизайн в Украине"',
     },
     en: {
         SIGN_MAKING: 'Sign making and visual design',
@@ -45,7 +68,7 @@ export const translations = {
         WORKER: 'Maketist, CNC operator, printer',
         STUDENT: 'Teacher, student',
 
-        ACCOUNT_REGISTER: 'Register to view our publications',
+        ACCOUNT_REGISTER: 'Register to View Our Publications',
         ACCOUNT_EMAIL: 'Email',
         ACCOUNT_PASSWORD: 'Password',
         ACCOUNT_CONFIRM_PASSWORD: 'Confirm password',
@@ -54,9 +77,29 @@ export const translations = {
         ACCOUNT_PLACEHOLDER_BUSINESS_TYPE: 'Select business type',
         ACCOUNT_PLACEHOLDER_JOB_TITLE: 'Select job title',
         ACCOUNT_SUBMIT: 'Register',
+        ACCOUNT_VALIDATION_EMAIL: 'Please enter your email address!',
+        ACCOUNT_VALIDATION_PASSWORD: 'Please enter your password!',
+        ACCOUNT_VALIDATION_PASSWORD_CONFIRM: 'Please confirm your password!',
+        ACCOUNT_VALIDATION_BUSINESS_TYPE: 'Please select business type!',
+        ACCOUNT_VALIDATION_JOB_TITLE: 'Please select job title!',
 
+        HOME_TITLE: 'The Ukrainian Edition of the OUTDOOR Magazine Will Help You Navigate the Technologies and Materials for Outdoor Advertising, Find Reliable Partners!',
+        HOME_SUBSCRIBE_CALL_TO_ACTION: 'Subscribe for FREE now!',
+        HOME_INTRO: 'The OUTDOOR magazine is intended for manufacturers of visual advertising, sellers of materials and equipment for advertising, customers of outdoor advertising. This is a competent source of information for all representatives of the visual advertising industry. This is information about new materials for the production of signs, equipment for wide-format printing. Each issue contains ideas for advertising design, news about implemented projects, a list of service providers, materials and equipment.',
+        HOME_SECTIONS_TITLE: 'Regular sections of the issue:',
+        HOME_SECTIONS: [
+            'Industry Events',
+            'Photo Gallery of Implemented Projects',
+            'Lighting Technology',
+            'Materials and Equipment for Advertising',
+        ],
+        HOME_MORE: '...and much more!',
+        HOME_SUBSCRIPTION: 'For Ukraine, there is a subscription to the print version, while for other countries, only a subscription to the electronic version is available. A subscription to the FREE print version does not guarantee regular receipt; issues will be sent selectively at the discretion of the editorial office.',
 
-
+        NAV_HOME: 'Home',
+        NAV_OUR_PUBLICATIONS: 'Our Publications',
+        NAV_OUR_PUBLICATIONS_OUTDOOR: 'OUTDOOR Magazine',
+        NAV_OUR_PUBLICATIONS_CATALOG: 'Advertising and Design in Ukraine Catalog',
     }
 };
 

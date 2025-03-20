@@ -6,11 +6,14 @@ import '../App.css';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import Registration from './Registration';
+import { getTranslation } from '../i18n/getTranslations';
+import { useLanguage } from '../context/LanguageContext';
 
 
 const Home = () => {
 
     const { isAuthenticated, handleAuthChange } = useContext(AuthContext);
+    const { language } = useLanguage();
 
     const checkAuthStatus = async () => {
         try {
@@ -30,43 +33,34 @@ const Home = () => {
         <div className="home-container">
             <div className="home-content">
                 <div className="home-intro">
-
                     <div className="home-left">
                         <h2 className="home-title">
-                            Журнал НАРУЖКА (Украина) поможет ориентироваться в технологиях и материалах для наружной рекламы, найти надежных партнеров!
+                            {getTranslation('HOME_TITLE', language)}
                         </h2>
-                        <h3 className="home-subtitle">Оформите БЕСПЛАТНУЮ подписку сейчас!</h3>
-                        <p>
-                            Журнал НАРУЖКА рассчитан на изготовителей визуальной рекламы, продавцов материалов и оборудования для рекламы, заказчиков наружной рекламы.
-                            Это компетентный источник информации для всех представителей индустрии визуальной рекламы.
-                            Это информация о новых материалах для производства вывесок, оборудовании для широкоформатной печати.
-                            В каждом номере публикуются идеи по рекламному оформлению, новости о реализованных проектах, список поставщиков услуг, материалов и оборудования.
-                        </p>
-                        <p>Постоянные разделы номера:</p>
+                        <h3 className="home-subtitle">{getTranslation('HOME_SUBSCRIBE_CALL_TO_ACTION', language)}</h3>
+                        <p>{getTranslation('HOME_INTRO', language)}</p>
+                        <p>{getTranslation('HOME_SECTIONS_TITLE', language)}</p>
                         <ul>
-                            <li>События индустрии</li>
-                            <li>Фотогалерея реализованных проектов</li>
-                            <li>Светотехника</li>
-                            <li>Материалы и оборудование для рекламы</li>
+                            {getTranslation('HOME_SECTIONS', language).map((section, index) => (
+                                <li key={index}>{section}</li>
+                            ))}
                         </ul>
-                        <p>...и многое другое!</p>
-                        <p>
-                            Для Украины существует подписка на печатную версию, для других стран подписка только на электронную версию.
-                            Подписка на БЕСПЛАТНУЮ печатную версию не гарантирует регулярного получения, номера будут присылаться выборочно на усмотрение редакции.
-                        </p>
+                        <p>{getTranslation('HOME_MORE', language)}</p>
+                        <p>{getTranslation('HOME_SUBSCRIPTION', language)}</p>
                     </div>
                     <div className="home-right">
                         <img className="home-image" src={magazinesImage} alt="Magazines" />
-                        <div className="home-links">
+                        {/* <div className="home-links">
                             <Link to="/issues" className="home-link">Архив журнала «Наружка»</Link>
                             <Link to="/catalogs" className="home-link">Архив каталога «Реклама и дизайн в Украине»</Link>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="home-outlet">
                     {!isAuthenticated ? <Registration /> : <Outlet />}
                 </div>
             </div>
+
         </div>
     );
 };

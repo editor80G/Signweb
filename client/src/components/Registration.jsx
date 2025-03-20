@@ -16,8 +16,6 @@ const { Option } = Select;
 
 const Register = () => {
     const { language } = useLanguage();
-
-
     const navigate = useNavigate();
     const { handleAuthChange } = useContext(AuthContext);
 
@@ -74,7 +72,7 @@ const Register = () => {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your email!',
+                            message: getTranslation('ACCOUNT_VALIDATION_EMAIL', language),
                             type: 'email',
                         },
                     ]}
@@ -88,7 +86,7 @@ const Register = () => {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your password!',
+                            message: getTranslation('ACCOUNT_VALIDATION_PASSWORD', language),
                         },
                     ]}
                 >
@@ -101,7 +99,7 @@ const Register = () => {
                     rules={[
                         {
                             required: true,
-                            message: 'Please confirm your password!',
+                            message: getTranslation('ACCOUNT_VALIDATION_PASSWORD_CONFIRM', language),
                         },
                     ]}
                 >
@@ -114,11 +112,11 @@ const Register = () => {
                     rules={[
                         {
                             required: true,
-                            message: 'Please select your business type!',
+                            message: getTranslation('ACCOUNT_VALIDATION_BUSINESS_TYPE', language),
                         },
                     ]}
                 >
-                    <Select placeholder="Select a business type">
+                    <Select placeholder={getTranslation('ACCOUNT_PLACEHOLDER_BUSINESS_TYPE', language)}>
                         {businessTypes.map((type) => (
                             <Option key={type.id} value={type.id}>
                                 {getTranslation(type.key, language)}
@@ -133,11 +131,11 @@ const Register = () => {
                     rules={[
                         {
                             required: true,
-                            message: 'Please select your job title!',
+                            message: getTranslation('ACCOUNT_VALIDATION_JOB_TITLE', language),
                         },
                     ]}
                 >
-                    <Select placeholder="Select a job title">
+                    <Select placeholder={getTranslation('ACCOUNT_PLACEHOLDER_JOB_TITLE', language)}>
                         {jobTitles.map((title) => (
                             <Option key={title.id} value={title.id}>
                                 {getTranslation(title.key, language)}
@@ -148,11 +146,11 @@ const Register = () => {
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                     <Button type="primary" htmlType="submit">
-                        Register
+                        {getTranslation('ACCOUNT_SUBMIT', language)}
                     </Button>
                 </Form.Item>
             </Form>
-        </div>
+        </div >
     );
 };
 
