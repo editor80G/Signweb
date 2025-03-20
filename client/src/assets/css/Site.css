@@ -13,6 +13,7 @@ footer,
 nav,
 section {
     display: block;
+    z-index: 10;
 }
 
 /*Custom styles*/
@@ -308,9 +309,8 @@ textarea {
     flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 20px; */
-    flex: 2;
-    /* Задаёт относительную ширину для home-intro */
-    /* margin-right: 50px; */
+    /* flex: 2; */
+    display: flex;
     width: 80%;
     text-align: left;
     padding-left: 90px;
@@ -354,9 +354,10 @@ textarea {
 }
 
 .home-image {
-    width: 100%;
-    max-width: 250px;
+    /* width: 100%; */
+    width: 350px;
     margin-bottom: 10px;
+    margin-top: 500px;
     position: relative;
 }
 
@@ -379,6 +380,6 @@ textarea {
     /* margin-top: 20px; */
     flex: 1;
     /* Задаёт относительную ширину для home-outlet */
-    width: 40%;
+    width: 100%;
     /* Ограничение максимальной ширины */
 }

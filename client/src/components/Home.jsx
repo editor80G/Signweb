@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import magazinesImage from '../assets/images/sign-magazines.jpg';
-import '../App.css'; // Предполагается, что стили вынесены в отдельный файл
+import '../App.css';
+// Предполагается, что стили вынесены в отдельный файл
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import Registration from './Registration';
+
 
 const Home = () => {
 
@@ -28,10 +30,11 @@ const Home = () => {
         <div className="home-container">
             <div className="home-content">
                 <div className="home-intro">
-                    <h2 className="home-title">
-                        Журнал НАРУЖКА (Украина) поможет ориентироваться в технологиях и материалах для наружной рекламы, найти надежных партнеров!
-                    </h2>
+
                     <div className="home-left">
+                        <h2 className="home-title">
+                            Журнал НАРУЖКА (Украина) поможет ориентироваться в технологиях и материалах для наружной рекламы, найти надежных партнеров!
+                        </h2>
                         <h3 className="home-subtitle">Оформите БЕСПЛАТНУЮ подписку сейчас!</h3>
                         <p>
                             Журнал НАРУЖКА рассчитан на изготовителей визуальной рекламы, продавцов материалов и оборудования для рекламы, заказчиков наружной рекламы.

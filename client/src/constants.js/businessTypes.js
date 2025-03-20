@@ -1,6 +1,6 @@
 export const businessTypes = [
     { id: 1, key: 'SIGN_MAKING', name: 'Изготовление вывесок, визуальное оформление' },
-    { id: 2, key: 'LARGE-FORMAT_PRINTING', name: 'Широкоформатная и цифровая печать' },
+    { id: 2, key: 'LARGE_FORMAT_PRINTING', name: 'Широкоформатная и цифровая печать' },
     { id: 3, key: 'AD_PLACEMENT', name: 'Размещение рекламы на билбордах и LED экранах' },
     { id: 4, key: 'MATERIAL_SUPPLIER', name: 'Поставщик материалов для рекламы и печати' },
     { id: 5, key: 'EQUIPMENT_SUPPLIER', name: 'Поставщик оборудования для рекламы и печати' },

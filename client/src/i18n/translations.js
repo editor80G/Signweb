@@ -1,3 +1,5 @@
+
+
 export const translations = {
     ru: {
         SIGN_MAKING: 'Изготовление вывесок, визуальное оформление',
@@ -8,7 +10,23 @@ export const translations = {
         AD_AGENCY: 'Рекламное агентство',
         AD_CUSTOMER: 'Заказчик рекламы и визуального оформления',
         EDUCATIONAL_INSTITUTION: 'Учебное заведение',
-        OTHER: 'Другое'
+        OTHER: 'Другое',
+        BUSINESS_OWNER: 'Руководитель, собственник бизнеса',
+        DESIGNER: 'Дизайнер, архитектор, конструктор',
+        SALES_PROCUREMENT_SPECIALIST: 'Специалист отдела продаж или закупок',
+        PR_SPECIALIST: 'Маркетолог, PR специалист',
+        WORKER: 'Макетчик, оператор ЧПУ станка, печатник',
+        STUDENT: 'Преподаватель, студент',
+
+        ACCOUNT_REGISTER: 'Зарегистрируйтесь для просмотра наших изданий',
+        ACCOUNT_EMAIL: 'Электронная почта',
+        ACCOUNT_PASSWORD: 'Пароль',
+        ACCOUNT_CONFIRM_PASSWORD: 'Подтвердите пароль',
+        ACCOUNT_BUSINESS_TYPE: 'Тип бизнеса',
+        ACCOUNT_JOB_TITLE: 'Должность',
+        ACCOUNT_PLACEHOLDER_BUSINESS_TYPE: 'Выберите тип бизнеса',
+        ACCOUNT_PLACEHOLDER_JOB_TITLE: 'Выберите должность или ',
+        ACCOUNT_SUBMIT: 'Зарегистрироваться',
     },
     en: {
         SIGN_MAKING: 'Sign making and visual design',
@@ -19,6 +37,26 @@ export const translations = {
         AD_AGENCY: 'Advertising agency',
         AD_CUSTOMER: 'Advertising customer',
         EDUCATIONAL_INSTITUTION: 'Educational institution',
-        OTHER: 'Other'
+        OTHER: 'Other',
+        BUSINESS_OWNER: 'Business owner, manager',
+        DESIGNER: 'Designer, architect, constructor',
+        SALES_PROCUREMENT_SPECIALIST: 'Sales or procurement specialist',
+        PR_SPECIALIST: 'Marketer, PR specialist',
+        WORKER: 'Maketist, CNC operator, printer',
+        STUDENT: 'Teacher, student',
+
+        ACCOUNT_REGISTER: 'Register to view our publications',
+        ACCOUNT_EMAIL: 'Email',
+        ACCOUNT_PASSWORD: 'Password',
+        ACCOUNT_CONFIRM_PASSWORD: 'Confirm password',
+        ACCOUNT_BUSINESS_TYPE: 'Business type',
+        ACCOUNT_JOB_TITLE: 'Job title',
+        ACCOUNT_PLACEHOLDER_BUSINESS_TYPE: 'Select business type',
+        ACCOUNT_PLACEHOLDER_JOB_TITLE: 'Select job title',
+        ACCOUNT_SUBMIT: 'Register',
+
+
+
     }
 };
+
