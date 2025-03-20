@@ -6,8 +6,13 @@ const homeController = Router();
 // HOME page (all users)
 // GET method
 homeController.get('/', async (req, res) => {
-    const publications = await getRecentPublications();
-    res.render('home', { publications });
+    try {
+        const publications = await getRecentPublications();
+        res.json({ publications }); // Send publications as JSON
+    } catch (error) {
+        console.error('Error fetching publications:', error);
+        res.status(500).json({ error: 'Failed to fetch publications' }); // Handle errors gracefully
+    }
 });
 
 export default homeController;
