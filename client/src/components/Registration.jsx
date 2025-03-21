@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { businessTypes } from '../constants.js/businessTypes';
 import { getTranslation } from '../i18n/getTranslations';
 import { jobTitles } from '../constants.js/jobTitles';
+import { countries } from '../constants.js/countries';
 import { Form, Button, Input, Select } from 'antd';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -18,9 +19,11 @@ const Register = () => {
     const { language } = useLanguage();
     const navigate = useNavigate();
     const { handleAuthChange } = useContext(AuthContext);
+    const [form] = Form.useForm(); // Initialize the form instance for dynamic updates
+
 
     const onFinish = async (values) => {
-        const { email, password, confirmPassword, businessType, jobTitle } = values;
+        const { email, password, confirmPassword, businessType, jobTitle, country } = values;
 
         if (password !== confirmPassword) {
             console.error('Passwords do not match');
@@ -30,7 +33,7 @@ const Register = () => {
         try {
             const response = await axios.post(
                 'http://localhost:3000/auth/register',
-                { email, password, businessType, jobTitle },
+                { email, password, businessType, jobTitle, country },
                 { withCredentials: true }
             );
             console.log('Success:', response.data.message);
@@ -45,10 +48,18 @@ const Register = () => {
         console.error('Failed:', errorInfo);
     };
 
+    // Dynamically update the country field when the language changes
+    useEffect(() => {
+        const defaultCountry = language === 'ru' ? 'RU' : 'US';
+        form.setFieldsValue({ country: defaultCountry });
+    }, [language, form]);
+
     return (
         <div>
             <h2 className="home-title">{getTranslation('ACCOUNT_REGISTER', language)}</h2>
             <Form
+                form={form} // Pass the form instance to the Form component for dynamic updates
+
                 name="register"
                 labelCol={{
                     span: 8,
@@ -60,7 +71,8 @@ const Register = () => {
                     maxWidth: 600,
                 }}
                 initialValues={{
-                    remember: true,
+                    //remember: true, // for checkboxes
+                    country: language === 'ru' ? 'RU' : 'US',
                 }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
@@ -144,13 +156,32 @@ const Register = () => {
                     </Select>
                 </Form.Item>
 
+                <Form.Item
+                    label={getTranslation('ACCOUNT_COUNTRY', language)}
+                    name="country"
+                    rules={[
+                        {
+                            required: true,
+                            message: getTranslation('ACCOUNT_VALIDATION_COUNTRY', language),
+                        },
+                    ]}
+                >
+                    <Select placeholder={getTranslation('ACCOUNT_PLACEHOLDER_COUNTRY', language)}>
+                        {Object.values(countries).map((country) => (
+                            <Option key={country.countryCode} value={country.countryCode}>
+                                {getTranslation(`COUNTRIES.${country.countryCode}`, language)}
+                            </Option>
+                        ))}
+                    </Select>
+                </Form.Item>
+
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                     <Button type="primary" htmlType="submit">
                         {getTranslation('ACCOUNT_SUBMIT', language)}
                     </Button>
                 </Form.Item>
             </Form>
-        </div >
+        </div>
     );
 };
 
