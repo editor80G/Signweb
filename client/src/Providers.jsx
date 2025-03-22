@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider } from './context/AuthProvider';
 import { LanguageContext } from './context/LanguageContext';
 
 const Providers = ({ children }) => {
@@ -12,5 +12,6 @@ const Providers = ({ children }) => {
         </AuthProvider>
     );
 };
-
+// Simple logic of LanguageContext is implemented in Providers.jsx
+// The logic of AuthContext is implemented in AuthProvider.jsx 
 export default Providers;
