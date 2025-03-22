@@ -1,22 +1,49 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "console": "integratedTerminal",
-            "internalConsoleOptions": "neverOpen",
-            "name": "Debug nodemon",
-            "program": "${workspaceFolder}/src/index.js",
             "request": "launch",
-            "restart": true,
-            "runtimeExecutable": "nodemon",
+            "type": "node",
+            "name": "Launch Server",
+            "program": "${workspaceFolder}/server/src/index.js",
+            "stopOnEntry": false,
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "type": "node"
+            "console": "integratedTerminal",
+            "restart": true,
+            "env": {
+                "PORT": "3000",
+                "DB_URI": "mongodb://localhost:27017/signweb",
+                "SESSION_SECRET": "VGh&Y7JHdGN2nhJMgd57674D"
+            } // Vulnerable to attack!!! Do not use in production
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Client",
+            "program": "${workspaceFolder}/client/node_modules/vite/bin/vite.js",
+            "cwd": "${workspaceFolder}/client",
+            "console": "integratedTerminal"
+        },
+        {
+            "request": "attach",
+            "type": "chrome",
+            "name": "Attach to Chrome",
+            "port": 9222,
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/client/src",
+            "trace": true
         }
-        
+    ],
+    "compounds": [
+        {
+            "name": "Debug Server and Client",
+            "configurations": [
+                "Launch Server",
+                "Launch Client",
+                "Attach to Chrome"
+            ]
+        }
     ]
 }
