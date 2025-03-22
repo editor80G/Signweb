@@ -3,7 +3,7 @@ import { Link, Outlet } from 'react-router-dom';
 import magazinesImage from '../assets/images/sign-magazines.jpg';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
-import Registration from './Registration';
+import AuthPage from './AuthPage';
 import { getTranslation } from '../i18n/getTranslations';
 import { useLanguage } from '../context/LanguageContext';
 import '../App.css';
@@ -57,7 +57,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="home-outlet">
-                    {!isAuthenticated ? <Registration /> : <Outlet />}
+                    {!isAuthenticated ? <AuthPage /> : <Outlet />}
                 </div>
             </div>
 
