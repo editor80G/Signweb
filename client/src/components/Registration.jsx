@@ -33,7 +33,7 @@ const Register = () => {
         try {
             const response = await axios.post(
                 'http://localhost:3000/auth/register',
-                { email, password, businessType, jobTitle, country },
+                { email, password, confirmPassword, businessType, jobTitle, country },
                 { withCredentials: true }
             );
             console.log('Success:', response.data.message);

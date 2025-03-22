@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-dotenv.config();
+dotenv.config({ path: '.env' });
 import process from 'process';
 
 import express from 'express';
@@ -19,7 +19,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 const DB_URI = process.env.DB_URI;
 
 // Db setup
@@ -62,8 +62,12 @@ app.get('*', (req, res) => {
 app.use((req, res) => {
     res.status(404).json({ error: 'Not Found' });
 });
-
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+console.log('PORT:', process.env.PORT);
+// Start the server should be the last line of the file
+try {
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+} catch (error) {
+    console.error('Error starting server:', error);
+}

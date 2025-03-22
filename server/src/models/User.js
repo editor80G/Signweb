@@ -16,10 +16,24 @@ const userSchema = new Schema({
         required: [true, 'Password is required!'],
         minlength: [4, 'Password must be at least 4 characters long!']
     },
+
+    businessType: {
+        type: String,
+        required: [true, 'Business Type is required!'],
+    },
+    jobTitle: {
+        type: String,
+        required: [true, 'Job Title is required!'],
+    },
+    country: {
+        type: String,
+        required: [true, 'Country is required!'],
+    },
     ipAddress: {
         type: String,
         required: false
     },
+
 }, { timestamps: true });
 
 userSchema.pre('save', async function () {

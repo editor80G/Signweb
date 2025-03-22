@@ -25,6 +25,7 @@ authController.get('/status', auth, (req, res) => {
 // POST method
 authController.post('/register', isGuest, captureIpMiddleware, async (req, res) => {
     const userData = req.body;
+    console.log(userData);
     try {
         const token = await authService.register(userData);
         res.cookie(AUTH_COOKIE_NAME, token, { httpOnly: true, secure: false, maxAge: 3600000 });
