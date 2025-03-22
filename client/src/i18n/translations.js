@@ -58,6 +58,8 @@ export const translations = {
         NAV_OUR_PUBLICATIONS: 'Наши издания',
         NAV_OUR_PUBLICATIONS_OUTDOOR: 'Журнал "НАРУЖКА"',
         NAV_OUR_PUBLICATIONS_CATALOG: 'Каталог"Реклама и дизайн в Украине"',
+        NAV_REGISTER_LOGIN: 'Регистрация / Вход',
+        NAV_LOGOUT: 'Выйти',
 
         COUNTRIES: {
             AF: 'Афганистан',
@@ -319,6 +321,8 @@ export const translations = {
         NAV_OUR_PUBLICATIONS: 'Our Publications',
         NAV_OUR_PUBLICATIONS_OUTDOOR: 'OUTDOOR Magazine',
         NAV_OUR_PUBLICATIONS_CATALOG: 'Advertising and Design in Ukraine Catalog',
+        NAV_REGISTER_LOGIN: 'Register / Login',
+        NAV_LOGOUT: 'Logout',
 
         COUNTRIES: {
             AF: 'Afghanistan',

@@ -48,17 +48,20 @@ authController.post('/login', isGuest, async (req, res) => {
     const userData = req.body;
     try {
         const token = await authService.login(userData);
-        res.cookie(AUTH_COOKIE_NAME, token, { httpOnly: true });
-        res.redirect('/');
+        res.cookie(AUTH_COOKIE_NAME, token, { httpOnly: true, secure: false, maxAge: 3600000 }); // Set the cookie with the token
+        res.status(200).json({ message: 'Login successful', token }); // Return JSON response
     } catch (error) {
-        res.render('auth/login', { title: 'Login Page', error: getErrorMessage(error) }); // Pass the error message only for security, otherwise the email is exposed and users can see if the email is registered and it hbs consider user as logged in
-
+        res.status(400).json({ error: getErrorMessage(error) }); // Return error as JSON
     }
 });
-// LOGOUT page (authenticated users)
+
 authController.get('/logout', isAuth, (req, res) => {
-    res.clearCookie(AUTH_COOKIE_NAME);
-    res.redirect('/');
+    try {
+        res.clearCookie(AUTH_COOKIE_NAME); // Clear the authentication cookie
+        res.status(200).json({ message: 'Logout successful' }); // Return a JSON response
+    } catch {
+        res.status(500).json({ error: 'An error occurred during logout' }); // Return error as JSON
+    }
 });
 
 export default authController;
