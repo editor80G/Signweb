@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useCallback } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import magazinesImage from '../assets/images/sign-magazines.jpg';
 import { AuthContext } from '../context/AuthContext';
@@ -8,24 +8,26 @@ import { getTranslation } from '../i18n/getTranslations';
 import { useLanguage } from '../context/LanguageContext';
 import '../App.css';
 
+
 const Home = () => {
 
     const { isAuthenticated, handleAuthChange } = useContext(AuthContext);
     const { language } = useLanguage();
 
-    const checkAuthStatus = async () => {
+    const checkAuthStatus = useCallback(async () => {
         try {
             const response = await axios.get('http://localhost:3000/auth/status', { withCredentials: true });
             handleAuthChange(response.data.isAuthenticated);
         } catch (error) {
-            console.error('Ошибка проверки статуса аутентификации:', error);
+            console.error('Error checking authentication status:', error);
             handleAuthChange(false);
         }
-    };
+    }, [handleAuthChange]);
+    // useCallback is used to prevent infinite loop of useEffect when handleAuthChange is passed as a dependency
 
     useEffect(() => {
         checkAuthStatus();
-    }, []);
+    }, [checkAuthStatus]); // checkAuthStatus is passed as a dependency
 
     return (
         <div className="home-container">
