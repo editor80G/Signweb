@@ -6,14 +6,27 @@ import * as publicationsService from '../services/pubService.js';
 const publicationsController = Router();
 
 // CATALOG page (all users)
-publicationsController.get('/', async (req, res) => {
+publicationsController.get('/publications/:type?', async (req, res) => {
     try {
-        const publications = await publicationsService.getAllPublications();
-        res.json({ publications });
+        const type = req.query.type || req.query.type;
+        const publications = await publicationsService.getAllPublications(type);
+        if (publications.length === 0) {
+            return res.json({ message: 'No publications found' });
+        }
+        return res.json({ publications });
     } catch (error) {
-        res.status(500).json({ error: getErrorMessage(error) });
+        return res.status(500).json({ error: getErrorMessage(error) });
     }
 });
+
+// publicationsController.get('/catalogs', async (req, res) => {
+//     try {
+//         const publications = await publicationsService.getAllCatalogs();
+//         res.json({ publications });
+//     } catch (error) {
+//         res.status(500).json({ error: getErrorMessage(error) });
+//     }
+// });
 
 // CREATE page (authenticated users only)
 // GET method

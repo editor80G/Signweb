@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import axios from '../axiosConfig';
+//import axios from '../axiosConfig';
+import axios from 'axios';
 
-const Publications = () => {
+const Publications = ({ type }) => {
     const [publications, setPublications] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchPublications = async () => {
             try {
-                const response = await axios.get('/publications');
+                const endpoint = type ? `/publications?type=${type}` : '/publications';
+                const response = await axios.get(endpoint);
                 setPublications(response.data.publications);
             } catch (err) {
                 setError(err.response?.data?.error || 'Failed to fetch publications');
@@ -16,7 +18,7 @@ const Publications = () => {
         };
 
         fetchPublications();
-    }, []);
+    }, [type]);
 
     return (
         <div>

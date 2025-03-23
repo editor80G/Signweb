@@ -21,9 +21,9 @@ const publicationSchema = new Schema({
         type: String,
         required: [true, 'Description is required!'],
     },
-    typeList: [{
+    type: [{
         type: String,
-        enum: ['Magazine', 'Book'],
+        enum: ['magazine', 'catalog'],
         required: [true, 'Type is required!'],
     }],
 }, { timestamps: true });

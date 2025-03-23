@@ -1,18 +1,17 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-// import Register from './components/Registration';
-// import Publications from './components/Publications';
+import Layout from '../components/Layout';
 import Home from '../components/Home';
+import Publications from '../components/Publications';
 
 const AppRoutes = () => {
     return (
         <Routes>
-            {/* <Route path="/register" element={<Register />} /> */}
-            {/* <Route path="/publications" element={<Publications />} /> */}
-            <Route path="/" element={<Home />} >
-                {/* <Route path="register" element={<Register />} /> */}
+            <Route path="/" element={<Layout />} >
+                <Route index element={<Home />} />
+                <Route path="/publications/magazines" element={<Publications type="magazine" />} />
+                <Route path="/publications/catalogs" element={<Publications type="catalog" />} />
             </Route>
-            {/* <Route path="/" element={<Form />} /> */}
         </Routes>
     );
 };

@@ -4,7 +4,6 @@ import Providers from './Providers';
 import Layout from './components/Layout';
 import AppRoutes from './routes/Routes';
 
-
 // import './App.css';
 import './assets/css/Site.css'; // Import the CSS file
 
@@ -12,9 +11,7 @@ const App = () => {
   return (
     <Providers>
       <Router>
-        <Layout>
-          <AppRoutes />
-        </Layout>
+        <AppRoutes />
       </Router>
     </Providers>
   );

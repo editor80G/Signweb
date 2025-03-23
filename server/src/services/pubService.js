@@ -36,11 +36,18 @@ export async function deletePublication(publicationId, userId) {
 }
 
 // Get all publications
-export async function getAllPublications() {
+export async function getAllPublications(type) {
     try {
+        let publications = [];
+        if (type === 'catalogs') {
+            publications = await Publication.find({ type: 'catalog' }).lean();
+        }
+        if (type === 'magazines') {
+            publications = await Publication.find({ type: 'magazine' }).lean();
+        }
         // Temporarily pass an empty array to test the {{else}} block
         // const publications = [];
-        const publications = await Publication.find().sort({ createdAt: -1 }).lean();
+        // const publications = await Publication.find().sort({ createdAt: -1 }).lean();
         return publications;
     } catch (error) {
         throw new Error('Error fetching publications: ' + error.message);

@@ -50,17 +50,19 @@ const Home = () => {
                     </div>
                     <div className="home-right">
                         <img className="home-image" src={magazinesImage} alt="Magazines" />
-                        {/* <div className="home-links">
-                            <Link to="/issues" className="home-link">Архив журнала «Наружка»</Link>
-                            <Link to="/catalogs" className="home-link">Архив каталога «Реклама и дизайн в Украине»</Link>
-                        </div> */}
                     </div>
                 </div>
-                <div className="home-outlet">
-                    {!isAuthenticated ? <AuthPage /> : <Outlet />}
+                <div className="home-profile">
+                    {!isAuthenticated ? (
+                        <AuthPage />
+                    ) : (
+                        <div>
+                            <h3>{getTranslation('HOME_PROFILE_TITLE', language)}</h3>
+                            <p>{getTranslation('HOME_PROFILE_DESCRIPTION', language)}</p>
+                        </div>
+                    )}
                 </div>
             </div>
-
         </div>
     );
 };

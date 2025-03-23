@@ -33,8 +33,8 @@ const Nav = () => {
                 <li className="dropdown">
                     <span>{getTranslation('NAV_OUR_PUBLICATIONS', language)}</span>
                     <ul className="dropdown-content">
-                        <li><Link to="/magazines">{getTranslation('NAV_OUR_PUBLICATIONS_OUTDOOR', language)}</Link></li>
-                        <li><Link to="/catalogs">{getTranslation('NAV_OUR_PUBLICATIONS_CATALOG', language)}</Link></li>
+                        <li><Link to="/publications/magazines">{getTranslation('NAV_OUR_PUBLICATIONS_OUTDOOR', language)}</Link></li>
+                        <li><Link to="/publications/catalogs">{getTranslation('NAV_OUR_PUBLICATIONS_CATALOG', language)}</Link></li>
                     </ul>
                 </li>
                 {/* {!isAuthenticated && <li><Link to="/register">Регистрация</Link></li>} */}

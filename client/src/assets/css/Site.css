@@ -403,13 +403,8 @@ textarea {
     text-decoration: underline;
 }
 
-.home-outlet {
-    /* margin-top: 20px; */
+.home-profile {
     flex: 1;
-    /* Задаёт относительную ширину для home-outlet */
-    /* width: 100%; */
-    /* Ограничение максимальной ширины */
-
     padding-right: 70px;
     float: left;
 }
