@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
 
     const handleLogout = async () => {
         try {
-            await axios.get('http://localhost:3000/auth/logout', { withCredentials: true });
+            await axios.post('http://localhost:3000/auth/logout', {}, { withCredentials: true });
             handleAuthChange(false); // Update authentication state
         } catch (error) {
             console.error('Error during logout:', error.response?.data?.error || 'Unknown error');

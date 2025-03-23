@@ -1,5 +1,6 @@
 import jsonwebtoken from '../lib/jsonwebtoken.js'; //own library to promisify jwt
 import { AUTH_COOKIE_NAME, JWT_SECRET } from "../config.js";
+import { isTokenBlacklisted } from '../utils/authUtils.js';
 
 export const auth = async (req, res, next) => {
   const token = req.cookies[AUTH_COOKIE_NAME];
@@ -25,9 +26,9 @@ export const auth = async (req, res, next) => {
 
 // Middleware to check if the user is authenticated
 export const isAuth = (req, res, next) => {
-  if (!req.user) {
-    //return res.redirect('/auth/login');
-    return res.status(401).json({ error: 'You are not authenticated' });
+  const token = req.cookies[AUTH_COOKIE_NAME];
+  if (!req.user || isTokenBlacklisted(token)) {
+    return res.status(401).json({ error: `You are not authenticated! Is token blacklisted: ${isTokenBlacklisted(token)} User: ${req.user}` });
   }
   next();
 };

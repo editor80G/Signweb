@@ -9,6 +9,7 @@ import expressSession from 'express-session';
 import { auth } from './middlewares/authMiddleware.js';
 import routes from './routes.js';
 import { tempData } from './middlewares/tempDataMiddleware.js';
+import { cleanupBlacklist } from './utils/authUtils.js';
 //import handlebars from 'express-handlebars';
 // React related imports
 import path from 'path';
@@ -21,6 +22,12 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT;
 const DB_URI = process.env.DB_URI;
+
+// Cleanup the blacklist every 30 minutes
+setInterval(() => {
+    cleanupBlacklist();
+    console.log('Blacklist cleaned up');
+}, 30 * 60 * 1000);
 
 // Db setup
 (async () => {
