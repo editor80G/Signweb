@@ -48,7 +48,8 @@ const Publications = ({ type }) => {
 
     return (
         <div className="publications-container">
-            <h2>
+            <h2 className="home-title"
+            >
                 {type === 'magazine' && getTranslation('PUB_LIST_MAGAZINE', language)}
                 {type === 'catalog' && getTranslation('PUB_LIST_CATALOG', language)}
                 {type !== 'magazine' && type !== 'catalog' && getTranslation('PUB_LIST_DEFAULT', language)}

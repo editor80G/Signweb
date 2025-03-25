@@ -57,7 +57,7 @@ export const translations = {
         NAV_HOME: 'Главная',
         NAV_OUR_PUBLICATIONS: 'Наши издания',
         NAV_OUR_PUBLICATIONS_OUTDOOR: 'Журнал "НАРУЖКА"',
-        NAV_OUR_PUBLICATIONS_CATALOG: 'Каталог"Реклама и дизайн в Украине"',
+        NAV_OUR_PUBLICATIONS_CATALOG: 'Каталог "Реклама и дизайн в Украине"',
         NAV_REGISTER_LOGIN: 'Регистрация / Вход',
         NAV_LOGOUT: 'Выйти',
 

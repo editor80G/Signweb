@@ -17,19 +17,33 @@ nav,
 section {
     display: block;
     z-index: 10;
+    height: 100%;
+}
+
+#root {
+    min-width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#page {
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    /* Занимает оставшееся пространство */
+    min-width: 100%;
+    min-height: 100%;
+    overflow: visible;
 }
 
 main {
 
-    /* min-height: 100vh;
-    min-width: 100vsb;
-    display: flex;
-    flex-direction: column; */
-
     padding-top: 190px !important;
     /* Убедитесь, что main не перекрывает header */
     flex: 1;
-    /* Занимаем оставшееся пространство */
+    /* Занимает всё доступное пространство */
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -199,18 +213,7 @@ nav ul li .dropdown-title:hover {
     /* Родительский элемент для позиционирования */
 }
 
-#page {
 
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    /* 100% of the viewport height */
-
-    /* width: auto;
-    margin: 0 auto 0;
-    padding: 0;
-    height: auto; */
-}
 
 #header {
     /* width: 100%;
@@ -518,6 +521,44 @@ textarea {
     height: 195px;
     display: block;
     margin: 0 auto;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    /* Добавляем плавный переход для увеличения и изменения оттенка */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Добавляем тень */
+}
+
+.publication-image:hover {
+    /* transform: scale(1.1) rotate(3deg); */
+    transform: scale(1.1);
+    /* Увеличиваем размер на 10% */
+    filter: brightness(1.2);
+    /* Увеличиваем яркость изображения */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    /* Добавляем тень */
+    animation: shake 0.5s ease-in-out infinite;
+}
+
+/* Ключевые кадры для анимации дрожания */
+@keyframes shake {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(-2px, 2px);
+    }
+
+    50% {
+        transform: translate(2px, -2px);
+    }
+
+    75% {
+        transform: translate(-2px, -2px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
 }
 
 .publication-details {
