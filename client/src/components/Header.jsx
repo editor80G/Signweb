@@ -5,10 +5,12 @@ import LanguageSwitcher from './LanguageSwitcher';
 const Header = () => {
     return (
         <header id="header">
-            <LanguageSwitcher />
-            <div className="header-container">
-                <img id="logo" src={logo} alt="Logo" />
 
+            <div className="logo-container">
+                <img id="logo" src={logo} alt="Logo" />
+            </div>
+            <div className="locals-container">
+                <LanguageSwitcher />
             </div>
 
         </header>

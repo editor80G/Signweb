@@ -17,15 +17,15 @@ const publicationSchema = new Schema({
         type: Date,
         required: [true, 'Date is required!'],
     },
-    description: {
+    type: {
         type: String,
-        required: [true, 'Description is required!'],
-    },
-    type: [{
-        type: String,
-        enum: ['magazine', 'catalog'],
         required: [true, 'Type is required!'],
-    }],
+    },
+    // type: [{
+    //     type: String,
+    //     enum: ['magazine', 'catalog'],
+    //     required: [true, 'Type is required!'],
+    // }],
 }, { timestamps: true });
 
 const Publication = model('Publication', publicationSchema);

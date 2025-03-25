@@ -2,8 +2,8 @@
 node_modules/
 
 # Ignore public/files folder
-public/files/
-public/images/covers
+src/public/files/
+src/public/images/covers
 
 # Ignore log files
 *.log

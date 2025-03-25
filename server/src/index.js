@@ -15,6 +15,7 @@ import { cleanupBlacklist } from './utils/authUtils.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
+import publicationsController from './controllers/pubController.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -44,8 +45,18 @@ app.use(cors({
     origin: 'http://localhost:5173', // Replace with your client's origin
     credentials: true // Allow credentials (cookies) to be sent
 })); // ensure that the CORS middleware is applied before any other middleware that handles requests
-app.use(express.json());
-app.use(express.static('src/public'));
+app.use(express.json()); // Middleware to parse JSON bodies
+// app.use(express.static('src/public'));
+
+// Настройка маршрутов API
+app.use('/publications', publicationsController);
+
+// Serve files from the public directory
+app.use('/files/magazines', express.static(path.join(__dirname, 'public/files/magazines')));
+app.use('/files/catalogs', express.static(path.join(__dirname, 'public/files/catalogs')));
+app.use('/images/covers', express.static(path.join(__dirname, 'public/images/covers')));
+
+
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(expressSession({
@@ -58,12 +69,14 @@ app.use(auth);
 app.use(tempData);
 app.use(routes);
 
-// Serve Vite build files (apply after CORS middleware)
-app.use(express.static(path.join(__dirname, '..', '..', 'client', 'dist')));
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '..', 'client', 'dist', 'index.html'));
-});
+// Serve Vite build files (apply after CORS middleware)
+// app.use(express.static(path.join(__dirname, '..', '..', 'client', 'dist')));
+
+// Handle all other routes (React)
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '..', '..', 'client', 'dist', 'index.html'));
+// });
 
 // Catch-all route for 404 errors
 app.use((req, res) => {

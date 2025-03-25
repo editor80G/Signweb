@@ -1,9 +1,12 @@
+html,
 body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
     font-size: .85em;
     font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
     color: #232323;
     background-color: #fff;
-
     font-family: 'Roboto Condensed', sans-serif;
 
 }
@@ -15,6 +18,26 @@ section {
     display: block;
     z-index: 10;
 }
+
+main {
+
+    /* min-height: 100vh;
+    min-width: 100vsb;
+    display: flex;
+    flex-direction: column; */
+
+    padding-top: 190px !important;
+    /* Убедитесь, что main не перекрывает header */
+    flex: 1;
+    /* Занимаем оставшееся пространство */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    z-index: 1;
+    height: 100%;
+    /*Добавляем прокрутку, если содержимое превышает высоту */
+}
+
 
 /*Custom styles*/
 
@@ -72,12 +95,27 @@ section {
 } */
 
 nav {
-    background-color: #343a40;
+    /* background-color: #343a40;
     padding: 10px;
     margin-top: 150px;
-    width: 100%;
+    width: 100%; */
     position: fixed;
-
+    top: 150px;
+    /* Убедитесь, что nav не перекрывает header */
+    left: 0;
+    width: 100%;
+    height: 40px;
+    /* Высота nav */
+    z-index: 999;
+    /* Убедимся, что nav находится поверх main */
+    display: flex;
+    align-items: center;
+    /* Align items vertically in the center */
+    justify-content: space-between;
+    /* Равномерное распределение элементов */
+    color: white;
+    background-color: #343a40;
+    font-size: 1.6em;
 }
 
 nav button {
@@ -95,16 +133,25 @@ nav ul {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     /* Distribute space between the items */
     align-items: center;
     /* Align items vertically in the center */
+    width: 100%;
+    /* Занимает всю ширину nav */
 }
 
+
 nav ul li {
-    position: relative;
+    /* position: relative;
     margin: 0 10px;
-    color: #fff;
+    color: #fff; */
+    flex-grow: 1;
+    /* Позволяет элементам равномерно занимать пространство */
+    text-align: center;
+    /* Центрируем текст внутри каждого li */
+    margin: 0 20px;
+    /* Отступы между элементами */
 }
 
 nav ul li a,
@@ -147,32 +194,60 @@ nav ul li .dropdown-title:hover {
     display: block;
 }
 
+.dropdown {
+    position: relative;
+    /* Родительский элемент для позиционирования */
+}
+
 #page {
 
-    width: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* 100% of the viewport height */
+
+    /* width: auto;
     margin: 0 auto 0;
     padding: 0;
-
-    /* background: #ffffff; */
-    height: auto;
-    /* border: #ff0000 1px solid; */
-
-
-    /* Distribute space between the child divs */
-    /* align-items: flex-start; */
-    /* Align items at the start of the container */
-
+    height: auto; */
 }
 
 #header {
-    width: 100%;
+    /* width: 100%;
     margin: 0 auto 0;
-    /* padding: 40px 0px 40px 0px; */
     height: 150px;
+    position: fixed; */
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
     background-color: #f8f9fa;
-    /* position: relative; */
-    /* background: #ffffff; */
+    z-index: 1000;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 30px 20px;
+    /* Внутренние отступы */
+    box-sizing: border-box;
+    /* Учитываем padding в ширине */
+}
+
+.logo-container {
+    display: flex;
+    align-items: flex-start;
+    /* Выравниваем содержимое по верхнему краю */
+    justify-content: left;
+    /* Логотип остаётся слева */
+
+}
+
+.locals-container {
+    display: flex;
+    align-items: flex-start;
+    /* Выравниваем содержимое по верхнему краю */
+    justify-content: right;
+    /* Контейнер располагается справа */
 }
 
 #logo {
@@ -296,6 +371,16 @@ textarea {
     padding-right: 20px;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 200px;
+    min-width: 100vw;
+    min-height: 100vh !important;
+    border: 2px solid red;
+}
+
 
 /* Home page CSS */
 .home-container {
@@ -303,7 +388,7 @@ textarea {
     flex-direction: column;
     align-items: center;
 
-    padding-top: 200px;
+    margin-top: 200px !important;
     /* width: 100%; */
 }
 
@@ -410,6 +495,50 @@ textarea {
 }
 
 
+
+/* CSS for Publications */
+.publications-container {
+    margin: 20px;
+}
+
+.publications-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.publication-item {
+    width: 200px;
+    float: left;
+    text-align: center;
+}
+
+.publication-image {
+    width: 150px;
+    height: 195px;
+    display: block;
+    margin: 0 auto;
+}
+
+.publication-details {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.publication-details p {
+    margin: 5px 0;
+}
+
+.publication-details a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.publication-details a:hover {
+    text-decoration: underline;
+}
+
+
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 768px) {
     .home-content {
@@ -465,17 +594,7 @@ textarea {
     }
 
 
-    .header-container {
-        display: flex;
-        justify-content: center;
-        /* Центрируем содержимое по горизонтали */
-        align-items: center;
-        /* Центрируем содержимое по вертикали */
-        width: 100%;
-        /* Контейнер занимает всю ширину */
-        /*padding: 20px;*/
-        /* Отступы вокруг логотипа */
-    }
+
 
     #logo {
         width: 300px;

@@ -6,10 +6,10 @@ import * as publicationsService from '../services/pubService.js';
 const publicationsController = Router();
 
 // CATALOG page (all users)
-publicationsController.get('/publications/:type?', async (req, res) => {
+publicationsController.get('/:type?', async (req, res) => {
     try {
         const type = req.query.type || req.query.type;
-        const publications = await publicationsService.getAllPublications(type);
+        const publications = await publicationsService.getAllPublicationsByType(type);
         if (publications.length === 0) {
             return res.json({ message: 'No publications found' });
         }
@@ -19,27 +19,13 @@ publicationsController.get('/publications/:type?', async (req, res) => {
     }
 });
 
-// publicationsController.get('/catalogs', async (req, res) => {
-//     try {
-//         const publications = await publicationsService.getAllCatalogs();
-//         res.json({ publications });
-//     } catch (error) {
-//         res.status(500).json({ error: getErrorMessage(error) });
-//     }
-// });
-
-// CREATE page (authenticated users only)
-// GET method
-publicationsController.get('/create', isAuth, (req, res) => {
-    res.json({ message: 'Create page' });
-});
 
 // POST method
 publicationsController.post('/create', isAuth, async (req, res) => {
-    const productData = req.body;
-    productData.owner = req.user._id;
+    const formData = req.body;
+    formData.owner = req.user._id;
     try {
-        await publicationsService.createRecipe(productData);
+        await publicationsService.createPublication(formData);
         res.status(201).json({ message: 'Publication created successfully' });
     } catch (error) {
         res.status(400).json({ error: getErrorMessage(error) });

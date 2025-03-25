@@ -262,7 +262,12 @@ export const translations = {
             YE: 'Йемен',
             ZM: 'Замбия',
             ZW: 'Зимбабве'
-        }
+        },
+
+        PUB_MAGAZINE_TITLE: 'Журнал "Наружка", номер',
+        PUB_CATALOG_TITLE: 'Каталог "Реклама и дизайн в Украине", номер',
+        PUB_LIST_MAGAZINE: 'Архив номеров журнала "Наружка"',
+        PUB_LIST_CATALOG: 'Архив выпусков каталога "Реклама и дизайн в Украине"',
     },
     en: {
         SIGN_MAKING: 'Sign making and visual design',
@@ -525,7 +530,12 @@ export const translations = {
             YE: 'Yemen',
             ZM: 'Zambia',
             ZW: 'Zimbabwe'
-        }
+        },
+
+        PUB_MAGAZINE_TITLE: 'OUTDOOR Magazine, issue',
+        PUB_CATALOG_TITLE: 'Advertising and Design in Ukraine Catalog, issue',
+        PUB_LIST_MAGAZINE: 'OUTDOOR Magazine Archive',
+        PUB_LIST_CATALOG: 'Advertising and Design in Ukraine Catalog Archive',
     }
 };
 

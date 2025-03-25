@@ -44,11 +44,16 @@ const Nav = () => {
                         <Link to="/">{getTranslation('NAV_REGISTER_LOGIN', language)}</Link>
                     </li>
                 ) : (
-                    <li>
-                        <button onClick={handleLogout}>
-                            {getTranslation('NAV_LOGOUT', language)}
-                        </button>
-                    </li>
+                    <>
+                        <li>
+                            <button onClick={handleLogout}>
+                                {getTranslation('NAV_LOGOUT', language)}
+                            </button>
+                        </li>
+                        <li>
+                            <Link to="/create-publication">{getTranslation('NAV_CREATE_PUBLICATION', language)}</Link>
+                        </li>
+                    </>
                 )}
             </ul>
         </nav>

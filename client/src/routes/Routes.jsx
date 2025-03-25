@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Home from '../components/Home';
 import Publications from '../components/Publications';
+import CreatePublication from '../components/CreatePublication';
 
 const AppRoutes = () => {
     return (
@@ -11,6 +12,7 @@ const AppRoutes = () => {
                 <Route index element={<Home />} />
                 <Route path="/publications/magazines" element={<Publications type="magazine" />} />
                 <Route path="/publications/catalogs" element={<Publications type="catalog" />} />
+                <Route path="/create-publication" element={<CreatePublication />} />
             </Route>
         </Routes>
     );

@@ -1,11 +1,33 @@
 import Publication from '../models/Publication.js';
 
-// Create a new publication
+// Create a new publication 
 export async function createPublication(data) {
     try {
         return await Publication.create(data);
     } catch (error) {
         throw new Error('Error creating publication: ' + error.message);
+    }
+}
+
+// Get all publications by type
+export async function getAllPublicationsByType(type) {
+    try {
+
+        let magazines = [];
+        let catalogs = [];
+
+        if (type === 'magazine') {
+            magazines = await Publication.find({ type: '1' }).lean();
+        } if (type === 'catalog') {
+            catalogs = await Publication.find({ type: '2' }).lean();
+        }
+        return {
+            magazines,
+            catalogs
+        };
+
+    } catch (error) {
+        throw new Error('Error fetching publications: ' + error.message);
     }
 }
 
@@ -35,24 +57,7 @@ export async function deletePublication(publicationId, userId) {
     }
 }
 
-// Get all publications
-export async function getAllPublications(type) {
-    try {
-        let publications = [];
-        if (type === 'catalogs') {
-            publications = await Publication.find({ type: 'catalog' }).lean();
-        }
-        if (type === 'magazines') {
-            publications = await Publication.find({ type: 'magazine' }).lean();
-        }
-        // Temporarily pass an empty array to test the {{else}} block
-        // const publications = [];
-        // const publications = await Publication.find().sort({ createdAt: -1 }).lean();
-        return publications;
-    } catch (error) {
-        throw new Error('Error fetching publications: ' + error.message);
-    }
-}
+
 
 // Get the 3 most recent publications
 export async function getRecentPublications() {
