@@ -81,13 +81,14 @@ publicationsController.delete('/delete/:id', isAuth, async (req, res) => {
 // DETAILS page (all users)
 // GET method
 publicationsController.get('/details/:id', async (req, res) => {
-    const recipeId = req.params.id;
+    const publicationId = req.params.id;
     try {
-        const recipe = await publicationsService.getRecipeById(recipeId);
-        const isOwner = recipe.owner.equals(req.user?._id);
-        const hasRecommended = req.user && recipe.recommendList.some(id => id.equals(req.user._id));
-        const peopleWhoRecommend = recipe.recommendList.length;
-        res.json({ recipe, user: req.user, isOwner, hasRecommended, peopleWhoRecommend });
+        const publication = await publicationsService.getPublicationById(publicationId);
+        //const isOwner = publication.owner.equals(req.user?._id);
+        //const hasRecommended = req.user && publication.recommendList.some(id => id.equals(req.user._id));
+        //const peopleWhoRecommend = publication.recommendList.length;
+        //res.json({ recipe: publication, user: req.user, isOwner, hasRecommended, peopleWhoRecommend });
+        res.json({ publication });
     } catch (error) {
         res.status(500).json({ error: getErrorMessage(error) });
     }

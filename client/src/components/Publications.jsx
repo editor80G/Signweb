@@ -3,6 +3,8 @@ import axios from 'axios';
 import config from '../../config';
 import { getTranslation } from '../i18n/getTranslations';
 import { useLanguage } from '../context/LanguageContext';
+import { Link } from 'react-router-dom';
+
 
 const Publications = ({ type }) => {
     const [publications, setPublications] = useState([]);
@@ -74,6 +76,7 @@ const Publications = ({ type }) => {
                                 {type === 'catalog' && <p>{getTranslation('PUB_CATALOG_TITLE', language)} {publication.issue}</p>}
                                 {type !== 'magazine' && type !== 'catalog' && <p>{publication.issue}</p>}
                                 {/* <p>
+                        
                                     <a
                                         href={`${config.baseUrl}${publication.file}`}
                                         target="_blank"
@@ -82,6 +85,20 @@ const Publications = ({ type }) => {
                                         Скачать №{publication.issue}
                                     </a>
                                 </p> */}
+                                {type === 'magazine' && (
+                                    <p>
+                                        <Link to={`/publications/${publication._id}`}>
+                                            {getTranslation('PUB_MAGAZINE_TITLE', language)} {publication.issue}
+                                        </Link>
+                                    </p>
+                                )}
+                                {type === 'catalog' && (
+                                    <p>
+                                        <Link to={`/publications/${publication._id}`}>
+                                            {getTranslation('PUB_CATALOG_TITLE', language)} {publication.issue}
+                                        </Link>
+                                    </p>
+                                )}
                             </div>
                         </div>
                     ))}

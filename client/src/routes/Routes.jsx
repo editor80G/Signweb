@@ -4,6 +4,8 @@ import Layout from '../components/Layout';
 import Home from '../components/Home';
 import Publications from '../components/Publications';
 import CreatePublication from '../components/CreatePublication';
+import DetailsPublication from '../components/DetailsPublication';
+
 
 const AppRoutes = () => {
     return (
@@ -13,6 +15,7 @@ const AppRoutes = () => {
                 <Route path="/publications/magazines" element={<Publications type="magazine" />} />
                 <Route path="/publications/catalogs" element={<Publications type="catalog" />} />
                 <Route path="/create-publication" element={<CreatePublication />} />
+                <Route path="/publications/:id" element={<DetailsPublication />} />
             </Route>
         </Routes>
     );

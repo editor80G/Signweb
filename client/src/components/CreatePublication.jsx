@@ -49,7 +49,7 @@ const CreatePublication = () => {
     return (
         <>
             <div>
-                <h2 className="home-title">{getTranslation('PUBLICATION_CREATE_TITLE', language)}</h2>
+                <h2 className="home-title">{getTranslation('PUB_CREATE_TITLE', language)}</h2>
                 <Form
                     form={form} // Pass the form instance to the Form component for dynamic updates
 
@@ -72,12 +72,12 @@ const CreatePublication = () => {
                     autoComplete="off"
                 >
                     <Form.Item
-                        label={getTranslation('PUBLICATION_ISSUE', language)}
+                        label={getTranslation('PUB_ISSUE', language)}
                         name="issue"
                         rules={[
                             {
                                 required: true,
-                                message: getTranslation('PUBLICATION_ISSUE_VALIDATION_MESSAGE', language),
+                                message: getTranslation('PUB_ISSUE_VALIDATION_MESSAGE', language),
                                 // type: 'email',
                             },
                         ]}
@@ -86,12 +86,12 @@ const CreatePublication = () => {
                     </Form.Item>
 
                     <Form.Item
-                        label={getTranslation('PUBLICATION_DATE', language)}
+                        label={getTranslation('PUB_DATE', language)}
                         name="date"
                         rules={[
                             {
                                 required: true,
-                                message: getTranslation('PUBLICATION_DATE_VALIDATION_MESSAGE', language),
+                                message: getTranslation('PUB_DATE_VALIDATION_MESSAGE', language),
                             },
                         ]}
                     >
@@ -99,12 +99,12 @@ const CreatePublication = () => {
                     </Form.Item>
 
                     <Form.Item
-                        label={getTranslation('PUBLICATION_IMAGE_PATH', language)}
+                        label={getTranslation('PUB_IMAGE', language)}
                         name="image"
                         rules={[
                             {
                                 required: true,
-                                message: getTranslation('PUBLICATION_IMAGE_PATH_VALIDATION_MESSAGE', language),
+                                message: getTranslation('PUB_IMAGE_VALIDATION_MESSAGE', language),
                             },
                         ]}
                     >
@@ -112,12 +112,12 @@ const CreatePublication = () => {
                     </Form.Item>
 
                     <Form.Item
-                        label={getTranslation('PUBLICATION_FILE_PATH', language)}
+                        label={getTranslation('PUB_FILE', language)}
                         name="file"
                         rules={[
                             {
                                 required: true,
-                                message: getTranslation('PUBLICATION_FILE_PATH_VALIDATION_MESSAGE', language),
+                                message: getTranslation('PUB_FILE__VALIDATION_MESSAGE', language),
                             },
                         ]}
                     >
@@ -125,19 +125,20 @@ const CreatePublication = () => {
                     </Form.Item>
 
                     <Form.Item
-                        label={getTranslation('PUBLICATION_TYPE', language)}
+                        label={getTranslation('PUB_TYPE_LABEL', language)}
                         name="type"
                         rules={[
                             {
                                 required: true,
-                                message: getTranslation('PUBLICATION_TYPE_VALIDATION_MESSAGE', language),
+                                message: getTranslation('PUB_TYPE_VALIDATION_MESSAGE', language),
                             },
                         ]}
                     >
-                        <Select placeholder={getTranslation('ACCOUNT_PLACEHOLDER_BUSINESS_TYPE', language)}>
-                            {publicationTypes.map((type) => (
-                                <Option key={type.id} value={type.id}>
-                                    {getTranslation(type.key, language)}
+
+                        <Select placeholder={getTranslation('PUB_TYPE_PLACEHOLDER', language)}>
+                            {Object.values(publicationTypes).map((t) => (
+                                <Option key={t.publicationTypeKey} value={t.publicationTypeKey}>
+                                    {getTranslation(`PUB_TYPES.${t.publicationTypeKey}`, language)}
                                 </Option>
                             ))}
                         </Select>
@@ -145,7 +146,7 @@ const CreatePublication = () => {
 
                     <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                         <Button type="primary" htmlType="submit">
-                            {getTranslation('PUBLICATION_CREATE', language)}
+                            {getTranslation('PUB_CREATE', language)}
                         </Button>
                     </Form.Item>
                 </Form>

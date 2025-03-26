@@ -7,6 +7,7 @@ import AuthPage from './AuthPage';
 import { getTranslation } from '../i18n/getTranslations';
 import { useLanguage } from '../context/LanguageContext';
 import '../App.css';
+import CreatePublication from './CreatePublication';
 
 
 const Home = () => {
@@ -56,10 +57,11 @@ const Home = () => {
                     {!isAuthenticated ? (
                         <AuthPage />
                     ) : (
-                        <div>
-                            <h3>{getTranslation('HOME_PROFILE_TITLE', language)}</h3>
-                            <p>{getTranslation('HOME_PROFILE_DESCRIPTION', language)}</p>
-                        </div>
+                        <CreatePublication />
+                        // <div>
+                        //     <h3>{getTranslation('HOME_PROFILE_TITLE', language)}</h3>
+                        //     <p>{getTranslation('HOME_PROFILE_DESCRIPTION', language)}</p>
+                        // </div>
                     )}
                 </div>
             </div>

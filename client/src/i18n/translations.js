@@ -1,5 +1,4 @@
 
-
 export const translations = {
     ru: {
         SIGN_MAKING: 'Изготовление вывесок, визуальное оформление',
@@ -60,6 +59,7 @@ export const translations = {
         NAV_OUR_PUBLICATIONS_CATALOG: 'Каталог "Реклама и дизайн в Украине"',
         NAV_REGISTER_LOGIN: 'Регистрация / Вход',
         NAV_LOGOUT: 'Выйти',
+        NAV_CREATE_PUBLICATION: 'Добавить издание',
 
         COUNTRIES: {
             AF: 'Афганистан',
@@ -268,6 +268,25 @@ export const translations = {
         PUB_CATALOG_TITLE: 'Каталог "Реклама и дизайн в Украине", номер',
         PUB_LIST_MAGAZINE: 'Архив номеров журнала "Наружка"',
         PUB_LIST_CATALOG: 'Архив выпусков каталога "Реклама и дизайн в Украине"',
+        PUB_TYPES_LABEL: 'Тип издания',
+        PUB_TYPES: {
+            MAGAZINE: 'Журнал',
+            CATALOG: 'Каталог',
+        },
+        PUB_FILE: 'Файл',
+        PUB_IMAGE: 'Изображение',
+        PUB_ISSUE: 'Номер',
+        PUB_DATE: 'Дата',
+        PUB_ISSUE_VALIDATION_MESSAGE: 'Пожалуйста, введите номер издания!',
+        PUB_DATE_VALIDATION_MESSAGE: 'Пожалуйста, введите дату издания!',
+        PUB_IMAGE_VALIDATION_MESSAGE: 'Пожалуйста, введите изображение!',
+        PUB_FILE__VALIDATION_MESSAGE: 'Пожалуйста, введите файл!',
+        PUB_TYPE_LABEL: 'Тип издания',
+        PUB_TYPE_VALIDATION_MESSAGE: 'Пожалуйста, выберите тип издания!',
+        PUB_TYPE_PLACEHOLDER: 'Выберите тип издания',
+        PUB_CREATE: 'Создать издание',
+        PUB_CREATE_TITLE: 'Добавить издание',
+
     },
     en: {
         SIGN_MAKING: 'Sign making and visual design',
@@ -328,6 +347,7 @@ export const translations = {
         NAV_OUR_PUBLICATIONS_CATALOG: 'Advertising and Design in Ukraine Catalog',
         NAV_REGISTER_LOGIN: 'Register / Login',
         NAV_LOGOUT: 'Logout',
+        NAV_CREATE_PUBLICATION: 'Add Publication',
 
         COUNTRIES: {
             AF: 'Afghanistan',
@@ -536,6 +556,27 @@ export const translations = {
         PUB_CATALOG_TITLE: 'Advertising and Design in Ukraine Catalog, issue',
         PUB_LIST_MAGAZINE: 'OUTDOOR Magazine Archive',
         PUB_LIST_CATALOG: 'Advertising and Design in Ukraine Catalog Archive',
+        PUB_TYPES_LABEL: 'Publication type',
+        PUB_TYPES: {
+            MAGAZINE: 'Magazine',
+            CATALOG: 'Catalog',
+        },
+        PUB_FILE: 'File',
+        PUB_IMAGE: 'Image',
+        PUB_ISSUE: 'Issue',
+        PUB_DATE: 'Date',
+        PUB_ISSUE_VALIDATION_MESSAGE: 'Please enter the issue number!',
+        PUB_DATE_VALIDATION_MESSAGE: 'Please enter the date!',
+        PUB_IMAGE_VALIDATION_MESSAGE: 'Please enter the image!',
+        PUB_FILE__VALIDATION_MESSAGE: 'Please enter the file!',
+        PUB_TYPE_LABEL: 'Type',
+        PUB_TYPE_VALIDATION_MESSAGE: 'Please select the type!',
+        PUB_TYPE_PLACEHOLDER: 'Select the type',
+        PUB_CREATE: 'Create',
+        PUB_CREATE_TITLE: 'Add Publication',
+        PUB_NOT_FOUND: 'Publication not found.',
+        PUB_DETAILS_TITLE: 'Publication Details',
+        PUB_DOWNLOAD_FILE: 'Download File',
     }
 };
 
