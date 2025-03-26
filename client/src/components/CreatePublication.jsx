@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import api from '../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { publicationTypes } from '../constants.js/publicationTypes';
@@ -23,11 +24,13 @@ const CreatePublication = () => {
             return;
         };
         try {
-            const response = await axios.post(
-                'http://localhost:3000/publications/create',
-                { type, issue, date, image, file },
-                { withCredentials: true }
-            );
+            // const response = await axios.post(
+            //     'http://localhost:3000/publications/create',
+            //     { type, issue, date, image, file },
+            //     { withCredentials: true }
+            // );
+            const response = await api.post('/publications/create',
+                { type, issue, date, image, file });
             console.log('Success:', response.data.message);
             handleAuthChange(true);
             navigate('/'); // Redirect to the home page on success
@@ -137,7 +140,7 @@ const CreatePublication = () => {
 
                         <Select placeholder={getTranslation('PUB_TYPE_PLACEHOLDER', language)}>
                             {Object.values(publicationTypes).map((t) => (
-                                <Option key={t.publicationTypeKey} value={t.publicationTypeKey}>
+                                <Option key={t.publicationTypeKey} value={t.id}>
                                     {getTranslation(`PUB_TYPES.${t.publicationTypeKey}`, language)}
                                 </Option>
                             ))}

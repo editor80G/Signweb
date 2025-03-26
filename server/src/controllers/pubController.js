@@ -22,10 +22,10 @@ publicationsController.get('/:type?', async (req, res) => {
 
 // POST method
 publicationsController.post('/create', isAuth, async (req, res) => {
-    const formData = req.body;
-    formData.owner = req.user._id;
+    const data = req.body;
+    data.owner = req.user._id;
     try {
-        await publicationsService.createPublication(formData);
+        await publicationsService.createPublication(data);
         res.status(201).json({ message: 'Publication created successfully' });
     } catch (error) {
         res.status(400).json({ error: getErrorMessage(error) });
@@ -65,14 +65,13 @@ publicationsController.post('/edit/:id', isAuth, async (req, res) => {
     }
 });
 
-// DELETE page (authenticated users that are owners only)
-// GET method
+// DELETE (authenticated users that are owners only)
 publicationsController.delete('/delete/:id', isAuth, async (req, res) => {
-    const recipeId = req.params.id;
+    const publicationId = req.params.id;
     const userId = req.user._id;
     try {
-        await publicationsService.deleteRecipe(recipeId, userId);
-        res.json({ message: 'Recipe deleted successfully' });
+        await publicationsService.deletePublicationById(publicationId, userId);
+        res.json({ message: 'Publication deleted successfully' });
     } catch (error) {
         res.status(500).json({ error: getErrorMessage(error) });
     }

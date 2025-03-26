@@ -45,9 +45,9 @@ export async function editPublication(publicationId, userId, data) {
 }
 
 // Delete a publication
-export async function deletePublication(publicationId, userId) {
-    const recipe = await Publication.findById(publicationId);
-    if (!recipe.owner.equals(userId)) {
+export async function deletePublicationById(publicationId, userId) {
+    const publication = await Publication.findById(publicationId);
+    if (!publication.owner.equals(userId)) {
         throw new Error('Error deleting publication: User is not the owner of the publication.');
     }
     try {
@@ -56,7 +56,6 @@ export async function deletePublication(publicationId, userId) {
         throw new Error('Error deleting publication: ' + error.message);
     }
 }
-
 
 
 // Get the 3 most recent publications

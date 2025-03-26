@@ -45,43 +45,43 @@ app.use(cors({
     origin: 'http://localhost:5173', // Replace with your client's origin
     credentials: true // Allow credentials (cookies) to be sent
 })); // ensure that the CORS middleware is applied before any other middleware that handles requests
+
 app.use(express.json()); // Middleware to parse JSON bodies
 // app.use(express.static('src/public'));
 
-// Настройка маршрутов API
-app.use('/publications', publicationsController);
-
-// Serve files from the public directory
-app.use('/files/magazines', express.static(path.join(__dirname, 'public/files/magazines')));
-app.use('/files/catalogs', express.static(path.join(__dirname, 'public/files/catalogs')));
-app.use('/images/covers', express.static(path.join(__dirname, 'public/images/covers')));
-
-
 app.use(express.urlencoded({ extended: false }));
+
+// Middleware для парсинга cookies (должен быть до auth)
 app.use(cookieParser());
+
+// Middleware для сессий (если используется)
 app.use(expressSession({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false, httpOnly: true, maxAge: 3600000 }
 }));
+
+// Middleware для аутентификации (использует req.cookies)
 app.use(auth);
+
+// Настройка маршрутов API
+app.use('/publications', publicationsController);
+
+// Другие middleware и маршруты
 app.use(tempData);
 app.use(routes);
 
-
-// Serve Vite build files (apply after CORS middleware)
-// app.use(express.static(path.join(__dirname, '..', '..', 'client', 'dist')));
-
-// Handle all other routes (React)
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '..', '..', 'client', 'dist', 'index.html'));
-// });
+// Serve files from the public directory
+app.use('/files/magazines', express.static(path.join(__dirname, 'public/files/magazines')));
+app.use('/files/catalogs', express.static(path.join(__dirname, 'public/files/catalogs')));
+app.use('/images/covers', express.static(path.join(__dirname, 'public/images/covers')));
 
 // Catch-all route for 404 errors
 app.use((req, res) => {
     res.status(404).json({ error: 'Not Found' });
 });
+
 console.log('PORT:', process.env.PORT);
 // Start the server should be the last line of the file
 try {
@@ -91,3 +91,13 @@ try {
 } catch (error) {
     console.error('Error starting server:', error);
 }
+
+
+
+// Serve Vite build files (apply after CORS middleware)
+// app.use(express.static(path.join(__dirname, '..', '..', 'client', 'dist')));
+
+// Handle all other routes (React)
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '..', '..', 'client', 'dist', 'index.html'));
+// });

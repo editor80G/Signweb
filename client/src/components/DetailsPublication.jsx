@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getTranslation } from '../i18n/getTranslations';
 import axios from 'axios';
 import config from '../../config';
+import { AuthContext } from '../context/AuthContext';
+import { getTranslation } from '../i18n/getTranslations';
+import { useLanguage } from '../context/LanguageContext';
 
-
-const DetailsPublication = ({ language }) => {
+const DetailsPublication = () => {
     const { id } = useParams(); // Get the publication ID from the URL
     const navigate = useNavigate();
     const [publication, setPublication] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { isAuthenticated } = useContext(AuthContext);
+    const { language } = useLanguage();
 
     useEffect(() => {
         const fetchPublication = async () => {
@@ -35,7 +38,7 @@ const DetailsPublication = ({ language }) => {
     const handleDelete = async () => {
         if (window.confirm(getTranslation('PUB_DELETE_CONFIRM', language) || 'Are you sure you want to delete this publication?')) {
             try {
-                await axios.delete(`${config.baseUrl}/publications/delete/${id}`);
+                await axios.delete(`${config.baseUrl}/publications/delete/${id}`, { withCredentials: true });
                 alert(getTranslation('PUB_DELETE_SUCCESS', language) || 'Publication deleted successfully.');
                 navigate('/publications'); // Redirect to the publications list
             } catch (err) {
@@ -78,14 +81,16 @@ const DetailsPublication = ({ language }) => {
                         {getTranslation('PUB_DOWNLOAD_FILE', language) || 'Download File'}
                     </a>
                 </p>
-                <div className="publication-actions">
-                    <button onClick={handleEdit} className="btn btn-edit">
-                        {getTranslation('PUB_EDIT', language) || 'Edit'}
-                    </button>
-                    <button onClick={handleDelete} className="btn btn-delete">
-                        {getTranslation('PUB_DELETE', language) || 'Delete'}
-                    </button>
-                </div>
+                {isAuthenticated ? (
+                    <div className="publication-actions">
+                        <button onClick={handleEdit} className="btn btn-edit">
+                            {getTranslation('PUB_EDIT', language) || 'Edit'}
+                        </button>
+                        <button onClick={handleDelete} className="btn btn-delete">
+                            {getTranslation('PUB_DELETE', language) || 'Delete'}
+                        </button>
+                    </div>
+                ) : null}
             </div>
         </div>
     );

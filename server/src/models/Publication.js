@@ -21,11 +21,11 @@ const publicationSchema = new Schema({
         type: String,
         required: [true, 'Type is required!'],
     },
-    // type: [{
-    //     type: String,
-    //     enum: ['magazine', 'catalog'],
-    //     required: [true, 'Type is required!'],
-    // }],
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    }, // Reference to the User who created this publication
+
 }, { timestamps: true });
 
 const Publication = model('Publication', publicationSchema);

@@ -25,8 +25,14 @@ export const auth = async (req, res, next) => {
 };
 
 // Middleware to check if the user is authenticated
-export const isAuth = (req, res, next) => {
+export const isAuth = async (req, res, next) => {
+  if (!req.cookies) {
+    return res.status(401).json({ error: 'Cookies are not defined' });
+  }
   const token = req.cookies[AUTH_COOKIE_NAME];
+  if (!token) {
+    return res.status(401).json({ error: 'You are not authenticated! No token' });
+  }
   if (!req.user || isTokenBlacklisted(token)) {
     return res.status(401).json({ error: `You are not authenticated! Is token blacklisted: ${isTokenBlacklisted(token)} User: ${req.user}` });
   }
