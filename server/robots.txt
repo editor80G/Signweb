@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /files/magazines/
+Disallow: /files/catalogs/

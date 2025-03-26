@@ -60,21 +60,23 @@ const Publications = ({ type }) => {
                 <div className="publications-grid">
                     {publications.map((publication) => (
                         <div className="publication-item" key={publication._id}>
-                            <a
+                            <Link to={`/publications/${publication._id}`}>
+                                {/* <a
                                 href={`${config.baseUrl}${publication.file}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                            >
+                            > */}
                                 <img
                                     className="publication-image"
                                     src={`${config.baseUrl}${publication.image}`}
                                     alt={type === 'magazine' && `${getTranslation('PUB_MAGAZINE_TITLE', language)} ${publication.issue}` || `${getTranslation('PUB_CATALOG_TITLE', language)} ${publication.issue}`}
                                 />
-                            </a>
+                                {/* </a> */}
+                            </Link>
                             <div className="publication-details">
-                                {type === 'magazine' && <p>{getTranslation('PUB_MAGAZINE_TITLE', language)} {publication.issue}</p>}
+                                {/* {type === 'magazine' && <p>{getTranslation('PUB_MAGAZINE_TITLE', language)} {publication.issue}</p>}
                                 {type === 'catalog' && <p>{getTranslation('PUB_CATALOG_TITLE', language)} {publication.issue}</p>}
-                                {type !== 'magazine' && type !== 'catalog' && <p>{publication.issue}</p>}
+                                {type !== 'magazine' && type !== 'catalog' && <p>{publication.issue}</p>} */}
                                 {/* <p>
                         
                                     <a

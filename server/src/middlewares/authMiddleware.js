@@ -9,6 +9,7 @@ export const auth = async (req, res, next) => {
     res.locals.user = null;
     req.user = null;
     return next();
+    // return res.status(401).json({ error: 'Unauthorized access. Please log in.' });
   }
   try {
     const decodedToken = await jsonwebtoken.verify(token, JWT_SECRET); // must be async but jwt.verify is not async

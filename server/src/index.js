@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config({ path: '.env' });
 import process from 'process';
+import { AUTH_COOKIE_NAME } from "./config.js";
 
 import express from 'express';
 import mongoose from 'mongoose';
@@ -10,8 +11,6 @@ import { auth } from './middlewares/authMiddleware.js';
 import routes from './routes.js';
 import { tempData } from './middlewares/tempDataMiddleware.js';
 import { cleanupBlacklist } from './utils/authUtils.js';
-//import handlebars from 'express-handlebars';
-// React related imports
 import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
@@ -72,9 +71,27 @@ app.use('/publications', publicationsController);
 app.use(tempData);
 app.use(routes);
 
-// Serve files from the public directory
-app.use('/files/magazines', express.static(path.join(__dirname, 'public/files/magazines')));
-app.use('/files/catalogs', express.static(path.join(__dirname, 'public/files/catalogs')));
+// Serve files from the public directory with restricted access
+app.use('/files/magazines', (req, res, next) => {
+    if (!req.cookies[AUTH_COOKIE_NAME]) {
+        return res.status(401).json({ error: 'Unauthorized access. Please log in.' });
+    }
+    next();
+}, (req, res, next) => {
+    res.set('X-Robots-Tag', 'noindex, nofollow');
+    next();
+}, express.static(path.join(__dirname, 'public/files/magazines')));
+
+app.use('/files/catalogs', (req, res, next) => {
+    if (!req.cookies[AUTH_COOKIE_NAME]) {
+        return res.status(401).json({ error: 'Unauthorized access. Please log in.' });
+    }
+    next();
+}, (req, res, next) => {
+    res.set('X-Robots-Tag', 'noindex, nofollow');
+    next();
+}, express.static(path.join(__dirname, 'public/files/catalogs')));
+
 app.use('/images/covers', express.static(path.join(__dirname, 'public/images/covers')));
 
 // Catch-all route for 404 errors

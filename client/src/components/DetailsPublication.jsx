@@ -40,7 +40,7 @@ const DetailsPublication = () => {
             try {
                 await axios.delete(`${config.baseUrl}/publications/delete/${id}`, { withCredentials: true });
                 alert(getTranslation('PUB_DELETE_SUCCESS', language) || 'Publication deleted successfully.');
-                navigate('/publications'); // Redirect to the publications list
+                navigate('/publications/magazines'); // Redirect to the publications list
             } catch (err) {
                 alert(getTranslation('PUB_DELETE_ERROR', language) || 'Failed to delete the publication.'), err;
             }
@@ -76,20 +76,23 @@ const DetailsPublication = () => {
                 <p>
                     <strong>{getTranslation('PUB_TYPE_LABEL', language)}:</strong> {publication.type}
                 </p>
-                <p>
-                    <a href={publication.file} target="_blank" rel="noopener noreferrer">
-                        {getTranslation('PUB_DOWNLOAD_FILE', language) || 'Download File'}
-                    </a>
-                </p>
+
                 {isAuthenticated ? (
-                    <div className="publication-actions">
-                        <button onClick={handleEdit} className="btn btn-edit">
-                            {getTranslation('PUB_EDIT', language) || 'Edit'}
-                        </button>
-                        <button onClick={handleDelete} className="btn btn-delete">
-                            {getTranslation('PUB_DELETE', language) || 'Delete'}
-                        </button>
-                    </div>
+                    <>
+                        <p>
+                            <a href={`${config.baseUrl}${publication.file}`} target="_blank" rel="noopener noreferrer">
+                                {getTranslation('PUB_DOWNLOAD_FILE', language) || 'Download File'}
+                            </a>
+                        </p>
+                        <div className="publication-actions">
+                            <button onClick={handleEdit} className="btn btn-edit">
+                                {getTranslation('PUB_EDIT', language) || 'Edit'}
+                            </button>
+                            <button onClick={handleDelete} className="btn btn-delete">
+                                {getTranslation('PUB_DELETE', language) || 'Delete'}
+                            </button>
+                        </div>
+                    </>
                 ) : null}
             </div>
         </div>
