@@ -1,15 +1,17 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+//import axios from 'axios';
 import config from '../../config';
 import { AuthContext } from '../context/AuthContext';
 import { getTranslation } from '../i18n/getTranslations';
 import { useLanguage } from '../context/LanguageContext';
+import api from '../utils/api';
 
 const DetailsPublication = () => {
     const { id } = useParams(); // Get the publication ID from the URL
     const navigate = useNavigate();
     const [publication, setPublication] = useState(null);
+    const [isOwner, setIsOwner] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { isAuthenticated } = useContext(AuthContext);
@@ -19,8 +21,9 @@ const DetailsPublication = () => {
         const fetchPublication = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`${config.baseUrl}/publications/details/${id}`);
+                const response = await api.get(`/publications/details/${id}`);
                 setPublication(response.data.publication); // Assuming the API returns the publication object
+                setIsOwner(response.data.isOwner); // Assuming the API returns the ownership status
             } catch (err) {
                 setError(err.response?.data?.error || 'Failed to fetch publication details');
             } finally {
@@ -38,7 +41,7 @@ const DetailsPublication = () => {
     const handleDelete = async () => {
         if (window.confirm(getTranslation('PUB_DELETE_CONFIRM', language) || 'Are you sure you want to delete this publication?')) {
             try {
-                await axios.delete(`${config.baseUrl}/publications/delete/${id}`, { withCredentials: true });
+                await api.delete(`/publications/delete/${id}`);
                 alert(getTranslation('PUB_DELETE_SUCCESS', language) || 'Publication deleted successfully.');
                 navigate('/publications/magazines'); // Redirect to the publications list
             } catch (err) {
@@ -77,7 +80,7 @@ const DetailsPublication = () => {
                     <strong>{getTranslation('PUB_TYPE_LABEL', language)}:</strong> {publication.type}
                 </p>
 
-                {isAuthenticated ? (
+                {isAuthenticated && isOwner ? (
                     <>
                         <p>
                             <a href={`${config.baseUrl}${publication.file}`} target="_blank" rel="noopener noreferrer">

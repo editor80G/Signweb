@@ -5,6 +5,7 @@ import Home from '../components/Home';
 import Publications from '../components/Publications';
 import CreatePublication from '../components/CreatePublication';
 import DetailsPublication from '../components/DetailsPublication';
+import EditPublication from '../components/EditPublication';
 
 
 const AppRoutes = () => {
@@ -14,8 +15,9 @@ const AppRoutes = () => {
                 <Route index element={<Home />} />
                 <Route path="/publications/magazines" element={<Publications type="magazine" />} />
                 <Route path="/publications/catalogs" element={<Publications type="catalog" />} />
-                <Route path="/create-publication" element={<CreatePublication />} />
-                <Route path="/publications/:id" element={<DetailsPublication />} />
+                <Route path="/publications/create" element={<CreatePublication />} />
+                <Route path="/publications/details/:id" element={<DetailsPublication />} />
+                <Route path="/publications/edit/:id" element={<EditPublication />} />
             </Route>
         </Routes>
     );

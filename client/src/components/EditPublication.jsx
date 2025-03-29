@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+// import axios from 'axios';
 import api from '../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
@@ -6,21 +7,43 @@ import { publicationTypes } from '../constants.js/publicationTypes';
 import { getTranslation } from '../i18n/getTranslations';
 import { Form, Button, Input, Select } from 'antd';
 import { useLanguage } from '../context/LanguageContext';
+import { useParams } from 'react-router-dom';
 
 
 const { Option } = Select;
-const CreatePublication = () => {
-    const { isAuthenticated } = useContext(AuthContext);
-    const navigate = useNavigate();
+const EditPublication = () => {
     const { language } = useLanguage();
+    const navigate = useNavigate();
     const { handleAuthChange } = useContext(AuthContext);
     const [form] = Form.useForm(); // Initialize the form instance for dynamic updates
+    const { id } = useParams();
+    const { isAuthenticated } = useContext(AuthContext);
+
 
     useEffect(() => {
         if (!isAuthenticated) {
             navigate('/'); // Redirect to the home page if not authenticated
+            return; // Exit early to avoid unnecessary API calls
         }
-    }, [isAuthenticated, navigate]);
+
+        // Fetch the publication details and populate the form
+        const fetchPublication = async () => {
+            try {
+                const response = await api.get(`/publications/edit/${id}`);
+                const publication = response.data.publication; // Extract the publication object
+                form.setFieldsValue({
+                    issue: publication.issue,
+                    date: publication.date,
+                    image: publication.image,
+                    file: publication.file,
+                    type: publication.type,
+                });
+            } catch (err) {
+                console.error('Error fetching publication:', err.response?.data?.error || 'Failed to connect to the server');
+            }
+        };
+        fetchPublication();
+    }, [isAuthenticated, navigate, id, form]);
 
     const onFinish = async (values) => {
         const { type, issue, date, image, file } = values;
@@ -29,16 +52,11 @@ const CreatePublication = () => {
             return;
         };
         try {
-            // const response = await axios.post(
-            //     'http://localhost:3000/publications/create',
-            //     { type, issue, date, image, file },
-            //     { withCredentials: true }
-            // );
-            const response = await api.post('/publications/create',
+            const response = await api.put(`/publications/edit/${id}`,
                 { type, issue, date, image, file });
             console.log('Success:', response.data.message);
             handleAuthChange(true);
-            //navigate('/'); // Redirect to the home page on success
+            //navigate(`/publications/${id}`);
             if (type === 'catalog') {
                 navigate(`/publications/catalogs`);
             } else {
@@ -53,20 +71,14 @@ const CreatePublication = () => {
         console.error('Failed:', errorInfo);
     };
 
-    // Dynamically update the country field when the language changes
-    // useEffect(() => {
-    //     const defaultCountry = language === 'ru' ? 'RU' : 'US';
-    //     form.setFieldsValue({ country: defaultCountry });
-    // }, [language, form]);
-
     return (
         <>
             <div>
-                <h2 className="home-title">{getTranslation('PUB_CREATE_TITLE', language)}</h2>
+                <h2 className="home-title">{getTranslation('PUB_EDIT_TITLE', language)}</h2>
                 <Form
                     form={form} // Pass the form instance to the Form component for dynamic updates
 
-                    name="create"
+                    name="edit"
                     labelCol={{
                         span: 8,
                     }}
@@ -159,7 +171,7 @@ const CreatePublication = () => {
 
                     <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                         <Button type="primary" htmlType="submit">
-                            {getTranslation('PUB_CREATE', language)}
+                            {getTranslation('PUB_SAVE_CHANGES', language)}
                         </Button>
                     </Form.Item>
                 </Form>
@@ -168,4 +180,4 @@ const CreatePublication = () => {
     );
 };
 
-export default CreatePublication;
+export default EditPublication;

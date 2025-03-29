@@ -9,12 +9,13 @@ import cookieParser from 'cookie-parser';
 import expressSession from 'express-session';
 import { auth } from './middlewares/authMiddleware.js';
 import routes from './routes.js';
-import { tempData } from './middlewares/tempDataMiddleware.js';
+//import { tempData } from './middlewares/tempDataMiddleware.js';
 import { cleanupBlacklist } from './utils/authUtils.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
-import publicationsController from './controllers/pubController.js';
+// import publicationsController from './controllers/pubController.js';
+// import searchController from './controllers/searchController.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -64,11 +65,13 @@ app.use(expressSession({
 // Middleware для аутентификации (использует req.cookies)
 app.use(auth);
 
-// Настройка маршрутов API
-app.use('/publications', publicationsController);
+// Настройка маршрутов API (см routes.js)
+// app.use('/publications', publicationsController);
+// app.use('/search', searchController);
 
 // Другие middleware и маршруты
-app.use(tempData);
+//app.use(tempData);
+// Настройка маршрутов API
 app.use(routes);
 
 // Serve files from the public directory with restricted access

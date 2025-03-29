@@ -9,17 +9,46 @@ export async function createPublication(data) {
     }
 }
 
+// Get a publication by ID
+export async function getPublicationById(id) {
+    try {
+        return await Publication.findById(id).lean();
+    } catch (error) {
+        throw new Error('Error fetching publication: ' + error.message);
+    }
+}
+
 // Get all publications by type
 export async function getAllPublicationsByType(type) {
-    try {
+    // try {
 
+    // let magazines = [];
+    // let catalogs = [];
+
+    // if (type === 'magazine') {
+    //     magazines = await Publication.find({ type: '1' }).lean();
+    // } if (type === 'catalog') {
+    //     catalogs = await Publication.find({ type: '2' }).lean();
+    // }
+    // if (type === null || type === undefined) {
+    //     magazines = await Publication.find({ type: '1' }).lean();
+    //     catalogs = await Publication.find({ type: '2' }).lean();
+    // }
+    try {
         let magazines = [];
         let catalogs = [];
 
         if (type === 'magazine') {
             magazines = await Publication.find({ type: '1' }).lean();
-        } if (type === 'catalog') {
+        } else if (type === 'catalog') {
             catalogs = await Publication.find({ type: '2' }).lean();
+        } else if (type === null || type === undefined) {
+            [magazines, catalogs] = await Promise.all([
+                Publication.find({ type: '1' }).lean(),
+                Publication.find({ type: '2' }).lean()
+            ]);
+        } else {
+            throw new Error('Invalid type parameter');
         }
         return {
             magazines,
@@ -31,8 +60,9 @@ export async function getAllPublicationsByType(type) {
     }
 }
 
-// Edit a publication
-export async function editPublication(publicationId, userId, data) {
+
+// Edit a publication by ID
+export async function editPublicationById(publicationId, userId, data) {
     const publication = await Publication.findById(publicationId);
     if (!publication.owner.equals(userId)) {
         throw new Error('Error deleting publication: User is not the owner of the publication.');
@@ -44,7 +74,7 @@ export async function editPublication(publicationId, userId, data) {
     }
 }
 
-// Delete a publication
+// Delete a publication by ID
 export async function deletePublicationById(publicationId, userId) {
     const publication = await Publication.findById(publicationId);
     if (!publication.owner.equals(userId)) {
@@ -70,14 +100,7 @@ export async function getRecentPublications() {
     }
 }
 
-// Get a publication by ID
-export async function getPublicationById(id) {
-    try {
-        return await Publication.findById(id).lean();
-    } catch (error) {
-        throw new Error('Error fetching publication: ' + error.message);
-    }
-}
+
 
 // Recommend a publication
 export async function recommendPublication(publicationId, userId) {
@@ -97,9 +120,9 @@ export async function recommendPublication(publicationId, userId) {
 }
 
 // Search publication by title
-export async function searchPublications(searchQuery) {
+export async function searchPublicationsByQuery(searchQuery) {
     try {
-        const query = searchQuery ? { title: { $regex: searchQuery, $options: 'i' } } : {};
+        const query = searchQuery ? { issue: { $regex: searchQuery, $options: 'i' } } : {};
         return await Publication.find(query).lean();
     } catch (error) {
         throw new Error('Error searching publications: ' + error.message);

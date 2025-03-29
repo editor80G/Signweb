@@ -1,8 +1,9 @@
 import axios from 'axios';
+import config from '../../config';
 
 // Create an Axios instance
 const api = axios.create({
-    baseURL: 'http://localhost:3000', // Your API base URL
+    baseURL: config.baseUrl, // Your API base URL
     withCredentials: true, // Ensure cookies are sent with requests
 });
 

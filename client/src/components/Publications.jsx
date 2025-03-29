@@ -60,7 +60,7 @@ const Publications = ({ type }) => {
                 <div className="publications-grid">
                     {publications.map((publication) => (
                         <div className="publication-item" key={publication._id}>
-                            <Link to={`/publications/${publication._id}`}>
+                            <Link to={`/publications/details/${publication._id}`}>
                                 {/* <a
                                 href={`${config.baseUrl}${publication.file}`}
                                 target="_blank"
@@ -89,14 +89,14 @@ const Publications = ({ type }) => {
                                 </p> */}
                                 {type === 'magazine' && (
                                     <p>
-                                        <Link to={`/publications/${publication._id}`}>
+                                        <Link to={`/publications/details/${publication._id}`}>
                                             {getTranslation('PUB_MAGAZINE_TITLE', language)} {publication.issue}
                                         </Link>
                                     </p>
                                 )}
                                 {type === 'catalog' && (
                                     <p>
-                                        <Link to={`/publications/${publication._id}`}>
+                                        <Link to={`/publications/details/${publication._id}`}>
                                             {getTranslation('PUB_CATALOG_TITLE', language)} {publication.issue}
                                         </Link>
                                     </p>

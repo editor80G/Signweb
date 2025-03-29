@@ -46,7 +46,7 @@ const Nav = () => {
                 ) : (
                     <>
                         <li>
-                            <Link to="/create-publication">{getTranslation('NAV_CREATE_PUBLICATION', language)}</Link>
+                            <Link to="/publications/create">{getTranslation('NAV_CREATE_PUBLICATION', language)}</Link>
                         </li>
                         <li>
                             <button onClick={handleLogout}>

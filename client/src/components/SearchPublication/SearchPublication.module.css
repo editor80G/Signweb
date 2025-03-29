@@ -1,0 +1,152 @@
+.searchContainer {
+    display: flex;
+    /* Используем flexbox для центрирования */
+    flex-direction: column;
+    /* Располагаем элементы вертикально */
+    align-items: center;
+    /* Центрируем элементы по горизонтали */
+    justify-content: center;
+    /* Центрируем элементы по вертикали (если нужно) */
+    margin: 20px auto;
+    /* Центрирование по горизонтали */
+    max-width: 100%;
+    padding: 20px;
+    /* Внутренний отступ */
+    position: relative;
+    /* Убедитесь, что компонент не перекрывается */
+    /* margin-top: 20px; */
+    /* Отступ сверху (высота Header + Nav + 20px) */
+    background-color: #f5f5f5;
+    /* Для визуального тестирования */
+    border-radius: 8px;
+    /* Добавим немного стиля */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Тень для визуального разделения */
+    width: 90%;
+}
+
+
+/* CSS for Publications */
+.publicationsContainer {
+    /* margin: 20px; */
+    display: flex;
+    flex-direction: column;
+    /* Убедитесь, что элементы располагаются вертикально */
+    width: 100%;
+    /* Контейнер занимает всю ширину */
+    max-width: 100%;
+    /* Убедитесь, что контейнер не превышает ширину экрана */
+    margin: 0 auto;
+    box-sizing: border-box;
+
+}
+
+.publicationsGrid {
+    display: flex;
+    /* Используем flexbox */
+    flex-wrap: wrap;
+    /* Разрешаем перенос элементов на новую строку */
+    gap: 20px;
+    /* Расстояние между элементами */
+    justify-content: center;
+    /* Центрируем элементы по горизонтали */
+    padding: 20px;
+    /* Внутренний отступ */
+    width: 100%;
+    /* Контейнер занимает всю ширину страницы */
+    box-sizing: border-box;
+    /* Учитываем padding в ширине */
+    max-width: 1200px;
+    /* Ограничиваем максимальную ширину */
+    margin: 0 auto;
+    /* Центрируем контейнер */
+}
+
+.publicationItem {
+    /* width: 200px; */
+    /* Фиксированная ширина элемента */
+    width: calc(25% - 20px);
+
+
+    /* Каждый элемент занимает 25% ширины контейнера с учётом gap */
+    min-width: 200px;
+    /* Минимальная ширина элемента */
+    text-align: center;
+    /* Центрируем содержимое элемента */
+    background-color: #fff;
+    /* Белый фон для каждого элемента */
+    border: 1px solid #ddd;
+    /* Лёгкая рамка */
+    border-radius: 8px;
+    /* Скруглённые углы */
+    padding: 10px;
+    /* Внутренний отступ */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Тень для визуального разделения */
+    box-sizing: border-box;
+    /* Учитываем padding в ширине */
+}
+
+.publicationImage {
+    width: 150px;
+    height: 195px;
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    /* Добавляем плавный переход для увеличения и изменения оттенка */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Добавляем тень */
+
+}
+
+.publicationImage:hover {
+    /* transform: scale(1.1) rotate(3deg); */
+    transform: scale(1.1);
+    /* Увеличиваем размер на 10% */
+    filter: brightness(1.2);
+    /* Увеличиваем яркость изображения */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    /* Добавляем тень */
+    animation: shake 0.5s ease-in-out infinite;
+}
+
+/* Ключевые кадры для анимации дрожания */
+@keyframes shake {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(-2px, 2px);
+    }
+
+    50% {
+        transform: translate(2px, -2px);
+    }
+
+    75% {
+        transform: translate(-2px, -2px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+.publicationDetails {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.publicationDetails p {
+    margin: 5px 0;
+}
+
+.publicationDetails a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.publicationDetails a:hover {
+    text-decoration: underline;
+}
