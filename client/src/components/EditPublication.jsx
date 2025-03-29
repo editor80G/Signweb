@@ -1,36 +1,35 @@
-import React, { useContext, useEffect } from 'react';
-// import axios from 'axios';
+import React, { useEffect } from 'react';
 import api from '../utils/api';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { publicationTypes } from '../constants.js/publicationTypes';
+import { publicationTypes } from '../constants/publicationTypes';
 import { getTranslation } from '../i18n/getTranslations';
 import { Form, Button, Input, Select } from 'antd';
 import { useLanguage } from '../context/LanguageContext';
 import { useParams } from 'react-router-dom';
 
-
 const { Option } = Select;
 const EditPublication = () => {
     const { language } = useLanguage();
     const navigate = useNavigate();
-    const { handleAuthChange } = useContext(AuthContext);
     const [form] = Form.useForm(); // Initialize the form instance for dynamic updates
     const { id } = useParams();
-    const { isAuthenticated } = useContext(AuthContext);
-
 
     useEffect(() => {
-        if (!isAuthenticated) {
-            navigate('/'); // Redirect to the home page if not authenticated
-            return; // Exit early to avoid unnecessary API calls
+        if (!id) {
+            console.error('No publication ID provided');
+            return;
         }
 
-        // Fetch the publication details and populate the form
         const fetchPublication = async () => {
             try {
                 const response = await api.get(`/publications/edit/${id}`);
                 const publication = response.data.publication; // Extract the publication object
+
+                if (!publication) {
+                    console.error('Publication not found');
+                    return;
+                }
+
                 form.setFieldsValue({
                     issue: publication.issue,
                     date: publication.date,
@@ -43,21 +42,13 @@ const EditPublication = () => {
             }
         };
         fetchPublication();
-    }, [isAuthenticated, navigate, id, form]);
+    }, [id, form]);
 
     const onFinish = async (values) => {
-        const { type, issue, date, image, file } = values;
-        if (!type || !issue || !date || !image || !file) {
-            console.error('All fields are required');
-            return;
-        };
         try {
-            const response = await api.put(`/publications/edit/${id}`,
-                { type, issue, date, image, file });
+            const response = await api.put(`/publications/edit/${id}`, values);
             console.log('Success:', response.data.message);
-            handleAuthChange(true);
-            //navigate(`/publications/${id}`);
-            if (type === 'catalog') {
+            if (values.type === 'catalog') {
                 navigate(`/publications/catalogs`);
             } else {
                 navigate(`/publications/magazines`);

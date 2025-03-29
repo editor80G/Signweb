@@ -6,6 +6,7 @@ import Publications from '../components/Publications';
 import CreatePublication from '../components/CreatePublication';
 import DetailsPublication from '../components/DetailsPublication';
 import EditPublication from '../components/EditPublication';
+import AuthGuard from '../components/Guards/AuthGuard';
 
 
 const AppRoutes = () => {
@@ -15,9 +16,12 @@ const AppRoutes = () => {
                 <Route index element={<Home />} />
                 <Route path="/publications/magazines" element={<Publications type="magazine" />} />
                 <Route path="/publications/catalogs" element={<Publications type="catalog" />} />
-                <Route path="/publications/create" element={<CreatePublication />} />
                 <Route path="/publications/details/:id" element={<DetailsPublication />} />
-                <Route path="/publications/edit/:id" element={<EditPublication />} />
+                <Route element={<AuthGuard />}>
+                    <Route path="/publications/create" element={<CreatePublication />} />
+                    <Route path="/publications/edit/:id" element={<EditPublication />} />
+                </Route>
+
             </Route>
         </Routes>
     );

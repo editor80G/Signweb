@@ -4,6 +4,8 @@ import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import { getTranslation } from '../i18n/getTranslations';
 import { useLanguage } from '../context/LanguageContext';
+import AuthGuard from '../components/Guards/AuthGuard';
+import GuestGuard from '../components/Guards/GuestGuard';
 
 const Nav = () => {
     const { isAuthenticated, handleAuthChange, handleLogout } = useContext(AuthContext);
@@ -39,25 +41,23 @@ const Nav = () => {
                 </li>
                 {/* {!isAuthenticated && <li><Link to="/register">Регистрация</Link></li>} */}
                 {/* Add other navigation links here */}
-                {!isAuthenticated ? (
+                <AuthGuard>
+                    <li>
+                        <button onClick={handleLogout}>
+                            {getTranslation('NAV_LOGOUT', language)}
+                        </button>
+                    </li>
+                    <li>
+                        <Link to="/publications/create">{getTranslation('NAV_CREATE_PUBLICATION', language)}</Link>
+                    </li>
+                </AuthGuard>
+                <GuestGuard>
                     <li>
                         <Link to="/">{getTranslation('NAV_REGISTER_LOGIN', language)}</Link>
                     </li>
-                ) : (
-                    <>
-                        <li>
-                            <Link to="/publications/create">{getTranslation('NAV_CREATE_PUBLICATION', language)}</Link>
-                        </li>
-                        <li>
-                            <button onClick={handleLogout}>
-                                {getTranslation('NAV_LOGOUT', language)}
-                            </button>
-                        </li>
-
-                    </>
-                )}
+                </GuestGuard>
             </ul>
-        </nav>
+        </nav >
     );
 };
 

@@ -264,7 +264,7 @@ export const translations = {
             ZW: 'Зимбабве'
         },
 
-        PUB_MAGAZINE_TITLE: 'Журнал "Наружка", номер',
+        PUB_MAGAZINE_TITLE: 'Журнал "Наружка", №',
         PUB_CATALOG_TITLE: 'Каталог "Реклама и дизайн в Украине", номер',
         PUB_LIST_MAGAZINE: 'Архив номеров журнала "Наружка"',
         PUB_LIST_CATALOG: 'Архив выпусков каталога "Реклама и дизайн в Украине"',

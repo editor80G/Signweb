@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import api from '../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { publicationTypes } from '../constants.js/publicationTypes';
+import { publicationTypes } from '../constants/publicationTypes';
 import { getTranslation } from '../i18n/getTranslations';
 import { Form, Button, Input, Select } from 'antd';
 import { useLanguage } from '../context/LanguageContext';
