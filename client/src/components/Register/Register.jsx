@@ -1,47 +1,28 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { businessTypes } from '../../constants/businessTypes';
 import { jobTitles } from '../../constants/jobTitles';
 import { countries } from '../../constants/countries';
-import { AuthContext } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { getTranslation } from '../../i18n/getTranslations';
 import { Form, Button, Input, Select } from 'antd';
-//import api from '../../utils/api';
-
-//const { Option } = Select;
+import { useRegister } from '../../hooks/useRegister';
 
 const Register = () => {
     const { language } = useLanguage();
     const navigate = useNavigate();
-    //const { handleAuthChange } = useContext(AuthContext);
-    const { handleRegister } = useContext(AuthContext);
+    const { register } = useRegister();
     const [form] = Form.useForm(); // Initialize the form instance for dynamic updates
 
 
     const onFinish = async (values) => {
-        // const { email, password, confirmPassword, businessType, jobTitle, country } = values;
-
-        // if (password !== confirmPassword) {
-        //     console.error('Passwords do not match');
-        //     return;
-        // }
-
         try {
-            // const response = await api.post('/auth/register',
-            //     { email, password, confirmPassword, businessType, jobTitle, country });
-            // console.log('Success:', response.data.message);
-            // if (response.data.isAuthenticated === true) {
-            //     handleAuthChange(true);
-            //     navigate('/'); // Redirect to the home page on success
-            // }
-            const success = await handleRegister(values); // Call handleRegister from AuthContext
+            const success = await register(values);
             console.log('Register success:', success);
             if (success) {
-                navigate('/'); // Redirect to the home page on success
+                navigate('/');
             }
         } catch (err) {
-            // console.error('Error:', err.response?.data?.error || 'Failed to connect to the server');
             console.error('Error:', err.message);
             form.setFields([
                 {

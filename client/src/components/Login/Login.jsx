@@ -1,19 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { getTranslation } from '../../i18n/getTranslations';
 import { Form, Button, Input } from 'antd';
 import { useLanguage } from '../../context/LanguageContext';
+import { useLogin } from '../../hooks/useLogin';
 
 const Login = () => {
     const { language } = useLanguage();
     const navigate = useNavigate();
-    const { handleLogin } = useContext(AuthContext);
+    const { login } = useLogin();
     const [form] = Form.useForm();
 
     const onFinish = async (values) => {
         try {
-            const success = await handleLogin(values);
+            const success = await login(values);
             console.log('Login success:', success);
             if (success) {
                 navigate('/');

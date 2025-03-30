@@ -1,14 +1,9 @@
-//import React, { useContext } from 'react';
 import React from 'react';
 import magazinesImage from '../assets/images/sign-magazines.jpg';
-import { AuthContext } from '../context/AuthContext';
-import AuthPage from './AuthPage/AuthPage';
 import { getTranslation } from '../i18n/getTranslations';
 import { useLanguage } from '../context/LanguageContext';
-import CreatePublication from './CreatePublication';
 
 const Home = () => {
-    //const { isAuthenticated } = useContext(AuthContext);
     const { language } = useLanguage();
 
     return (

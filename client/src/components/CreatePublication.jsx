@@ -29,15 +29,10 @@ const CreatePublication = () => {
             return;
         };
         try {
-            // const response = await axios.post(
-            //     'http://localhost:3000/publications/create',
-            //     { type, issue, date, image, file },
-            //     { withCredentials: true }
-            // );
             const response = await api.post('/publications/create',
                 { type, issue, date, image, file });
             console.log('Success:', response.data.message);
-            handleAuthChange(true);
+            // handleAuthChange(true);
             //navigate('/'); // Redirect to the home page on success
             if (type === 'catalog') {
                 navigate(`/publications/catalogs`);
