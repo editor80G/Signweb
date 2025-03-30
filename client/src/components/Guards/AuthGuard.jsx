@@ -1,15 +1,34 @@
+// import { Navigate, Outlet } from "react-router-dom";
+// import { useContext } from "react";
+// import { AuthContext } from "../../context/AuthContext";
+
+// const AuthGuard = ({ children }) => {
+//     const { isAuthenticated } = useContext(AuthContext);
+
+//     if (!isAuthenticated) {
+//         return <Navigate to="/auth/register" replace />;
+//     }
+
+//     // If children are passed, render them, otherwise use <Outlet /> for nested routes
+//     return children ? children : <Outlet />;
+// };
+
+//export default AuthGuard;
+
 import { Navigate, Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
-const AuthGuard = ({ children }) => {
+const AuthGuard = () => {
     const { isAuthenticated } = useContext(AuthContext);
 
     if (!isAuthenticated) {
-        return <Navigate to="/" replace />;
+        return <Navigate to="/auth/register" replace />;
     }
+
     // If children are passed, render them, otherwise use <Outlet /> for nested routes
-    return children ? children : <Outlet />;
+    return <Outlet />;
 };
 
 export default AuthGuard;
+

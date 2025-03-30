@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-//import axios from 'axios';
 import config from '../../config';
-// import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 import { getTranslation } from '../i18n/getTranslations';
 import { useLanguage } from '../context/LanguageContext';
 import api from '../utils/api';
-import AuthGuard from '../components/Guards/AuthGuard';
+
 
 const DetailsPublication = () => {
     const { id } = useParams(); // Get the publication ID from the URL
@@ -15,7 +14,7 @@ const DetailsPublication = () => {
     const [isOwner, setIsOwner] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    // const { isAuthenticated } = useContext(AuthContext);
+    const { isAuthenticated } = useContext(AuthContext);
     const { language } = useLanguage();
 
     useEffect(() => {
@@ -80,7 +79,7 @@ const DetailsPublication = () => {
                 <p>
                     <strong>{getTranslation('PUB_TYPE_LABEL', language)}:</strong> {publication.type}
                 </p>
-                {/* 
+
                 {isAuthenticated && isOwner ? (
                     <>
                         <p>
@@ -97,27 +96,7 @@ const DetailsPublication = () => {
                             </button>
                         </div>
                     </>
-                ) : null} */}
-
-                {isOwner && (
-                    <AuthGuard>
-                        <>
-                            <p>
-                                <a href={`${config.baseUrl}${publication.file}`} target="_blank" rel="noopener noreferrer">
-                                    {getTranslation('PUB_DOWNLOAD_FILE', language) || 'Download File'}
-                                </a>
-                            </p>
-                            <div className="publication-actions">
-                                <button onClick={handleEdit} className="btn btn-edit">
-                                    {getTranslation('PUB_EDIT', language) || 'Edit'}
-                                </button>
-                                <button onClick={handleDelete} className="btn btn-delete">
-                                    {getTranslation('PUB_DELETE', language) || 'Delete'}
-                                </button>
-                            </div>
-                        </>
-                    </AuthGuard>
-                )}
+                ) : null}
             </div>
         </div>
     );

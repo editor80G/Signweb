@@ -9,7 +9,7 @@ export const register = async (userData) => {
 
     const existingUser = await User.findOne({ email: userData.email }).select({ _id: 1 }).lean();
     if (existingUser) {
-        throw new Error('User already exists');
+        throw new Error('User already exists with this email');
     }
 
     return generateToken(await User.create(userData));

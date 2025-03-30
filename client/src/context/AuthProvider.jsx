@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { AuthContext } from './AuthContext';
-import axios from 'axios';
+import api from '../utils/api';
 
 export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false); // By default, the user is not authenticated
@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
 
     const checkAuthStatus = useCallback(async () => {
         try {
-            const response = await axios.get('http://localhost:3000/auth/status', { withCredentials: true });
+            const response = await api.get('/auth/status');
             handleAuthChange(response.data.isAuthenticated);
         } catch (error) {
             console.error('Error checking authentication status:', error);
@@ -31,17 +31,72 @@ export const AuthProvider = ({ children }) => {
         checkAuthStatus();
     }, [checkAuthStatus]);
 
+    // LOGOUT 
     const handleLogout = async () => {
         try {
-            await axios.post('http://localhost:3000/auth/logout', {}, { withCredentials: true });
-            handleAuthChange(false); // Update authentication state
+            const response = await api.post('/auth/logout', {});
+            if (response.data.success === true) {
+                handleAuthChange(false);
+                return response.data.success;
+            } else {
+                throw new Error('Logout failed');
+            }
         } catch (error) {
-            console.error('Error during logout:', error.response?.data?.error || 'Unknown error');
+            console.error('Error during logout:', error.success?.data?.error || 'Unknown error');
+        }
+    };
+
+    // REGISTER
+    const handleRegister = async (values) => {
+        const { email, password, confirmPassword, businessType, jobTitle, country } = values;
+
+        if (password !== confirmPassword) {
+            throw new Error('Passwords do not match');
+        }
+
+        try {
+            const response = await api.post('/auth/register', {
+                email,
+                password,
+                confirmPassword,
+                businessType,
+                jobTitle,
+                country,
+            });
+
+            if (response.data.token) {
+                handleAuthChange(true);
+                return response.data.success; // Return success message
+            } else {
+                throw new Error('Authentication failed'); // If no token, throw an error
+            }
+        } catch (err) {
+            const errorMessage = err.response?.data?.error || 'Failed to connect to the server';
+            throw new Error(errorMessage); // Pass the server's error message
+
+        }
+    };
+
+    // LOGIN
+    const handleLogin = async (values) => {
+        const { email, password } = values;
+
+        try {
+            const response = await api.post('/auth/login', { email, password });
+            if (response.data.token) {
+                handleAuthChange(true);
+                return response.data.success;
+            } else {
+                throw new Error('Authentication failed'); // Если токена нет, выбрасываем ошибку
+            }
+        } catch (err) {
+            const errorMessage = err.response?.data?.error || 'Failed to connect to the server';
+            throw new Error(errorMessage); // Pass the server's error message
         }
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, handleAuthChange, handleLogout, checkAuthStatus }}>
+        <AuthContext.Provider value={{ isAuthenticated, handleAuthChange, handleLogout, checkAuthStatus, handleRegister, handleLogin }}>
             {children}
         </AuthContext.Provider>
     );

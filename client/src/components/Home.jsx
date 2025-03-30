@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
+//import React, { useContext } from 'react';
+import React from 'react';
 import magazinesImage from '../assets/images/sign-magazines.jpg';
 import { AuthContext } from '../context/AuthContext';
-import AuthPage from './AuthPage';
+import AuthPage from './AuthPage/AuthPage';
 import { getTranslation } from '../i18n/getTranslations';
 import { useLanguage } from '../context/LanguageContext';
 import CreatePublication from './CreatePublication';
 
 const Home = () => {
-    const { isAuthenticated } = useContext(AuthContext);
+    //const { isAuthenticated } = useContext(AuthContext);
     const { language } = useLanguage();
 
     return (
@@ -33,13 +34,13 @@ const Home = () => {
                         <img className="home-image" src={magazinesImage} alt="Magazines" />
                     </div>
                 </div>
-                <div className="home-profile">
+                {/* <div className="home-profile">
                     {!isAuthenticated ? (
                         <AuthPage />
                     ) : (
                         <CreatePublication />
                     )}
-                </div>
+                </div> */}
             </div>
         </div>
     );

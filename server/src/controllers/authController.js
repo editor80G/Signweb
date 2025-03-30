@@ -29,13 +29,13 @@ authController.get('/status', auth, (req, res) => {
 // POST method (not authenticated users) - Register
 authController.post('/register', isGuest, captureIpMiddleware, async (req, res) => {
     const userData = req.body;
-    console.log(userData);
+    //console.log(userData);
     try {
         const token = await authService.register(userData);
         res.cookie(AUTH_COOKIE_NAME, token, { httpOnly: true, secure: false, maxAge: 3600000 });
-        res.status(201).json({ message: 'Registration successful', token });
+        res.status(201).json({ success: true, token });
     } catch (error) {
-        res.status(400).json({ title: 'Register Page', error: getErrorMessage(error), user: userData });
+        res.status(400).json({ error: getErrorMessage(error) });
     }
 });
 
@@ -45,7 +45,7 @@ authController.post('/login', isGuest, async (req, res) => {
     try {
         const token = await authService.login(userData);
         res.cookie(AUTH_COOKIE_NAME, token, { httpOnly: true, secure: false, maxAge: 3600000 }); // Set the cookie with the token
-        res.status(200).json({ message: 'Login successful', token }); // Return JSON response
+        res.status(200).json({ success: true, token }); // Return JSON response
     } catch (error) {
         res.status(400).json({ error: getErrorMessage(error) }); // Return error as JSON
     }
@@ -58,17 +58,15 @@ authController.post('/logout', isAuth, (req, res) => {
         if (!token) {
             return res.status(401).json({ error: 'No token provided' });
         }
-
         const decoded = jsonwebtoken.decode(token);
         const expiresAt = decoded.exp * 1000; // convert Unix timestamp (seconds) to milliseconds for JS Date
         addToBlacklist(token, expiresAt);
 
         res.clearCookie(AUTH_COOKIE_NAME);
-        res.status(200).json({ message: 'Logout successful' });
+        res.status(200).json({ success: true });
     } catch {
         res.status(500).json({ error: 'An error occurred during logout' });
     }
 });
-
 
 export default authController;
