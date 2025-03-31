@@ -1,19 +1,17 @@
 import React, { useContext, useEffect } from 'react';
-import api from '../utils/api';
+import api from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { publicationTypes } from '../constants/publicationTypes';
-import { getTranslation } from '../i18n/getTranslations';
+import { AuthContext } from '../../context/AuthContext';
+import { publicationTypes } from '../../constants/publicationTypes';
+import { getTranslation } from '../../i18n/getTranslations';
 import { Form, Button, Input, Select } from 'antd';
-import { useLanguage } from '../context/LanguageContext';
-
+import { useLanguage } from '../../context/LanguageContext';
 
 const { Option } = Select;
 const CreatePublication = () => {
     const { isAuthenticated } = useContext(AuthContext);
     const navigate = useNavigate();
     const { language } = useLanguage();
-    const { handleAuthChange } = useContext(AuthContext);
     const [form] = Form.useForm(); // Initialize the form instance for dynamic updates
 
     useEffect(() => {
@@ -31,16 +29,22 @@ const CreatePublication = () => {
         try {
             const response = await api.post('/publications/create',
                 { type, issue, date, image, file });
-            console.log('Success:', response.data.message);
-            handleAuthChange(true);
-            //navigate('/'); // Redirect to the home page on success
+            console.log('Create success:', response.data.success);
             if (type === 'catalog') {
                 navigate(`/publications/catalogs`);
             } else {
                 navigate(`/publications/magazines`);
             }
         } catch (err) {
-            console.error('Error:', err.response?.data?.error || 'Failed to connect to the server');
+            // Log the full error object for debugging
+            console.error('Full error object:', err);
+
+            // Extract and log the error message
+            const errorMessage = err.response?.data?.error || err.message || 'Failed to connect to the server';
+            console.error('Error:', errorMessage);
+
+            // Optionally, display the error message to the user
+            alert(errorMessage);
         }
     };
 
@@ -48,11 +52,7 @@ const CreatePublication = () => {
         console.error('Failed:', errorInfo);
     };
 
-    // Dynamically update the country field when the language changes
-    // useEffect(() => {
-    //     const defaultCountry = language === 'ru' ? 'RU' : 'US';
-    //     form.setFieldsValue({ country: defaultCountry });
-    // }, [language, form]);
+
 
     return (
         <>

@@ -1,17 +1,17 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Layout from '../components/Layout';
-import Home from '../components/Home';
-import Publications from '../components/Publications';
-import CreatePublication from '../components/CreatePublication';
-import DetailsPublication from '../components/DetailsPublication';
-import EditPublication from '../components/EditPublication';
-import AuthGuard from '../components/Guards/AuthGuard';
-import GuestGuard from '../components/Guards/GuestGuard';
-import AuthPage from '../components/AuthPage/AuthPage';
-import Login from '../components/Login/Login';
-import Register from '../components/Register/Register';
-import Logout from '../components/Logout/Logout';
+import Layout from '../components/layout/Layout';
+import Home from '../pages/Home/Home';
+import Publications from '../pages/Publications/Publications';
+import CreatePublication from '../pages/CreatePublication/CreatePublication';
+import DetailsPublication from '../pages/DetailsPublication/DetailsPublication';
+import EditPublication from '../pages/EditPublication/EditPublication';
+import AuthGuard from '../guards/AuthGuard';
+import GuestGuard from '../guards/GuestGuard';
+import AuthPage from '../pages/AuthPage/AuthPage';
+import Login from '../pages/Login/Login';
+import Register from '../pages/Register/Register';
+import Logout from '../pages/Logout/Logout';
 
 const AppRoutes = () => {
     return (

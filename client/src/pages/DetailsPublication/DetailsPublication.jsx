@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import config from '../../config';
-import { AuthContext } from '../context/AuthContext';
-import { getTranslation } from '../i18n/getTranslations';
-import { useLanguage } from '../context/LanguageContext';
-import api from '../utils/api';
+import config from '../../../config';
+import { AuthContext } from '../../context/AuthContext';
+import { getTranslation } from '../../i18n/getTranslations';
+import { useLanguage } from '../../context/LanguageContext';
+import api from '../../utils/api';
 
 
 const DetailsPublication = () => {
@@ -24,6 +24,7 @@ const DetailsPublication = () => {
                 const response = await api.get(`/publications/details/${id}`);
                 setPublication(response.data.publication); // Assuming the API returns the publication object
                 setIsOwner(response.data.isOwner); // Assuming the API returns the ownership status
+                console.log('isOwner:', response.data.isOwner);
             } catch (err) {
                 setError(err.response?.data?.error || 'Failed to fetch publication details');
             } finally {

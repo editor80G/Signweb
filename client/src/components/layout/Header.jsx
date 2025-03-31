@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/images/logo-sign-magazine.jpg';
+import logo from '../../assets/images/logo-sign-magazine.jpg';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const Header = () => {

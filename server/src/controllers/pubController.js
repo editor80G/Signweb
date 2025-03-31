@@ -11,10 +11,11 @@ publicationsController.get('/:type?', async (req, res) => {
     try {
         const type = req.query.type || req.query.type;
         const publications = await publicationsService.getAllPublicationsByType(type);
+
         if (publications.length === 0) {
-            return res.json({ message: 'No publications found' });
+            return res.json({ success: false });
         }
-        return res.json({ publications });
+        return res.json({ success: true, publications });
     } catch (error) {
         return res.status(500).json({ error: getErrorMessage(error) });
     }
@@ -27,7 +28,7 @@ publicationsController.post('/create', isAuth, async (req, res) => {
     data.owner = req.user._id;
     try {
         await publicationsService.createPublication(data);
-        res.status(201).json({ message: 'Publication created successfully' });
+        res.status(201).json({ success: true });
     } catch (error) {
         res.status(400).json({ error: getErrorMessage(error) });
     }
@@ -43,7 +44,7 @@ publicationsController.get('/edit/:id', isAuth, async (req, res) => {
         if (!publication.owner.equals(req.user._id)) {
             return res.status(403).json({ error: 'You are not the owner of the publication' });
         }
-        res.json({ publication: publication });
+        res.status(200).json({ publication: publication });
     } catch (error) {
         res.status(500).json({ error: getErrorMessage(error) });
     }
@@ -61,7 +62,7 @@ publicationsController.put('/edit/:id', isAuth, async (req, res) => {
             return res.status(403).json({ error: 'You are not the owner of the recipe' });
         }
         await publicationsService.editPublicationById(publicationId, userId, data);
-        res.json({ message: 'Publication updated successfully' });
+        res.status(200).json({ success: true });
     } catch (error) {
         res.status(400).json({ error: getErrorMessage(error) });
     }
@@ -78,7 +79,7 @@ publicationsController.delete('/delete/:id', isAuth, async (req, res) => {
     }
     try {
         await publicationsService.deletePublicationById(publicationId, userId);
-        res.json({ message: 'Publication deleted successfully' });
+        res.status(200).json({ success: true });
     } catch (error) {
         res.status(500).json({ error: getErrorMessage(error) });
     }
@@ -98,7 +99,7 @@ publicationsController.get('/details/:id', async (req, res) => {
         //const hasRecommended = req.user && publication.recommendList.some(id => id.equals(req.user._id));
         //const peopleWhoRecommend = publication.recommendList.length;
         //res.json({ recipe: publication, user: req.user, isOwner, hasRecommended, peopleWhoRecommend });
-        res.json({ publication, isOwner });
+        res.status(200).json({ publication, isOwner });
     } catch (error) {
         res.status(500).json({ error: getErrorMessage(error) });
     }

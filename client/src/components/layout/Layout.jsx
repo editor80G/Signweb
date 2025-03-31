@@ -3,7 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Nav from './Nav';
 import { Outlet, useLocation } from 'react-router-dom';
-import SearchPublication from './SearchPublication/SearchPublication';
+import SearchPublication from '../common/SearchPublication/SearchPublication';
 
 
 const Layout = () => {

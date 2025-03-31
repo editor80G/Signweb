@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import config from '../../config';
-import { getTranslation } from '../i18n/getTranslations';
-import { useLanguage } from '../context/LanguageContext';
+//import axios from 'axios';
+import config from '../../../config';
+import { getTranslation } from '../../i18n/getTranslations';
+import { useLanguage } from '../../context/LanguageContext';
 import { Link } from 'react-router-dom';
-
+import api from '../../utils/api';
 
 const Publications = ({ type }) => {
     const [publications, setPublications] = useState([]);
@@ -12,33 +12,46 @@ const Publications = ({ type }) => {
     const [loading, setLoading] = useState(true);
     const { language } = useLanguage();
 
-
     useEffect(() => {
+        let isMounted = true;
+
         const fetchPublications = async () => {
-            setPublications([]); // Clear the list before loading
-            setLoading(true); // Set loading state
+            setLoading(true);
             try {
                 const endpoint = type
-                    ? `http://localhost:3000/publications?type=${type}`
-                    : 'http://localhost:3000/publications';
-
-                const { magazines = [], catalogs = [] } = (await axios.get(endpoint)).data.publications || {};
-                // Update state based on the type
-                if (type === 'magazine') {
-                    setPublications(magazines);
-                } else if (type === 'catalog') {
-                    setPublications(catalogs);
-                } else {
-                    setPublications([...magazines, ...catalogs]);
+                    ? `/publications?type=${type}`
+                    : '/publications';
+                const response = await api.get(endpoint);
+                if (isMounted) {
+                    const { magazines = [], catalogs = [] } = response.data.publications || {};
+                    const success = response.data.success || false;
+                    if (success) {
+                        if (type === 'magazine') {
+                            setPublications(magazines);
+                        } else if (type === 'catalog') {
+                            setPublications(catalogs);
+                        } else {
+                            setPublications([...magazines, ...catalogs]);
+                        }
+                    }
                 }
             } catch (err) {
-                setError(err.response?.data?.error || 'Failed to fetch publications');
+                if (isMounted) {
+                    setError(err.response?.data?.error || err.message || 'Failed to fetch publications');
+                }
             } finally {
-                setLoading(false);
+                if (isMounted) {
+                    setLoading(false);
+                }
             }
         };
+
         fetchPublications();
-    }, [type]); // Fetch publications when the type changes
+
+        return () => {
+            isMounted = false;
+        };
+    }, [type, language]);
 
     if (loading) {
         return <p>Loading...</p>;

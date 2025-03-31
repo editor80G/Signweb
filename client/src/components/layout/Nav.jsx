@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
-import { getTranslation } from '../i18n/getTranslations';
-import { useLanguage } from '../context/LanguageContext';
+import { AuthContext } from '../../context/AuthContext';
+import { getTranslation } from '../../i18n/getTranslations';
+import { useLanguage } from '../../context/LanguageContext';
 
 const Nav = () => {
     const { isAuthenticated } = useContext(AuthContext);

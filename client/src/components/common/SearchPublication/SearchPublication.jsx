@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, List, Typography } from 'antd';
 import styles from './SearchPublication.module.css';
-import api from '../../utils/api';
-import config from '../../../config';
-import { getTranslation } from '../../i18n/getTranslations';
-import { useLanguage } from '../../context/LanguageContext';
+import api from '../../../utils/api';
+import config from '../../../../config';
+import { getTranslation } from '../../../i18n/getTranslations';
+import { useLanguage } from '../../../context/LanguageContext';
 import { Link } from 'react-router-dom';
 
 const Title = Typography.Title;

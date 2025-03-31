@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import api from '../utils/api';
+import api from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
-import { publicationTypes } from '../constants/publicationTypes';
-import { getTranslation } from '../i18n/getTranslations';
+import { publicationTypes } from '../../constants/publicationTypes';
+import { getTranslation } from '../../i18n/getTranslations';
 import { Form, Button, Input, Select } from 'antd';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../../context/LanguageContext';
 import { useParams } from 'react-router-dom';
 
 const { Option } = Select;
@@ -47,14 +47,22 @@ const EditPublication = () => {
     const onFinish = async (values) => {
         try {
             const response = await api.put(`/publications/edit/${id}`, values);
-            console.log('Success:', response.data.message);
+            console.log('Update success:', response.data.success);
             if (values.type === 'catalog') {
                 navigate(`/publications/catalogs`);
             } else {
                 navigate(`/publications/magazines`);
             }
         } catch (err) {
-            console.error('Error:', err.response?.data?.error || 'Failed to connect to the server');
+            // Log the full error object for debugging
+            console.error('Full error object:', err);
+
+            // Extract and log the error message
+            const errorMessage = err.response?.data?.error || err.message || 'Failed to connect to the server';
+            console.error('Error:', errorMessage);
+
+            // Optionally, display the error message to the user
+            alert(errorMessage);
         }
     };
 
