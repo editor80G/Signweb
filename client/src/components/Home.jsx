@@ -1,7 +1,7 @@
 import React from 'react';
 import magazinesImage from '../assets/images/sign-magazines.jpg';
 import { getTranslation } from '../i18n/getTranslations';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from "../context/LanguageContext";
 
 const Home = () => {
     const { language } = useLanguage();

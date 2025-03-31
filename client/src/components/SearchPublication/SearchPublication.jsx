@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, List, Typography } from 'antd';
-// import axios from 'axios';
 import styles from './SearchPublication.module.css';
-import api from '../../utils/api'; // Adjust the import path as necessary
+import api from '../../utils/api';
 import config from '../../../config';
 import { getTranslation } from '../../i18n/getTranslations';
 import { useLanguage } from '../../context/LanguageContext';
 import { Link } from 'react-router-dom';
-//const { Title } = Typography; //
-const Title = Typography.Title; // Import Title from Ant Design Typography
+
+const Title = Typography.Title;
 
 const SearchPage = () => {
-    const [form] = Form.useForm(); // Initialize the form instance
+    const [form] = Form.useForm();
     const [results, setResults] = useState([]); // State to store search results
     const [loading, setLoading] = useState(false); // State to manage loading state
     const [error, setError] = useState(null); // State to store error messages
@@ -22,8 +21,7 @@ const SearchPage = () => {
         setLoading(true); // Set loading state to true
         setError(null); // Clear previous errors
         try {
-            //const response = await axios.get(`/search?search=${query}`); // Call the search API
-            const response = await api.get(`/search?search=${query}`); // Use the API utility to call the search endpoint
+            const response = await api.get(`/search?search=${query}`);
             setResults(response.data.publications || []); // Update results with API response
         } catch (err) {
             setError(err.response?.data?.error || 'Failed to fetch search results'); // Handle errors
@@ -33,7 +31,6 @@ const SearchPage = () => {
     };
 
     return (
-        // <div style={{ maxWidth: 800, margin: '0 auto', padding: '20px' }}>
         <div className={styles.searchContainer}>
             <Title level={2}>Search Publications</Title>
             <Form
@@ -62,38 +59,6 @@ const SearchPage = () => {
 
             {error && <p style={{ color: 'red' }}>{error}</p>}
 
-            {/* <List
-                className={styles.publicationsGrid}
-                bordered
-                dataSource={results}
-                renderItem={(item) => (
-                    <List.Item>
-                        <div className={styles.publicationItem} key={item._id}>
-                            <Link to={`/publications/details/${item._id}`}>
-                                <img
-                                    className={styles.publicationImage}
-                                    src={`${config.baseUrl}${item.image}`}
-                                    alt={
-                                        item.type === '1'
-                                            ? `${getTranslation('PUB_MAGAZINE_TITLE', language)} ${item.issue}`
-                                            : `${getTranslation('PUB_CATALOG_TITLE', language)} ${item.issue}`
-                                    }
-                                />
-                            </Link>
-                            <div className={styles.publicationDetails}>
-                                <Typography.Text strong>Issue: {item.issue}</Typography.Text>
-                                <br />
-                                <Typography.Text>Date: {new Date(item.date).toLocaleDateString()}</Typography.Text>
-                                <br />
-                                <a href={item.file} target="_blank" rel="noopener noreferrer">
-                                    Open File
-                                </a>
-                            </div>
-                        </div>
-                    </List.Item>
-                )}
-                locale={{ emptyText: 'No results found' }}
-            /> */}
             <div className={styles.publicationsGrid}>
                 {results.map((item) => (
                     <div className={styles.publicationItem} key={item._id}>

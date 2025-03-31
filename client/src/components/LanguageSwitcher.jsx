@@ -1,10 +1,8 @@
-
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 const LanguageSwitcher = () => {
     const { language, setLanguage } = useLanguage();
-
     return (
         <div className="language-switcher">
             <button
