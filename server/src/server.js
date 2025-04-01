@@ -1,7 +1,4 @@
-//import dotenv from 'dotenv';
-//dotenv.config({ path: './server/.env' });
 import process from 'process';
-//import { AUTH_COOKIE_NAME, DB_URI, PORT, SESSION_SECRET } from "./config.js";
 import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
@@ -23,8 +20,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-//const PORT = process.env.PORT;
-//const DB_URI = process.env.DB_URI;
 
 // Cleanup the blacklist every 30 minutes
 setInterval(() => {
@@ -98,24 +93,13 @@ app.use((req, res) => {
     res.status(404).json({ error: 'Not Found' });
 });
 
-//console.log('PORT:', PORT);
 // Start the server should be the last line of the file
 try {
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
         console.log(`Node.js version: ${process.version}`);
-        //console.log(`AUTH_COOKIE_NAME: ${AUTH_COOKIE_NAME}`);
     });
 } catch (error) {
     console.error('Error starting server:', error);
 }
 
-
-
-// Serve Vite build files (apply after CORS middleware)
-// app.use(express.static(path.join(__dirname, '..', '..', 'client', 'dist')));
-
-// Handle all other routes (React)
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '..', '..', 'client', 'dist', 'index.html'));
-// });

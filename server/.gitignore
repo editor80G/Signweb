@@ -3,11 +3,10 @@ node_modules/
 
 # Ignore public/files folder
 src/public/files/
-src/public/images/covers
 
 # Ignore log files
 *.log
 
 # Ignore .env file
 .env    
-.env
+
