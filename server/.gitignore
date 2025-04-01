@@ -10,3 +10,4 @@ src/public/images/covers
 
 # Ignore .env file
 .env    
+.env
