@@ -1,6 +1,10 @@
 import jsonwebtoken from '../lib/jsonwebtoken.js'; //own library to promisify jwt
-import { AUTH_COOKIE_NAME, JWT_SECRET } from "../config.js";
+//import { AUTH_COOKIE_NAME, JWT_SECRET } from "../config.js";
 import { isTokenBlacklisted } from '../utils/authUtils.js';
+import { config } from "../config.js";
+
+const AUTH_COOKIE_NAME = config.AUTH_COOKIE_NAME;
+const JWT_SECRET = config.JWT_SECRET;
 
 // Global middleware to check if the user is authenticated
 // If the user is authenticated, the user object is attached to the request object

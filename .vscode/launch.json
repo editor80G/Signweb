@@ -5,18 +5,18 @@
             "request": "launch",
             "type": "node",
             "name": "Launch Server",
-            "program": "${workspaceFolder}/server/src/index.js",
+            "program": "${workspaceFolder}/server/src/server.js",
             "stopOnEntry": false,
             "skipFiles": [
                 "<node_internals>/**"
             ],
             "console": "integratedTerminal",
             "restart": true,
-            "env": {
-                "PORT": "3000",
-                "DB_URI": "mongodb://localhost:27017/signweb",
-                "SESSION_SECRET": "VGh&Y7JHdGN2nhJMgd57674D"
-            } // Vulnerable to attack!!! Do not use in production
+            // "env": {
+            //     "PORT": "3000",
+            //     "DB_URI": "mongodb://localhost:27017/signweb",
+            //     "SESSION_SECRET": "VGh&Y7JHdGN2nhJMgd57674D"
+            // } // Vulnerable to attack!!! Do not use in production
         },
         {
             "type": "node",
@@ -26,15 +26,15 @@
             "cwd": "${workspaceFolder}/client",
             "console": "integratedTerminal"
         },
-        {
-            "request": "attach",
-            "type": "chrome",
-            "name": "Attach to Chrome",
-            "port": 9222,
-            "url": "http://localhost:5173",
-            "webRoot": "${workspaceFolder}/client/src",
-            "trace": true
-        }
+        // {
+        //     "request": "attach",
+        //     "type": "chrome",
+        //     "name": "Attach to Chrome",
+        //     "port": 9222,
+        //     "url": "http://localhost:5173",
+        //     "webRoot": "${workspaceFolder}/client/src",
+        //     "trace": true
+        // }
     ],
     "compounds": [
         {
@@ -42,7 +42,7 @@
             "configurations": [
                 "Launch Server",
                 "Launch Client",
-                "Attach to Chrome"
+                // "Attach to Chrome"
             ]
         }
     ]

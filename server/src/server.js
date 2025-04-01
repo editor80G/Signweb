@@ -1,28 +1,30 @@
-import dotenv from 'dotenv';
-dotenv.config({ path: '.env' });
+//import dotenv from 'dotenv';
+//dotenv.config({ path: './server/.env' });
 import process from 'process';
-import { AUTH_COOKIE_NAME } from "./config.js";
-
+//import { AUTH_COOKIE_NAME, DB_URI, PORT, SESSION_SECRET } from "./config.js";
 import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import expressSession from 'express-session';
 import { auth } from './middlewares/authMiddleware.js';
 import routes from './routes.js';
-//import { tempData } from './middlewares/tempDataMiddleware.js';
 import { cleanupBlacklist } from './utils/authUtils.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
-// import publicationsController from './controllers/pubController.js';
-// import searchController from './controllers/searchController.js';
+import { config } from "./config.js";
+
+const AUTH_COOKIE_NAME = config.AUTH_COOKIE_NAME;
+const DB_URI = config.DB_URI;
+const PORT = config.PORT;
+const SESSION_SECRET = config.SESSION_SECRET;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT;
-const DB_URI = process.env.DB_URI;
+//const PORT = process.env.PORT;
+//const DB_URI = process.env.DB_URI;
 
 // Cleanup the blacklist every 30 minutes
 setInterval(() => {
@@ -56,7 +58,7 @@ app.use(cookieParser());
 
 // Middleware для сессий (если используется)
 app.use(expressSession({
-    secret: process.env.SESSION_SECRET,
+    secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false, httpOnly: true, maxAge: 3600000 }
@@ -65,12 +67,6 @@ app.use(expressSession({
 // Middleware для аутентификации (использует req.cookies)
 app.use(auth);
 
-// Настройка маршрутов API (см routes.js)
-// app.use('/publications', publicationsController);
-// app.use('/search', searchController);
-
-// Другие middleware и маршруты
-//app.use(tempData);
 // Настройка маршрутов API
 app.use(routes);
 
@@ -102,11 +98,13 @@ app.use((req, res) => {
     res.status(404).json({ error: 'Not Found' });
 });
 
-console.log('PORT:', process.env.PORT);
+//console.log('PORT:', PORT);
 // Start the server should be the last line of the file
 try {
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
+        console.log(`Node.js version: ${process.version}`);
+        //console.log(`AUTH_COOKIE_NAME: ${AUTH_COOKIE_NAME}`);
     });
 } catch (error) {
     console.error('Error starting server:', error);

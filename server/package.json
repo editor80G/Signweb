@@ -2,16 +2,17 @@
   "name": "exampreparation1",
   "version": "1.0.0",
   "description": "1. Initialixe project",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node --watch src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "node --watch src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
     "@eslint/js": "^9.19.0",
+    "@types/node": "^22.13.14",
     "eslint": "^9.19.0",
     "globals": "^15.14.0",
     "nodemon": "^3.1.9"

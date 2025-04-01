@@ -3,8 +3,10 @@
 // checking if a token is blacklisted, and cleaning up expired tokens 
 // from the blacklist to ensure security and efficiency.
 
-import { JWT_SECRET } from '../config.js';
+import { config } from '../config.js';
 import jsonwebtoken from '../lib/jsonwebtoken.js'; //own library to promisify jwt
+
+const JWT_SECRET = config.JWT_SECRET;
 
 export const generateToken = async (user) => {
     const payload = {

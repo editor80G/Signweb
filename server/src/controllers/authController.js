@@ -8,12 +8,15 @@
 
 import { Router } from 'express';
 import authService from '../services/authService.js';
-import { AUTH_COOKIE_NAME } from '../config.js';
+//import { AUTH_COOKIE_NAME } from '../config.js';
 import { auth, isAuth, isGuest } from '../middlewares/authMiddleware.js';
 import { getErrorMessage } from '../utils/errorUtils.js';
 import captureIpMiddleware from '../middlewares/captureIpMiddleware.js';
 import { addToBlacklist } from '../utils/authUtils.js';
 import jsonwebtoken from 'jsonwebtoken';
+import { config } from '../config.js';
+
+const AUTH_COOKIE_NAME = config.AUTH_COOKIE_NAME;
 
 const authController = Router();
 
