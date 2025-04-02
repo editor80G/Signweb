@@ -54,3 +54,4 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KINETIC_PHYSICS_455419_C3 }}
           channelId: live
           projectId: kinetic-physics-455419-c3
+          entryPoint: ./client
