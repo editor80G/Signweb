@@ -9,15 +9,15 @@
     "rewrites": [
       {
         "source": "/publications/**",
-        "function": "publications"
+        "destination": "https://signweb-server-6655698061.europe-west8.run.app/publications/**"
       },
       {
         "source": "/search/**",
-        "function": "search"
+        "destination": "https://signweb-server-6655698061.europe-west8.run.app/search/**"
       },
       {
         "source": "/auth/**",
-        "function": "auth"
+        "destination": "https://signweb-server-6655698061.europe-west8.run.app/auth/**"
       },
       {
         "source": "**",
