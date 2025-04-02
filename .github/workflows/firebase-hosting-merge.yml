@@ -30,6 +30,13 @@ jobs:
       # Checkout the repository
       - uses: actions/checkout@v4
 
+      # Clean and install dependencies
+      - name: Clean and install dependencies
+        working-directory: ./client
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
+
       # Navigate to the client directory and install dependencies
       - name: Install dependencies
         working-directory: ./client
