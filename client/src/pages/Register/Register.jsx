@@ -7,6 +7,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { getTranslation } from '../../i18n/getTranslations';
 import { Form, Button, Input, Select } from 'antd';
 import { useRegister } from '../../hooks/useRegister';
+import styles from './Register.module.css';
 
 const Register = () => {
     const { language } = useLanguage();
@@ -44,8 +45,8 @@ const Register = () => {
     }, [language, form]);
 
     return (
-        <div>
-            <h2 className="home-title">{getTranslation('ACCOUNT_REGISTER_TITLE', language)}</h2>
+        <div className={styles.container}>
+            <h2 className={styles.heading}>{getTranslation('ACCOUNT_REGISTER_TITLE', language)}</h2>
             <Form
                 form={form} // Pass the form instance to the Form component for dynamic updates
 
@@ -57,7 +58,8 @@ const Register = () => {
                     span: 16,
                 }}
                 style={{
-                    maxWidth: 600,
+                    maxWidth: 1000,
+                    minWidth: 600,
                 }}
                 initialValues={{
                     //remember: true, // for checkboxes

@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { publicationTypes } from '../../constants/publicationTypes';
 import { getTranslation } from '../../i18n/getTranslations';
-import { Form, Button, Input, Select } from 'antd';
+import { Form, Button, Input, Select, DatePicker } from 'antd';
 import { useLanguage } from '../../context/LanguageContext';
+import styles from './CreatePublication.module.css';
+import dayjs from 'dayjs';
 
 const { Option } = Select;
 const CreatePublication = () => {
@@ -56,8 +58,8 @@ const CreatePublication = () => {
 
     return (
         <>
-            <div>
-                <h2 className="home-title">{getTranslation('PUB_CREATE_TITLE', language)}</h2>
+            <div className={styles.container}>
+                <h2 className={styles.heading}>{getTranslation('PUB_CREATE_TITLE', language)}</h2>
                 <Form
                     form={form} // Pass the form instance to the Form component for dynamic updates
 
@@ -73,6 +75,7 @@ const CreatePublication = () => {
                     }}
                     initialValues={{
                         //remember: true, // for checkboxes
+                        date: dayjs(),
                         country: language === 'ru' ? 'RU' : 'US',
                     }}
                     onFinish={onFinish}
@@ -103,7 +106,11 @@ const CreatePublication = () => {
                             },
                         ]}
                     >
-                        <Input />
+                        {/* <Input /> */}
+                        <DatePicker
+                            format="YYYY-MM-DD" // Формат отображения даты
+                            style={{ width: '100%' }} // Растягиваем DatePicker на всю ширину
+                        />
                     </Form.Item>
 
                     <Form.Item

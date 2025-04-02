@@ -3,9 +3,11 @@ import api from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { publicationTypes } from '../../constants/publicationTypes';
 import { getTranslation } from '../../i18n/getTranslations';
-import { Form, Button, Input, Select } from 'antd';
+import { Form, Button, Input, Select, DatePicker } from 'antd';
 import { useLanguage } from '../../context/LanguageContext';
 import { useParams } from 'react-router-dom';
+import styles from './EditPublication.module.css';
+import dayjs from 'dayjs';
 
 const { Option } = Select;
 const EditPublication = () => {
@@ -32,10 +34,10 @@ const EditPublication = () => {
 
                 form.setFieldsValue({
                     issue: publication.issue,
-                    date: publication.date,
+                    date: dayjs(publication.date),
                     image: publication.image,
                     file: publication.file,
-                    type: publication.type,
+                    type: Number(publication.type),
                 });
             } catch (err) {
                 console.error('Error fetching publication:', err.response?.data?.error || 'Failed to connect to the server');
@@ -72,8 +74,8 @@ const EditPublication = () => {
 
     return (
         <>
-            <div>
-                <h2 className="home-title">{getTranslation('PUB_EDIT_TITLE', language)}</h2>
+            <div className={styles.container}>
+                <h2 className={styles.heading}>{getTranslation('PUB_EDIT_TITLE', language)}</h2>
                 <Form
                     form={form} // Pass the form instance to the Form component for dynamic updates
 
@@ -85,9 +87,10 @@ const EditPublication = () => {
                         span: 16,
                     }}
                     style={{
-                        maxWidth: 600,
+                        maxWidth: 800,
                     }}
                     initialValues={{
+                        date: dayjs(),  // Set the initial date to today
                         //remember: true, // for checkboxes
                         country: language === 'ru' ? 'RU' : 'US',
                     }}
@@ -119,7 +122,11 @@ const EditPublication = () => {
                             },
                         ]}
                     >
-                        <Input />
+                        {/* <Input /> */}
+                        <DatePicker
+                            format="YYYY-MM-DD" // Формат отображения даты
+                            style={{ width: '100%' }} // Растягиваем DatePicker на всю ширину
+                        />
                     </Form.Item>
 
                     <Form.Item
@@ -158,7 +165,6 @@ const EditPublication = () => {
                             },
                         ]}
                     >
-
                         <Select placeholder={getTranslation('PUB_TYPE_PLACEHOLDER', language)}>
                             {Object.values(publicationTypes).map((t) => (
                                 <Option key={t.publicationTypeKey} value={t.id}>

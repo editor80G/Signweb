@@ -82,6 +82,17 @@
     /* Межстрочный интервал */
 }
 
+.details {
+    font-size: 1.5em;
+    /* Размер шрифта */
+    text-align: left;
+    /* Выравнивание текста по левому краю */
+    margin: calc(5%) auto;
+    margin-left: calc(5%);
+    margin-right: calc(5%);
+    /* Внешние отступы сверху и снизу, авто по бокам */
+}
+
 .buttonsContainerDetailsPublication {
     display: flex;
     /* Flexbox для выравнивания кнопок */
@@ -91,4 +102,19 @@
     /* Промежуток между кнопками */
     margin-top: 20px;
     font-size: 1.5em;
+}
+
+.notification {
+    font-size: 1.5em;
+    /* Размер шрифта */
+    text-align: center;
+    /* Выравнивание текста по центру */
+    margin: calc(5%) auto;
+    margin-left: calc(5%);
+    margin-right: calc(5%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: coral;
+    font-weight: bold;
+
+    /* Внешние отступы сверху и снизу, авто по бокам */
 }

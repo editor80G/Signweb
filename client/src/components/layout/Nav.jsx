@@ -20,8 +20,8 @@ const Nav = () => {
                 </li>
                 {isAuthenticated ? (
                     <>
-                        <li><Link to="/logout">{getTranslation('NAV_LOGOUT', language)}</Link></li>
                         <li><Link to="/publications/create">{getTranslation('NAV_CREATE_PUBLICATION', language)}</Link></li>
+                        <li><Link to="/logout">{getTranslation('NAV_LOGOUT', language)}</Link></li>
                     </>
                 ) : (
                     <li><Link to="/auth/register">{getTranslation('NAV_REGISTER_LOGIN', language)}</Link></li>

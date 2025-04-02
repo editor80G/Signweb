@@ -1,0 +1,19 @@
+.publicationDetails {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.publicationDetails p {
+    margin: 5px 0;
+}
+
+.publicationDetails a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.publicationDetails a:hover {
+    text-decoration: underline;
+}

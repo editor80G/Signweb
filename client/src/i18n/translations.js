@@ -290,10 +290,13 @@ export const translations = {
         PUB_DOWNLOAD_FILE: 'Скачать',
         PUB_EDIT: 'Редактировать',
         PUB_DELETE: 'Удалить',
+        PUB_EDIT_TITLE: 'Редактировать издание',
+        PUB_SAVE_CHANGES: 'Сохранить изменения',
+        PUB_DELETE_CONFIRM: 'Вы уверены, что хотите удалить это издание?',
+        PUB_LOGIN_REQUIRED: 'Для загрузки издания необходимо войти в систему.',
 
-
-        SEARCH_PUBLICATIONS_TITLE: 'Поиск изданий',
-        SEARCH_PUBLICATIONS_PLACEHOLDER: 'Введите поисковый запрос',
+        SEARCH_PUBLICATIONS_TITLE: 'Поиск изданий по номеру',
+        SEARCH_PUBLICATIONS_PLACEHOLDER: 'Введите номер издания',
         SEARCH_PUBLICATIONS_BUTTON: 'Поиск',
         SEARCH_PUBLICATIONS_DATE: 'Дата выпуска',
         SEARCH_PUBLICATIONS_OPEN_FILE: 'Открыть файл',
@@ -586,17 +589,24 @@ export const translations = {
         PUB_CREATE: 'Create',
         PUB_CREATE_TITLE: 'Add Publication',
         PUB_NOT_FOUND: 'Publication not found.',
-        PUB_DETAILS_TITLE: 'Content Of the Issue',
+        PUB_DETAILS_TITLE: 'Content of the Issue',
         PUB_DOWNLOAD_FILE: 'Download',
         PUB_EDIT: 'Edit',
         PUB_DELETE: 'Delete',
+        PUB_EDIT_TITLE: 'Edit Publication',
+        PUB_SAVE_CHANGES: 'Save Changes',
+        PUB_DELETE_CONFIRM: 'Are you sure you want to delete this publication?',
+        PUB_LOGIN_REQUIRED: 'Login required to download publication.',
 
 
-        SEARCH_PUBLICATIONS_TITLE: 'Search Publications',
-        SEARCH_PUBLICATIONS_PLACEHOLDER: 'Enter search query',
+
+        SEARCH_PUBLICATIONS_TITLE: 'Search Publications By Issue Number',
+        SEARCH_PUBLICATIONS_PLACEHOLDER: 'Enter issue number',
         SEARCH_PUBLICATIONS_BUTTON: 'Search',
         SEARCH_PUBLICATIONS_DATE: 'Publication Date',
         SEARCH_PUBLICATIONS_OPEN_FILE: 'Open File',
+
+
 
     }
 };

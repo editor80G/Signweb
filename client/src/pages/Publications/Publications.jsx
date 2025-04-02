@@ -5,6 +5,7 @@ import { getTranslation } from '../../i18n/getTranslations';
 import { useLanguage } from '../../context/LanguageContext';
 import { Link } from 'react-router-dom';
 import api from '../../utils/api';
+import styles from './Publications.module.css';
 
 const Publications = ({ type }) => {
     const [publications, setPublications] = useState([]);
@@ -80,7 +81,7 @@ const Publications = ({ type }) => {
                                     alt={type === 'magazine' && `${getTranslation('PUB_MAGAZINE_TITLE', language)} ${publication.issue}` || `${getTranslation('PUB_CATALOG_TITLE', language)} ${publication.issue}`}
                                 />
                             </Link>
-                            <div className="publication-details">
+                            <div className={styles.publicationDetails}>
                                 {type === 'magazine' && (
                                     <p>
                                         <Link to={`/publications/details/${publication._id}`}>

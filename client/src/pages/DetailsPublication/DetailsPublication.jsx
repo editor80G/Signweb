@@ -44,7 +44,7 @@ const DetailsPublication = () => {
         if (window.confirm(getTranslation('PUB_DELETE_CONFIRM', language) || 'Are you sure you want to delete this publication?')) {
             try {
                 await api.delete(`/publications/delete/${id}`);
-                alert(getTranslation('PUB_DELETE_SUCCESS', language) || 'Publication deleted successfully.');
+                //alert(getTranslation('PUB_DELETE_SUCCESS', language) || 'Publication deleted successfully.');
                 navigate('/publications/magazines'); // Redirect to the publications list
             } catch (err) {
                 alert(getTranslation('PUB_DELETE_ERROR', language) || 'Failed to delete the publication.'), err;
@@ -83,7 +83,16 @@ const DetailsPublication = () => {
             </div>
             <div className={styles.rightColumnDetailsPublication}>
                 <h2 className={styles.headingDetailsPublication}>{getTranslation('PUB_DETAILS_TITLE', language) || 'Publication Details'}</h2>
-                {isAuthenticated && (
+                <p className={styles.details}>
+                    1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat id itaque possimus magnam placeat. Itaque incidunt rem corrupti aspernatur sapiente animi. Rem maxime quae ut odio cumque possimus voluptas esse!
+                </p>
+                <p className={styles.details}>
+                    2. Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat id itaque possimus magnam placeat. Itaque incidunt rem corrupti aspernatur sapiente animi. Rem maxime quae ut odio cumque possimus voluptas esse!
+                </p>
+                <p className={styles.details}>
+                    3. Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat id itaque possimus magnam placeat. Itaque incidunt rem corrupti aspernatur sapiente animi. Rem maxime quae ut odio cumque possimus voluptas esse!
+                </p>
+                {isAuthenticated ? (
                     <>
                         <p className={styles.buttonsContainerDetailsPublication}>
                             <a href={`${config.baseUrl}${publication.file}`} target="_blank" rel="noopener noreferrer">
@@ -104,6 +113,10 @@ const DetailsPublication = () => {
                             </div>
                         )}
                     </>
+                ) : (
+                    <p className={styles.notification}>
+                        {getTranslation('PUB_LOGIN_REQUIRED', language) || 'Login required to download publication.'}
+                    </p>
                 )}
             </div>
         </div>

@@ -86,9 +86,10 @@ const SearchPage = () => {
                                     : new Date(item.date).getFullYear() // Только год
                                 }
                             </Typography.Text>                           <br />
-                            <a href={item.file} target="_blank" rel="noopener noreferrer">
-                                {getTranslation('SEARCH_PUBLICATIONS_OPEN_FILE', language)}
-                            </a>
+                            <Link to={`/publications/details/${item._id}`}>
+                                {getTranslation('PUB_DETAILS_TITLE', language)}
+                            </Link>
+
                         </div>
                     </div>
                 ))}
