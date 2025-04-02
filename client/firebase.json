@@ -8,6 +8,18 @@
     ],
     "rewrites": [
       {
+        "source": "/publications/**",
+        "function": "publications"
+      },
+      {
+        "source": "/search/**",
+        "function": "search"
+      },
+      {
+        "source": "/auth/**",
+        "function": "auth"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

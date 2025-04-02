@@ -270,8 +270,8 @@ export const translations = {
         PUB_LIST_CATALOG: 'Архив выпусков каталога "Реклама и дизайн в Украине"',
         PUB_TYPES_LABEL: 'Тип издания',
         PUB_TYPES: {
-            MAGAZINE: 'Журнал',
-            CATALOG: 'Каталог',
+            MAGAZINE: 'журнал',
+            CATALOG: 'каталог',
         },
         PUB_FILE: 'Файл',
         PUB_IMAGE: 'Изображение',
@@ -286,6 +286,11 @@ export const translations = {
         PUB_TYPE_PLACEHOLDER: 'Выберите тип издания',
         PUB_CREATE: 'Создать издание',
         PUB_CREATE_TITLE: 'Добавить издание',
+        PUB_DETAILS_TITLE: 'Содержание номера',
+        PUB_DOWNLOAD_FILE: 'Скачать',
+        PUB_EDIT: 'Редактировать',
+        PUB_DELETE: 'Удалить',
+
 
         SEARCH_PUBLICATIONS_TITLE: 'Поиск изданий',
         SEARCH_PUBLICATIONS_PLACEHOLDER: 'Введите поисковый запрос',
@@ -564,8 +569,8 @@ export const translations = {
         PUB_LIST_CATALOG: 'Advertising and Design in Ukraine Catalog Archive',
         PUB_TYPES_LABEL: 'Publication type',
         PUB_TYPES: {
-            MAGAZINE: 'Magazine',
-            CATALOG: 'Catalog',
+            MAGAZINE: 'magazine',
+            CATALOG: 'catalog',
         },
         PUB_FILE: 'File',
         PUB_IMAGE: 'Image',
@@ -581,8 +586,11 @@ export const translations = {
         PUB_CREATE: 'Create',
         PUB_CREATE_TITLE: 'Add Publication',
         PUB_NOT_FOUND: 'Publication not found.',
-        PUB_DETAILS_TITLE: 'Publication Details',
-        PUB_DOWNLOAD_FILE: 'Download File',
+        PUB_DETAILS_TITLE: 'Content Of the Issue',
+        PUB_DOWNLOAD_FILE: 'Download',
+        PUB_EDIT: 'Edit',
+        PUB_DELETE: 'Delete',
+
 
         SEARCH_PUBLICATIONS_TITLE: 'Search Publications',
         SEARCH_PUBLICATIONS_PLACEHOLDER: 'Enter search query',

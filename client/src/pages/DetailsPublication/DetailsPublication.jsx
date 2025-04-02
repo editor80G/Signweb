@@ -5,6 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { getTranslation } from '../../i18n/getTranslations';
 import { useLanguage } from '../../context/LanguageContext';
 import api from '../../utils/api';
+import styles from './DetailsPublication.module.css';
 
 
 const DetailsPublication = () => {
@@ -63,41 +64,47 @@ const DetailsPublication = () => {
     }
 
     return (
-        <div className="details-publication">
-            <h2>{getTranslation('PUB_DETAILS_TITLE', language) || 'Publication Details'}</h2>
-            <div className="publication-details">
+        <div className={styles.rowDetailsPublication}>
+            <div className={styles.leftColumnDetailsPublication}>
                 <img
                     src={`${config.baseUrl}${publication.image}`}
                     alt={`${getTranslation('PUB_IMAGE', language)} ${publication.issue}`}
-                    className="publication-image"
+                    className={styles.imageCoverDetailsPublication}
                 />
-                <p>
+                <p className={styles.imageCoverTitleDetailsPublication}>
                     <strong>{getTranslation('PUB_ISSUE', language)}:</strong> {publication.issue}
                 </p>
-                <p>
-                    <strong>{getTranslation('PUB_DATE', language)}:</strong> {new Date(publication.date).toLocaleDateString()}
+                <p className={styles.imageCoverTxtDetailsPublication}>
+                    <strong>{getTranslation('SEARCH_PUBLICATIONS_DATE', language)}:</strong> {publication.type === '1'
+                        ? new Date(publication.date).toLocaleDateString(language, { month: 'long', year: 'numeric' }) // Полный формат: месяц и год
+                        : new Date(publication.date).getFullYear() // Только год
+                    }
                 </p>
-                <p>
-                    <strong>{getTranslation('PUB_TYPE_LABEL', language)}:</strong> {publication.type}
-                </p>
-
-                {isAuthenticated && isOwner ? (
+            </div>
+            <div className={styles.rightColumnDetailsPublication}>
+                <h2 className={styles.headingDetailsPublication}>{getTranslation('PUB_DETAILS_TITLE', language) || 'Publication Details'}</h2>
+                {isAuthenticated && (
                     <>
-                        <p>
+                        <p className={styles.buttonsContainerDetailsPublication}>
                             <a href={`${config.baseUrl}${publication.file}`} target="_blank" rel="noopener noreferrer">
-                                {getTranslation('PUB_DOWNLOAD_FILE', language) || 'Download File'}
+                                {`${getTranslation('PUB_DOWNLOAD_FILE', language) || 'Download File'} ${publication.type === '1'
+                                    ? getTranslation('PUB_TYPES.MAGAZINE', language) || 'Magazine'
+                                    : getTranslation('PUB_TYPES.CATALOG', language) || 'Catalog'
+                                    }`}
                             </a>
                         </p>
-                        <div className="publication-actions">
-                            <button onClick={handleEdit} className="btn btn-edit">
-                                {getTranslation('PUB_EDIT', language) || 'Edit'}
-                            </button>
-                            <button onClick={handleDelete} className="btn btn-delete">
-                                {getTranslation('PUB_DELETE', language) || 'Delete'}
-                            </button>
-                        </div>
+                        {isOwner && (
+                            <div className={styles.buttonsContainerDetailsPublication}>
+                                <button onClick={handleEdit} className="btn btn-edit">
+                                    {getTranslation('PUB_EDIT', language) || 'Edit'}
+                                </button>
+                                <button onClick={handleDelete} className="btn btn-delete">
+                                    {getTranslation('PUB_DELETE', language) || 'Delete'}
+                                </button>
+                            </div>
+                        )}
                     </>
-                ) : null}
+                )}
             </div>
         </div>
     );
