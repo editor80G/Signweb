@@ -95,15 +95,44 @@ src/
 ├── App.jsx            # Main application component
 ├── main.jsx           # Entry point for the React app
 
-Key Files
-src/context/AuthContext.js:
-Manages authentication state using React Context API.
+## Key Files
 
-src/hooks/useAuthStatus.js:
-Custom hook to check the user's authentication status.
+- **`src/context/AuthContext.js`**:  
+    Manages authentication state using the React Context API.
 
-.env:
-Contains environment variables for the project.
+- **`src/hooks/useAuthStatus.js`**:  
+    Custom hook to check the user's authentication status.
+
+- **`.env`**:  
+    Contains environment variables for the project.
+
+---
+
+## Error Handling
+
+The application includes an **Error Boundary** to handle unexpected errors in React components. This ensures that the application does not crash entirely if an error occurs in one of the components.
+
+### How It Works
+
+- If an error occurs in a child component, the `ErrorBoundary` component catches it and displays a fallback UI.
+- The fallback UI informs the user that something went wrong and suggests reloading the page.
+
+### Key File
+
+- **`src/components/ErrorBoundary/ErrorBoundary.jsx`**:  
+    This file contains the implementation of the `ErrorBoundary` component.
+
+### Example
+
+If an error occurs in a component, the user will see the following message:  
+**"Something went wrong. Try to reload the page."**
+
+### Benefits
+
+- Prevents the entire application from crashing due to errors in specific components.
+- Improves user experience by providing a clear fallback UI.
+
+---
 
 Technologies Used
 Frontend: React, React Router, Axios
