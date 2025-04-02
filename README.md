@@ -52,9 +52,12 @@ VITE_BASE_URL=https://signweb-server-6655698061.europe-west8.run.app
 
 ### 4. Start the Development Server
 ```bash
+cd client
+```
+```bash
 npm run dev
 ```
-The application will be available at [http://localhost:3000](http://localhost:3000).
+The application will be available at [http://localhost:5173](http://localhost:5173).
 
 ---
 
