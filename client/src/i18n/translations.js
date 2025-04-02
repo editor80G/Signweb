@@ -265,7 +265,7 @@ export const translations = {
         },
 
         PUB_MAGAZINE_TITLE: 'Журнал "Наружка", №',
-        PUB_CATALOG_TITLE: 'Каталог "Реклама и дизайн в Украине", номер',
+        PUB_CATALOG_TITLE: 'Каталог "Реклама и дизайн в Украине", №',
         PUB_LIST_MAGAZINE: 'Архив номеров журнала "Наружка"',
         PUB_LIST_CATALOG: 'Архив выпусков каталога "Реклама и дизайн в Украине"',
         PUB_TYPES_LABEL: 'Тип издания',
@@ -286,6 +286,12 @@ export const translations = {
         PUB_TYPE_PLACEHOLDER: 'Выберите тип издания',
         PUB_CREATE: 'Создать издание',
         PUB_CREATE_TITLE: 'Добавить издание',
+
+        SEARCH_PUBLICATIONS_TITLE: 'Поиск изданий',
+        SEARCH_PUBLICATIONS_PLACEHOLDER: 'Введите поисковый запрос',
+        SEARCH_PUBLICATIONS_BUTTON: 'Поиск',
+        SEARCH_PUBLICATIONS_DATE: 'Дата выпуска',
+        SEARCH_PUBLICATIONS_OPEN_FILE: 'Открыть файл',
 
     },
     en: {
@@ -577,6 +583,13 @@ export const translations = {
         PUB_NOT_FOUND: 'Publication not found.',
         PUB_DETAILS_TITLE: 'Publication Details',
         PUB_DOWNLOAD_FILE: 'Download File',
+
+        SEARCH_PUBLICATIONS_TITLE: 'Search Publications',
+        SEARCH_PUBLICATIONS_PLACEHOLDER: 'Enter search query',
+        SEARCH_PUBLICATIONS_BUTTON: 'Search',
+        SEARCH_PUBLICATIONS_DATE: 'Publication Date',
+        SEARCH_PUBLICATIONS_OPEN_FILE: 'Open File',
+
     }
 };
 

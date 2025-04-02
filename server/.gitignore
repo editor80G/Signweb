@@ -1,12 +1,23 @@
 # Ignore node_modules folder
 node_modules/
 
+# Ignore .env file
+.env
+.env.development
+.env.production   
+
+# Исключаем файлы Docker
+.dockerignore
+
 # Ignore public/files folder
 src/public/files/
 
 # Ignore log files
+logs
 *.log
+*.txt
 
-# Ignore .env file
-.env    
+# Исключаем файлы редактора
+.vscode
+.idea
 

@@ -1,14 +1,14 @@
 html,
 body {
-    margin: 0;
+    /* margin: 0;
     padding: 0;
-    height: 100%;
-    /* font-size: .85em; */
+    height: 100%; */
+    font-size: .85em;
     font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
     color: #232323;
     background-color: #fff;
     font-family: 'Roboto Condensed', sans-serif;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     min-width: 1000px;
 
 }
@@ -24,10 +24,12 @@ section {
 }
 
 #root {
-    min-width: 100%;
-    min-height: 100%;
+    /* min-width: 100%; */
+    /* min-height: 100%; */
     display: flex;
     flex-direction: column;
+    /* min-height: 100%; */
+    min-height: 100vh;
 }
 
 #page {
@@ -35,26 +37,44 @@ section {
     display: flex;
     flex-direction: column;
     flex: 1;
-    /* Занимает оставшееся пространство */
-    /* min-width: 100%;
-    min-height: 100%; */
-    /* overflow: visible; */
+    align-items: stretch;
+    /* Убедитесь, что содержимое растянуто */
 }
 
 main {
 
-    /* padding-top: 220px !important; */
+
     /* Убедитесь, что main не перекрывает header */
     flex: 1;
     /* Занимает всё доступное пространство */
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    /*Добавляем прокрутку, если содержимое превышает высоту */
     z-index: 1;
-    height: 100%;
+    /* height: 100%; */
     width: 95%;
     margin: 0 auto
-        /*Добавляем прокрутку, если содержимое превышает высоту */
+}
+
+#header {
+    /* position: static; */
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background-color: #f8f9fa;
+    z-index: 1000;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px 20px 20px 20px;
+    /* Внутренние отступы */
+    box-sizing: border-box;
+    /* Учитываем padding в ширине */
+    float: none;
+    /* Убираем float чтобы избежать проблем с позиционированием */
 }
 
 
@@ -65,8 +85,12 @@ main {
     padding: 20px;
     text-align: center;
     border-top: 1px solid #e7e7e7;
-    position: static;
+    /* position: static; */
     bottom: 0;
+
+    position: relative;
+    /* Статичный футер */
+    width: 100%;
 
 }
 
@@ -112,25 +136,7 @@ main {
 .child:last-child {
     background-color: #dee2e6;
 } */
-#header {
-    /* position: fixed; */
-    position: static;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 150px;
-    background-color: #f8f9fa;
-    z-index: 1000;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 20px 20px 20px 20px;
-    /* Внутренние отступы */
-    box-sizing: border-box;
-    /* Учитываем padding в ширине */
-    float: none;
-    /* Убираем float чтобы избежать проблем с позиционированием */
-}
+
 
 nav {
     /* position: fixed; */
@@ -612,7 +618,7 @@ textarea {
         /* max-width: 100%; */
         /* Занимает всю ширину */
         display: flex;
-        justify-content: center;
+        /* justify-content: center; */
         /* Центрируем содержимое по горизонтали */
         align-items: center;
         /* Центрируем содержимое по вертикали */

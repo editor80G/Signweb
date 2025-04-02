@@ -1,5 +1,20 @@
-# Ignore log files
+# Исключаем локальные зависимости из локальной среды
+# при этом они должны быть установлены в контейнере см. Dockerfile
+# COPY package*.json ./
+# RUN npm install --production
+node_modules
+
+# Исключаем конфиденциальные данные
+.env
+.env.development
+.env.production
+
+# Исключаем файлы и папки, которые не нужны в контейнере
+.dockerignore
+.git
+.gitignore
+.vscode
+logs
 *.log
 
-# Ignore .env file
-.env
+*.txt

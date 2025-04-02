@@ -23,5 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment
+# Environment variables
 .env
+.env.development
+.env.production
+
+*.txt

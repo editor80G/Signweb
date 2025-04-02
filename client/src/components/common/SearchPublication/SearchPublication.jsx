@@ -32,7 +32,7 @@ const SearchPage = () => {
 
     return (
         <div className={styles.searchContainer}>
-            <Title level={2}>Search Publications</Title>
+            <Title level={2}>{getTranslation('SEARCH_PUBLICATIONS_TITLE', language)}</Title>
             <Form
                 form={form}
                 layout="inline"
@@ -48,11 +48,11 @@ const SearchPage = () => {
                         },
                     ]}
                 >
-                    <Input placeholder="Enter search query" style={{ width: 300 }} />
+                    <Input placeholder={getTranslation('SEARCH_PUBLICATIONS_PLACEHOLDER', language)} style={{ width: 300 }} />
                 </Form.Item>
                 <Form.Item>
                     <Button type="primary" htmlType="submit" loading={loading}>
-                        Search
+                        {getTranslation('SEARCH_PUBLICATIONS_BUTTON', language)}
                     </Button>
                 </Form.Item>
             </Form>
@@ -74,12 +74,20 @@ const SearchPage = () => {
                             />
                         </Link>
                         <div className={styles.publicationDetails}>
-                            <Typography.Text strong>Issue: {item.issue}</Typography.Text>
+                            <Typography.Text strong>
+                                {item.type === '1'
+                                    ? `${getTranslation('PUB_MAGAZINE_TITLE', language)}: ${item.issue}`
+                                    : `${getTranslation('PUB_CATALOG_TITLE', language)}: ${item.issue}`}
+                            </Typography.Text>
                             <br />
-                            <Typography.Text>Date: {new Date(item.date).toLocaleDateString()}</Typography.Text>
-                            <br />
+                            <Typography.Text>
+                                {getTranslation('SEARCH_PUBLICATIONS_DATE', language)}: {item.type === '1'
+                                    ? new Date(item.date).toLocaleDateString(language, { month: 'long', year: 'numeric' }) // Полный формат: месяц и год
+                                    : new Date(item.date).getFullYear() // Только год
+                                }
+                            </Typography.Text>                           <br />
                             <a href={item.file} target="_blank" rel="noopener noreferrer">
-                                Open File
+                                {getTranslation('SEARCH_PUBLICATIONS_OPEN_FILE', language)}
                             </a>
                         </div>
                     </div>
