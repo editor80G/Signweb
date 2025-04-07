@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { getTranslation } from '../../i18n/getTranslations';
@@ -12,13 +12,49 @@ const Login = () => {
     const navigate = useNavigate();
     const { login } = useLogin();
     const [form] = Form.useForm();
+    const [recaptchaReady, setRecaptchaReady] = useState(false);
+
+    // Load reCAPTCHA script dynamically
+    useEffect(() => {
+        if (window.grecaptcha) {
+            window.grecaptcha.enterprise.ready(() => {
+                setRecaptchaReady(true);
+                console.log('reCAPTCHA is ready');
+            });
+        } else {
+            console.error('reCAPTCHA not loaded');
+        }
+    }, []);
+
+    const handleRecaptcha = async () => {
+        if (window.grecaptcha) {
+            const token = await window.grecaptcha.enterprise.execute('6LeD0AsrAAAAAExinf4S5J104V1ncJ4uTkeyetS3', { action: 'submit' });
+            console.log('CAPTCHA Token:', token);
+            return token;
+        } else {
+            console.error('reCAPTCHA not loaded');
+            return null;
+        }
+    };
 
     const onFinish = async (values) => {
         try {
-            const success = await login(values);
+            const captchaToken = await handleRecaptcha();
+            if (!captchaToken) {
+                form.setFields([
+                    {
+                        name: 'email',
+                        errors: [getTranslation('ACCOUNT_VALIDATION_RECAPTCHA', language)],
+                    },
+                ]);
+                return;
+            }
+
+            const success = await login({ ...values, captchaToken });
             console.log('Login success:', success);
             if (success) {
-                navigate('/');
+                const redirectTo = new URLSearchParams(window.location.search).get('redirectTo') || '/';
+                navigate(redirectTo);
             }
         }
         catch (err) {
@@ -26,7 +62,7 @@ const Login = () => {
             form.setFields([
                 {
                     name: 'email',
-                    errors: [err.message], // Show the error message on the email field
+                    errors: [getTranslation(err.message, language) || 'An unknown error occured.'], // Show the error message on the email field
                 },
             ]);
         }
@@ -89,7 +125,7 @@ const Login = () => {
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" disabled={!recaptchaReady}>
                         {getTranslation('ACCOUNT_LOGIN', language)}
                     </Button>
                 </Form.Item>

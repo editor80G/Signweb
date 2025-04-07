@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 //import axios from 'axios';
 import config from '../../../config';
 import { getTranslation } from '../../i18n/getTranslations';
@@ -52,7 +52,11 @@ const Publications = ({ type }) => {
         return () => {
             isMounted = false;
         };
-    }, [type, language]);
+    }, [type]);
+
+    // Memoize publications to avoid recalculating on every render
+    const memoizedPublications = useMemo(() => publications, [publications]);
+
 
     if (loading) {
         return <p>Loading...</p>;
@@ -70,9 +74,9 @@ const Publications = ({ type }) => {
                 {type === 'catalog' && getTranslation('PUB_LIST_CATALOG', language)}
                 {type !== 'magazine' && type !== 'catalog' && getTranslation('PUB_LIST_DEFAULT', language)}
             </h2>
-            {publications.length > 0 ? (
+            {memoizedPublications.length > 0 ? (
                 <div className="publications-grid">
-                    {publications.map((publication) => (
+                    {memoizedPublications.map((publication) => (
                         <div className="publication-item" key={publication._id}>
                             <Link to={`/publications/details/${publication._id}`}>
                                 <img

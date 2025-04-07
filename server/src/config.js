@@ -23,7 +23,7 @@ if (!envLoaded) {
 }
 
 // Check if required environment variables are set
-const requiredEnvVars = ['JWT_SECRET', 'AUTH_COOKIE_NAME', 'DB_URI', 'SESSION_SECRET'];
+const requiredEnvVars = ['JWT_SECRET', 'AUTH_COOKIE_NAME', 'DB_URI', 'SESSION_SECRET', 'RECAPTCHA_SECRET_KEY'];
 requiredEnvVars.forEach((varName) => {
     if (!process.env[varName]) {
         throw new Error(`Missing required environment variable: ${varName}. Please check your .env file.`);
@@ -43,4 +43,5 @@ export const config = {
     DB_URI: process.env.DB_URI, // MongoDB connection URI
     SESSION_SECRET: process.env.SESSION_SECRET, // Secret for session management
     ALLOWED_ORIGINS: allowedOrigins, // allowed origins for CORS
+    RECAPTCHA_SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY, // Secret key for Google reCAPTCHA
 };

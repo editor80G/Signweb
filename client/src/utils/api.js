@@ -1,9 +1,15 @@
 import axios from 'axios';
-import config from '../../config';
+import config from '../../config.js'; // Import the config file
+
+// const baseUrl =
+//     typeof import.meta !== "undefined" && import.meta.env
+//         ? config.baseUrl
+//         : global.importMetaEnv.VITE_BASE_URL;
 
 // Create an Axios instance
 const api = axios.create({
     baseURL: config.baseUrl, // Your API base URL
+    timeout: 5000, // Request timeout
     withCredentials: true, // Ensure cookies are sent with requests
 });
 

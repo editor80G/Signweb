@@ -12,7 +12,20 @@ body {
     min-width: 1000px;
     width: 100vw;
     /* 100% от ширины окна браузера */
+    position: static;
 
+}
+
+body .grecaptcha-badge {
+    bottom: 0px;
+    /* Сдвиг вверх */
+    right: 0px;
+    /* Сдвиг влево */
+    transform: scale(0.8);
+    /* Уменьшение размера */
+    opacity: 0.7;
+    /* Прозрачность */
+    z-index: 1000;
 }
 
 header,
@@ -20,8 +33,9 @@ footer,
 nav,
 section {
     /* display: block; */
-    z-index: 10;
+    z-index: 1;
     width: 100vw;
+    position: relative;
     /* 100% от ширины окна браузера */
 
     /* height: 100%; */
@@ -35,6 +49,7 @@ section {
     /* min-height: 100%; */
     min-height: 100vh;
     width: 100vw;
+    position: static;
 }
 
 #page {

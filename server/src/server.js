@@ -41,63 +41,23 @@ setInterval(() => {
 // Express setup
 
 // Настраиваем CORS для разрешения всех запросов с любого домена (работает)
-app.use(cors({
-    //origin: 'https://kinetic-physics-455419-c3.web.app', // Разрешить запросы с любого домена
-    origin: 'http://localhost:5173', // Локальный хост для разработки
-    credentials: true // Разрешить отправку cookies
-}));
-
-// клиент
-
-// fetch('https://signweb-server-6655698061.europe-west8.run.app/publications?type=magazine', {
-//     method: 'GET',
-//     credentials: 'include', // Включить cookies в запрос
-//     headers: {
-//         'Content-Type': 'application/json'
-//     }
-// });
-
-//сервер
-// app.use((req, res, next) => {
-//     const allowedOrigins = [
-//         'https://kinetic-physics-455419-c3.web.app', // Продакшн-домен
-//         'http://localhost:5173' // Локальный хост для разработки
-//     ];
-
-//     const origin = req.headers.origin;
-
-//     if (allowedOrigins.includes(origin)) {
-//         res.setHeader('Access-Control-Allow-Origin', origin);
-//         res.setHeader('Access-Control-Allow-Credentials', 'true');
-//         res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-//         res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
-//     }
-
-//     if (req.method === 'OPTIONS') {
-//         return res.sendStatus(200); // Обработка preflight-запросов
-//     }
-
-//     next();
-// });
-
-
-// TODO: test it later do not work on production
 // app.use(cors({
-//     origin: (origin, callback) => {
-//         // Разрешаем запросы, если домен есть в списке разрешённых
-//         if (!origin || ALLOWED_ORIGINS.includes(origin)) {
-//             callback(null, true);
-//         } else {
-//             callback(new Error('Not allowed by CORS'));
-//         }
-//     },
-//     credentials: true // Allow credentials (cookies) to be sent
+//     //origin: 'https://kinetic-physics-455419-c3.web.app', // Разрешить запросы с любого домена
+//     origin: 'http://localhost:5173', // Локальный хост для разработки
+//     credentials: true // Разрешить отправку cookies
 // }));
 
-// app.use(cors({
-//     origin: 'http://localhost:5173', // Replace with your client's origin
-//     credentials: true // Allow credentials (cookies) to be sent
-// })); // ensure that the CORS middleware is applied before any other middleware that handles requests
+const allowedOrigins = [
+    'http://localhost:5173', // Локальный хост для разработки
+    'https://kinetic-physics-455419-c3.web.app', // Продакшн-домен Firebase Hosting
+    'https://www.signweb.com.ua', // Основной пользовательский домен
+    // 'https://signweb.com.ua' // Корневой домен (если используется)
+];
+
+app.use(cors({
+    origin: allowedOrigins, // Передаем массив разрешенных доменов
+    credentials: true // Разрешить отправку cookies
+}));
 
 app.use(express.json()); // Middleware to parse JSON bodies
 // app.use(express.static('src/public'));

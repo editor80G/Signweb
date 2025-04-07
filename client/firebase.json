@@ -6,7 +6,18 @@
       "**/.*",
       "**/node_modules/**"
     ],
+    "redirects": [
+      {
+        "source": "https://signweb.com.ua",
+        "destination": "https://www.signweb.com.ua",
+        "type": 301
+      }
+    ],
     "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      },
       {
         "source": "/publications/**",
         "destination": "https://signweb-server-6655698061.europe-west8.run.app/publications/**"
@@ -18,10 +29,6 @@
       {
         "source": "/auth/**",
         "destination": "https://signweb-server-6655698061.europe-west8.run.app/auth/**"
-      },
-      {
-        "source": "**",
-        "destination": "/index.html"
       }
     ]
   }

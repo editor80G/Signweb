@@ -301,6 +301,8 @@ export const translations = {
         SEARCH_PUBLICATIONS_DATE: 'Дата выпуска',
         SEARCH_PUBLICATIONS_OPEN_FILE: 'Открыть файл',
 
+        ERROR_LOGIN_USER_ALREADY_EXISTS: 'Пользователь с таким адресом электронной почты уже существует, пожалуйста перейдите к входу.',
+
     },
     en: {
         SIGN_MAKING: 'Sign making and visual design',
@@ -605,6 +607,8 @@ export const translations = {
         SEARCH_PUBLICATIONS_BUTTON: 'Search',
         SEARCH_PUBLICATIONS_DATE: 'Publication Date',
         SEARCH_PUBLICATIONS_OPEN_FILE: 'Open File',
+
+        ERROR_LOGIN_USER_ALREADY_EXISTS: 'A user with this email address already exists, please go to log in.',
 
 
 

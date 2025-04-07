@@ -9,7 +9,11 @@ export default [
     files: ['**/*.{js,jsx}'],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.jest, // Add Jest globals
+        ...globals.node,
+      },
       parserOptions: {
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
@@ -28,6 +32,17 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+    },
+  },
+  {
+    files: ['**/*.test.{js,jsx}'], // Apply Jest-specific settings to test files
+    languageOptions: {
+      globals: {
+        ...globals.jest, // Add Jest globals for test files
+      },
+    },
+    rules: {
+      'no-unused-expressions': 'off', // Optional: Disable rules that conflict with testing patterns
     },
   },
 ]

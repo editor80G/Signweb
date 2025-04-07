@@ -14,9 +14,8 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: [true, 'Password is required!'],
-        minlength: [4, 'Password must be at least 4 characters long!']
+        minlength: [8, 'Password must be at least 8 characters long!']
     },
-
     businessType: {
         type: String,
         required: [true, 'Business Type is required!'],
@@ -29,8 +28,25 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Country is required!'],
     },
+    isActive: {
+        type: Boolean,
+        default: false
+    },
+    userRole: {
+        type: [String],
+        enum: ['admin', 'user', 'publisher'],
+        default: 'user'
+    },
+    loginAttempts: {
+        type: Number,
+        default: 0
+    },
     ipAddress: {
         type: String,
+        required: false
+    },
+    lastLogin: {
+        type: Date,
         required: false
     },
 
@@ -38,7 +54,8 @@ const userSchema = new Schema({
 
 userSchema.pre('save', async function () {
     const user = this;
-    user.password = await bcrypt.hash(user.password, 10);
+    const saltRounds = 11; // Number of rounds for salting recommended to be between 10-12
+    user.password = await bcrypt.hash(user.password, saltRounds);
 }); // Hash the password before saving the user, using bcrypt with 10 rounds of salting
 
 const User = model('User', userSchema);

@@ -6,10 +6,14 @@ export const useLogin = () => {
     const { handleAuthChange } = useContext(AuthContext);
 
     const login = async (values) => {
-        const { email, password } = values;
+        const { email, password, captchaToken } = values;
+        const captchaVerificationToken = captchaToken || null;
+        if (!captchaVerificationToken) {
+            throw new Error('useLogin: Captcha verification failed');
+        }
 
         try {
-            const response = await api.post('/auth/login', { email, password });
+            const response = await api.post('/auth/login', { email, password, captchaVerificationToken });
             if (response.data.token) {
                 handleAuthChange(true);
                 return response.data.success;
@@ -17,7 +21,11 @@ export const useLogin = () => {
                 throw new Error('Authentication failed');
             }
         } catch (err) {
-            const errorMessage = err.response?.data?.error || 'Failed to connect to the server';
+            const errorMessage = err.response?.data?.error
+            if (!errorMessage) {
+                console.error('Unexpected error structure:', err.response);
+                throw new Error('Unexpected error from server'); // Если структура ответа неожиданная
+            }
             throw new Error(errorMessage);
         }
     };

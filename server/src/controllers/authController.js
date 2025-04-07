@@ -10,7 +10,7 @@ import { Router } from 'express';
 import authService from '../services/authService.js';
 //import { AUTH_COOKIE_NAME } from '../config.js';
 import { auth, isAuth, isGuest } from '../middlewares/authMiddleware.js';
-import { getErrorMessage } from '../utils/errorUtils.js';
+//import { getErrorMessage } from '../utils/errorUtils.js';
 import captureIpMiddleware from '../middlewares/captureIpMiddleware.js';
 import { addToBlacklist } from '../utils/authUtils.js';
 import jsonwebtoken from 'jsonwebtoken';
@@ -34,11 +34,13 @@ authController.post('/register', isGuest, captureIpMiddleware, async (req, res) 
     const userData = req.body;
     //console.log(userData);
     try {
+        await authService.verifyCaptcha(userData.captchaVerificationToken);
         const token = await authService.register(userData);
         res.cookie(AUTH_COOKIE_NAME, token, { httpOnly: true, secure: false, maxAge: 3600000 });
         res.status(201).json({ success: true, token });
     } catch (error) {
-        res.status(400).json({ error: getErrorMessage(error) });
+        res.status(400).json({ error: error.message });
+
     }
 });
 
@@ -46,11 +48,12 @@ authController.post('/register', isGuest, captureIpMiddleware, async (req, res) 
 authController.post('/login', isGuest, async (req, res) => {
     const userData = req.body;
     try {
+        await authService.verifyCaptcha(userData.captchaVerificationToken);
         const token = await authService.login(userData);
         res.cookie(AUTH_COOKIE_NAME, token, { httpOnly: true, secure: false, maxAge: 3600000 }); // Set the cookie with the token
         res.status(200).json({ success: true, token }); // Return JSON response
     } catch (error) {
-        res.status(400).json({ error: getErrorMessage(error) }); // Return error as JSON
+        res.status(400).json({ error: error.message }); // Return error as JSON
     }
 });
 

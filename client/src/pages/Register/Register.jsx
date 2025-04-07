@@ -9,16 +9,45 @@ import { Form, Button, Input, Select } from 'antd';
 import { useRegister } from '../../hooks/useRegister';
 import styles from './Register.module.css';
 
+
 const Register = () => {
     const { language } = useLanguage();
     const navigate = useNavigate();
     const { register } = useRegister();
     const [form] = Form.useForm(); // Initialize the form instance for dynamic updates
 
+    // Load reCAPTCHA script dynamically
+    useEffect(() => {
+        if (window.grecaptcha) {
+            window.grecaptcha.enterprise.ready(() => {
+                console.log('reCAPTCHA is ready');
+            });
+        } else {
+            console.error('reCAPTCHA not loaded');
+        }
+    }, []);
+
+    const handleRecaptcha = async () => {
+        if (window.grecaptcha) {
+            const token = await window.grecaptcha.enterprise.execute('6LeD0AsrAAAAAExinf4S5J104V1ncJ4uTkeyetS3', { action: 'submit' });
+            console.log('CAPTCHA Token:', token);
+            return token;
+        } else {
+            console.error('reCAPTCHA not loaded');
+            return null;
+        }
+    };
 
     const onFinish = async (values) => {
         try {
-            const success = await register(values);
+            const captchaToken = await handleRecaptcha();
+            if (!captchaToken) {
+                alert(getTranslation('ACCOUNT_VALIDATION_RECAPTCHA', language));
+                return;
+            }
+            console.log('Payload sent to register:', { ...values, captchaToken }); // Убедитесь, что captchaToken присутствует
+
+            const success = await register({ ...values, captchaToken });
             console.log('Register success:', success);
             if (success) {
                 navigate('/');
@@ -28,7 +57,7 @@ const Register = () => {
             form.setFields([
                 {
                     name: 'email',
-                    errors: [err.message], // Show the error message on the email field
+                    errors: [getTranslation(err.message, language) || 'An unknown error occured.'], // Show the error message on the email field
                 },
             ]);
         }
@@ -37,6 +66,10 @@ const Register = () => {
     const onFinishFailed = (errorInfo) => {
         console.error('Failed:', errorInfo);
     };
+
+
+
+
 
     // Dynamically update the country field when the language changes
     useEffect(() => {
