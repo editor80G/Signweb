@@ -18,40 +18,76 @@
 #           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KINETIC_PHYSICS_455419_C3 }}
 #           channelId: live
 #           projectId: kinetic-physics-455419-c3
+# name: Deploy to Firebase Hosting on merge
+# on:
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   build_and_deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       # Checkout the repository
+#       - uses: actions/checkout@v4
+
+#       # Clean and install dependencies
+#       - name: Clean and install dependencies
+#         working-directory: ./client
+#         run: |
+#           rm -rf node_modules package-lock.json
+#           npm install
+
+#       # Navigate to the client directory and install dependencies
+#       - name: Install dependencies
+#         working-directory: ./client
+#         run: npm ci
+
+#       # Build the project
+#       - name: Build project
+#         working-directory: ./client
+#         run: npm run build
+
+#       # Deploy to Firebase Hosting
+#       - uses: FirebaseExtended/action-hosting-deploy@v0
+#         with:
+#           repoToken: ${{ secrets.GITHUB_TOKEN }}
+#           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KINETIC_PHYSICS_455419_C3 }}
+#           channelId: live
+#           projectId: kinetic-physics-455419-c3
+#           entryPoint: ./client
 name: Deploy to Firebase Hosting on merge
+
 on:
   push:
     branches:
       - main
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      # Checkout the repository
-      - uses: actions/checkout@v4
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      # Clean and install dependencies
+      # Step 2: Clean and install dependencies
       - name: Clean and install dependencies
         working-directory: ./client
         run: |
           rm -rf node_modules package-lock.json
           npm install
 
-      # Navigate to the client directory and install dependencies
-      - name: Install dependencies
-        working-directory: ./client
-        run: npm ci
-
-      # Build the project
+      # Step 3: Build the project
       - name: Build project
         working-directory: ./client
         run: npm run build
 
-      # Deploy to Firebase Hosting
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      # Step 4: Deploy to Firebase Hosting
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KINETIC_PHYSICS_455419_C3 }}
-          channelId: live
           projectId: kinetic-physics-455419-c3
-          entryPoint: ./client
+          channelId: live
+          entryPoint: ./client/dist

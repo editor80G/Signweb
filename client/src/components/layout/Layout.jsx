@@ -5,7 +5,6 @@ import Nav from './Nav';
 import { Outlet, useLocation } from 'react-router-dom';
 import SearchPublication from '../common/SearchPublication/SearchPublication';
 
-
 const Layout = () => {
     const location = useLocation();
     // Show SearchPublication only on specific routes
