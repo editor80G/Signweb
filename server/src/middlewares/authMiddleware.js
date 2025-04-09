@@ -87,8 +87,21 @@ export function authorize(roles) {
 
     const { userRole } = req.user; // Assumes the user is decoded from JWT
 
-    if (!roles.includes(userRole)) {
-      return res.status(403).json({ message: 'Access denied' });
+    // if (!roles.includes(userRole)) {
+    //   return res.status(403).json({ message: 'Access denied' });
+    // }
+
+    // Check if userRole is an array
+    if (Array.isArray(userRole)) {
+      // Check if any role in userRole matches the allowed roles
+      if (!roles.some(role => userRole.includes(role))) {
+        return res.status(403).json({ message: 'Access denied' });
+      }
+    } else {
+      // If userRole is a string, check directly
+      if (!roles.includes(userRole)) {
+        return res.status(403).json({ message: 'Access denied' });
+      }
     }
 
     next();

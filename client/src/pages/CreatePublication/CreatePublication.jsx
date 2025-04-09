@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+//import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import api from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
@@ -11,16 +12,16 @@ import dayjs from 'dayjs';
 
 const { Option } = Select;
 const CreatePublication = () => {
-    const { isAuthenticated } = useContext(AuthContext);
+    // const { isAuthenticated } = useContext(AuthContext);
     const navigate = useNavigate();
     const { language } = useLanguage();
     const [form] = Form.useForm(); // Initialize the form instance for dynamic updates
 
-    useEffect(() => {
-        if (!isAuthenticated) {
-            navigate('/'); // Redirect to the home page if not authenticated
-        }
-    }, [isAuthenticated, navigate]);
+    // useEffect(() => {
+    //     if (!isAuthenticated) {
+    //         navigate('/'); // Redirect to the home page if not authenticated
+    //     }
+    // }, [isAuthenticated, navigate]);
 
     const onFinish = async (values) => {
         const { type, issue, date, image, file } = values;

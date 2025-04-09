@@ -15,7 +15,14 @@ export const useLogin = () => {
         try {
             const response = await api.post('/auth/login', { email, password, captchaVerificationToken });
             if (response.data.token) {
-                handleAuthChange(true);
+                // After successful registration, call /auth/status to get user role
+                const statusResponse = await api.get('/auth/status');
+                const { isAuthenticated, userRole } = statusResponse.data;
+
+                // Update authState with the latest information
+                handleAuthChange(isAuthenticated, userRole);
+
+                // handleAuthChange(true);
                 return response.data.success;
             } else {
                 throw new Error('Authentication failed');

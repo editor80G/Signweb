@@ -28,7 +28,7 @@ publicationsController.post('/create', isAuth, authorize(['admin']), async (req,
     const data = req.body;
     data.owner = req.user._id;
     try {
-        await publicationsService.createPublication(data);
+        await publicationsService.createPublication(data, req.user.userRole);
         res.status(201).json({ success: true });
     } catch (error) {
         res.status(400).json({ error: getErrorMessage(error) });
@@ -42,7 +42,7 @@ publicationsController.get('/edit/:id', isAuth, authorize(['admin']), async (req
 
     try {
         const publication = await publicationsService.getPublicationById(publicationId);
-        if (!publication.owner.equals(req.user._id)) {
+        if (!publication.owner.equals(req.user._id) && !req.user.userRole.includes('admin')) {
             return res.status(403).json({ error: 'You are not the owner of the publication' });
         }
         res.status(200).json({ publication: publication });
@@ -57,12 +57,13 @@ publicationsController.put('/edit/:id', isAuth, authorize(['admin']), async (req
     const publicationId = req.params.id;
     const userId = req.user._id;
     const data = req.body;
+
     try {
         const publication = await publicationsService.getPublicationById(publicationId);
-        if (!publication.owner.equals(req.user._id)) {
+        if (!publication.owner.equals(req.user._id) && !req.user.userRole.includes('admin')) {
             return res.status(403).json({ error: 'You are not the owner of the recipe' });
         }
-        await publicationsService.editPublicationById(publicationId, userId, data);
+        await publicationsService.editPublicationById(publicationId, userId, data, req.user.userRole);
         res.status(200).json({ success: true });
     } catch (error) {
         res.status(400).json({ error: getErrorMessage(error) });
@@ -75,11 +76,11 @@ publicationsController.delete('/delete/:id', isAuth, authorize(['admin']), async
     const publicationId = req.params.id;
     const userId = req.user._id;
     const publication = await publicationsService.getPublicationById(publicationId);
-    if (!publication.owner.equals(userId)) {
+    if (!publication.owner.equals(req.user._id) && !req.user.userRole.includes('admin')) {
         return res.status(403).json({ error: 'You are not the owner of the publication' });
     }
     try {
-        await publicationsService.deletePublicationById(publicationId, userId);
+        await publicationsService.deletePublicationById(publicationId, userId, req.user.userRole);
         res.status(200).json({ success: true });
     } catch (error) {
         res.status(500).json({ error: getErrorMessage(error) });

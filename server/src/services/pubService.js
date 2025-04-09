@@ -1,9 +1,12 @@
 import Publication from '../models/Publication.js';
 
 // Create a new publication 
-export async function createPublication(data) {
+export async function createPublication(data, userRole) {
     try {
-        return await Publication.create(data);
+        if (userRole.includes('admin')) {
+            return await Publication.create(data);
+        }
+        throw new Error('Error creating publication: User is not admin.');
     } catch (error) {
         throw new Error('Error creating publication: ' + error.message);
     }
@@ -62,10 +65,10 @@ export async function getAllPublicationsByType(type) {
 
 
 // Edit a publication by ID
-export async function editPublicationById(publicationId, userId, data) {
+export async function editPublicationById(publicationId, userId, data, userRole) {
     const publication = await Publication.findById(publicationId);
-    if (!publication.owner.equals(userId)) {
-        throw new Error('Error deleting publication: User is not the owner of the publication.');
+    if (!publication.owner.equals(userId) && !userRole.includes('admin')) {
+        throw new Error('Error editing publication: User is not admin or the owner of the publication.');
     }
     try {
         return await Publication.findByIdAndUpdate(publicationId, data, { runValidators: true });
@@ -75,9 +78,9 @@ export async function editPublicationById(publicationId, userId, data) {
 }
 
 // Delete a publication by ID
-export async function deletePublicationById(publicationId, userId) {
+export async function deletePublicationById(publicationId, userId, userRole) {
     const publication = await Publication.findById(publicationId);
-    if (!publication.owner.equals(userId)) {
+    if (!publication.owner.equals(userId) && !userRole.includes('admin')) {
         throw new Error('Error deleting publication: User is not the owner of the publication.');
     }
     try {

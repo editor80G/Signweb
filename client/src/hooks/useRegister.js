@@ -28,8 +28,17 @@ export const useRegister = () => {
             });
 
             if (response.data.token) {
-                handleAuthChange(true);
-                console.log('useRegister: response.data.error:', response.data.token);
+                // After successful registration, call /auth/status to get user role
+                const statusResponse = await api.get('/auth/status');
+                const { isAuthenticated, userRole } = statusResponse.data;
+
+                // Update authState with the latest information
+                handleAuthChange(isAuthenticated, userRole);
+
+                console.log('useRegister: Registration successful');
+
+                // handleAuthChange(true);
+                // console.log('useRegister: response.data.error:', response.data.token);
                 return response.data.success;
             } else {
                 throw new Error('Authentication failed');
