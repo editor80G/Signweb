@@ -5,7 +5,7 @@ import { getTranslation } from '../../i18n/getTranslations';
 import { useLanguage } from '../../context/LanguageContext';
 
 const Nav = () => {
-    const { isAuthenticated } = useContext(AuthContext);
+    const { authState } = useContext(AuthContext);
     const { language } = useLanguage();
     return (
         <nav>
@@ -18,9 +18,11 @@ const Nav = () => {
                         <li><Link to="/publications/catalogs">{getTranslation('NAV_OUR_PUBLICATIONS_CATALOG', language)}</Link></li>
                     </ul>
                 </li>
-                {isAuthenticated ? (
+                {authState.isAuthenticated ? (
                     <>
-                        <li><Link to="/publications/create">{getTranslation('NAV_CREATE_PUBLICATION', language)}</Link></li>
+                        {authState.userRole.includes('admin') && (
+                            <li><Link to="/publications/create">{getTranslation('NAV_CREATE_PUBLICATION', language)}</Link></li>
+                        )}
                         <li><Link to="/logout">{getTranslation('NAV_LOGOUT', language)}</Link></li>
                     </>
                 ) : (

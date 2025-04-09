@@ -15,7 +15,7 @@ const DetailsPublication = () => {
     const [isOwner, setIsOwner] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { isAuthenticated } = useContext(AuthContext);
+    const { authState } = useContext(AuthContext);
     const { language } = useLanguage();
 
     useEffect(() => {
@@ -92,7 +92,7 @@ const DetailsPublication = () => {
                 <p className={styles.details}>
                     3. Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat id itaque possimus magnam placeat. Itaque incidunt rem corrupti aspernatur sapiente animi. Rem maxime quae ut odio cumque possimus voluptas esse!
                 </p>
-                {isAuthenticated ? (
+                {authState.isAuthenticated ? (
                     <>
                         <p className={styles.buttonsContainerDetailsPublication}>
                             <a href={`${config.baseUrl}${publication.file}`} target="_blank" rel="noopener noreferrer">
@@ -102,7 +102,7 @@ const DetailsPublication = () => {
                                     }`}
                             </a>
                         </p>
-                        {isOwner && (
+                        {(isOwner || authState.userRole.includes('admin')) && ( // Проверяем, что пользователь либо владелец, либо администратор
                             <div className={styles.buttonsContainerDetailsPublication}>
                                 <button onClick={handleEdit} className="btn btn-edit">
                                     {getTranslation('PUB_EDIT', language) || 'Edit'}

@@ -8,10 +8,12 @@ import DetailsPublication from '../pages/DetailsPublication/DetailsPublication';
 import EditPublication from '../pages/EditPublication/EditPublication';
 import AuthGuard from '../guards/AuthGuard';
 import GuestGuard from '../guards/GuestGuard';
+import RoleGuard from '../guards/RoleGuard';
 import AuthPage from '../pages/AuthPage/AuthPage';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import Logout from '../pages/Logout/Logout';
+import AccessDenied from '../components/common/AccessDenied/AccessDenied';
 
 const AppRoutes = () => {
     return (
@@ -23,6 +25,7 @@ const AppRoutes = () => {
                 <Route path="/publications/magazines" element={<Publications type="magazine" />} />
                 <Route path="/publications/catalogs" element={<Publications type="catalog" />} />
                 <Route path="/publications/details/:id" element={<DetailsPublication />} />
+                <Route path="/access-denied" element={<AccessDenied />} />
 
                 {/* Guarded routes for guests */}
                 <Route element={<GuestGuard />}>
@@ -35,9 +38,14 @@ const AppRoutes = () => {
 
                 {/* Guarded routes for authenticated users */}
                 <Route element={<AuthGuard />}>
+                    {/* <Route path="/publications/create" element={<CreatePublication />} />
+                    <Route path="/publications/edit/:id" element={<EditPublication />} /> */}
+                    <Route path="/logout" element={<Logout />} />
+                </Route>
+                {/* Guarded routes for admin users */}
+                <Route element={<RoleGuard allowedRoles={['admin']} />}>
                     <Route path="/publications/create" element={<CreatePublication />} />
                     <Route path="/publications/edit/:id" element={<EditPublication />} />
-                    <Route path="/logout" element={<Logout />} />
                 </Route>
             </Route>
         </Routes>

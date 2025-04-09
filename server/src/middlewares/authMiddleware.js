@@ -78,3 +78,19 @@ export function isOwner(req, res, next) {
   }
   next();
 }
+
+export function authorize(roles) {
+  return (req, res, next) => {
+    if (!req.user) {
+      return res.status(401).json({ message: 'Unauthorized access. Please log in.' });
+    }
+
+    const { userRole } = req.user; // Assumes the user is decoded from JWT
+
+    if (!roles.includes(userRole)) {
+      return res.status(403).json({ message: 'Access denied' });
+    }
+
+    next();
+  };
+}

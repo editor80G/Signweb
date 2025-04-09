@@ -3,24 +3,42 @@ import { AuthContext } from '../context/AuthContext';
 import api from '../utils/api';
 
 export const useAuthStatus = () => {
-    const { handleAuthChange } = useContext(AuthContext);
+    const { authState, handleAuthChange } = useContext(AuthContext);
     const [loading, setLoading] = useState(true); // Initialize loading state
+    const [error, setError] = useState(null);
 
     useEffect(() => {
+        let isMounted = true; // Track if the component is mounted
         const checkAuthStatus = async () => {
             try {
                 const response = await api.get('/auth/status');
-                handleAuthChange(response.data.isAuthenticated);
+                if (isMounted) {
+                    handleAuthChange(response.data.isAuthenticated, response.data.userRole);
+
+                }
             } catch (error) {
                 console.error('Error checking authentication status:', error);
-                handleAuthChange(false);
+                if (isMounted) {
+                    handleAuthChange(false, null);
+                    setError(error);
+                }
             } finally {
-                setLoading(false); // Stop loading when the check is complete
+                if (isMounted) {
+                    setLoading(false); // Set loading to false after the request completes
+                }
             }
         };
 
         checkAuthStatus();
+        return () => {
+            isMounted = false; // Flag the component as unmounted
+        };
     }, [handleAuthChange]);
 
-    return { loading }; // Return loading state
+    return {
+        loading,
+        error,
+        isAuthenticated: authState.isAuthenticated,
+        userRole: authState.userRole,
+    };
 };

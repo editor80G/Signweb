@@ -301,8 +301,15 @@ export const translations = {
         SEARCH_PUBLICATIONS_DATE: 'Дата выпуска',
         SEARCH_PUBLICATIONS_OPEN_FILE: 'Открыть файл',
 
-        ERROR_LOGIN_USER_ALREADY_EXISTS: 'Пользователь с таким адресом электронной почты уже существует, пожалуйста перейдите к входу.',
+        ERROR_REGISTER_USER_ALREADY_EXISTS: 'Пользователь с таким адресом электронной почты уже существует, пожалуйста перейдите к входу.',
+        ERROR_REGISTER_PASSWORDS_DO_NOT_MATCH: 'Пароли не совпадают.',
 
+        ERROR_LOGIN_USER_NOT_ACTIVE: 'Пользователь не активен, пожалуйста активируйте аккаунт по ссылке, отправленной на вашу электронную почту.',
+        ERROR_LOGIN_ATTEMPTS_EXCEEDED: 'Слишком много неудачных попыток входа. Пожалуйста, свяжитесь с поддержкой.',
+
+
+        ERROR_AUTH_INVALID_CREDENTIALS: 'Неверные учетные данные.',
+        ERROR_AUTH_CAPTCHA_VERIFICATION_FAILED: 'Проверка капчи не прошла. Пользователь, вероятно, является ботом.',
     },
     en: {
         SIGN_MAKING: 'Sign making and visual design',
@@ -608,7 +615,14 @@ export const translations = {
         SEARCH_PUBLICATIONS_DATE: 'Publication Date',
         SEARCH_PUBLICATIONS_OPEN_FILE: 'Open File',
 
-        ERROR_LOGIN_USER_ALREADY_EXISTS: 'A user with this email address already exists, please go to log in.',
+        ERROR_REGISTER_USER_ALREADY_EXISTS: 'A user with this email address already exists, please go to log in.',
+        ERROR_REGISTER_PASSWORDS_DO_NOT_MATCH: 'Passwords do not match.',
+
+        ERROR_LOGIN_USER_NOT_ACTIVE: 'User is not active, please activate your account with the link sent to your email.',
+        ERROR_LOGIN_ATTEMPTS_EXCEEDED: 'Account is locked due to too many failed login attempts. Please contact support.',
+
+        ERROR_AUTH_INVALID_CREDENTIALS: 'Invalid credentials.',
+        ERROR_AUTH_CAPTCHA_VERIFICATION_FAILED: 'Captcha verification failed. User is likely a bot.',
 
 
 

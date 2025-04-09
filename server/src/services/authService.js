@@ -6,11 +6,11 @@ import fetch from 'node-fetch';
 
 export const register = async (userData) => {
     if (userData.password !== userData.confirmPassword) {
-        throw new Error('Passwords do not match');
+        throw new Error('ERROR_REGISTER_PASSWORDS_DO_NOT_MATCH');
     }
     const existingUser = await User.findOne({ email: userData.email }).select({ _id: 1 }).lean();
     if (existingUser) {
-        throw new Error('ERROR_LOGIN_USER_ALREADY_EXISTS');
+        throw new Error('ERROR_REGISTER_USER_ALREADY_EXISTS');
     }
     return generateToken(await User.create(userData));
 }
@@ -18,13 +18,13 @@ export const register = async (userData) => {
 export const login = async (userData) => {
     const user = await User.findOne({ email: userData.email });
     if (!user) {
-        throw new Error('Invalid credentials');
+        throw new Error('ERROR_AUTH_INVALID_CREDENTIALS');
     }
 
     const isPasswordValid = await bcrypt.compare(userData.password, user.password);
 
     if (!user.isActive) {
-        throw new Error('User is not active, please activate your account with the link sent to your email');
+        throw new Error('ERROR_LOGIN_USER_NOT_ACTIVE');
     }
     if (!isPasswordValid && user.loginAttempts <= 5) {
         // user.loginAttempts += 1;
@@ -34,9 +34,9 @@ export const login = async (userData) => {
             { email: userData.email }, // Filter
             { $inc: { loginAttempts: 1 } } // Increment loginAttempts by 1
         );
-        throw new Error('Invalid credentials');
+        throw new Error('ERROR_AUTH_INVALID_CREDENTIALS');
     } else if (!isPasswordValid && user.loginAttempts > 5) {
-        throw new Error('Account is locked due to too many failed login attempts. Please contact support.');
+        throw new Error('ERROR_LOGIN_ATTEMPTS_EXCEEDED');
     } else {
         await User.updateOne(
             { email: userData.email },
@@ -61,7 +61,7 @@ const verifyCaptcha = async (captchaVerificationToken) => {
     if (isCaptchaValid) {
         return true;
     } else {
-        throw new Error('Captcha verification failed. User is likely a bot.');
+        throw new Error('ERROR_AUTH_CAPTCHA_VERIFICATION_FAILED');
     }
 };
 

@@ -12,7 +12,8 @@ export const generateToken = async (user) => {
     const payload = {
         _id: user._id,
         email: user.email,
-        username: user.username
+        username: user.username,
+        userRole: user.userRole
     };
     const token = await jsonwebtoken.sign(payload, JWT_SECRET, { expiresIn: '30m' });
     return token;

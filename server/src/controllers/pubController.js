@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { getErrorMessage } from '../utils/errorUtils.js';
-import { isAuth } from '../middlewares/authMiddleware.js';
+import { isAuth, authorize } from '../middlewares/authMiddleware.js';
 import * as publicationsService from '../services/pubService.js';
+
 
 const publicationsController = Router();
 
@@ -23,7 +24,7 @@ publicationsController.get('/:type?', async (req, res) => {
 
 // CREATE page (authenticated users only)
 // POST method
-publicationsController.post('/create', isAuth, async (req, res) => {
+publicationsController.post('/create', isAuth, authorize(['admin']), async (req, res) => {
     const data = req.body;
     data.owner = req.user._id;
     try {
@@ -34,9 +35,9 @@ publicationsController.post('/create', isAuth, async (req, res) => {
     }
 });
 
-// UPDATE page (authenticated users that are owners only)
+// UPDATE page (authenticated users of admin that are owners only)
 // GET method
-publicationsController.get('/edit/:id', isAuth, async (req, res) => {
+publicationsController.get('/edit/:id', isAuth, authorize(['admin']), async (req, res) => {
     const publicationId = req.params.id; // get the id from the URL
 
     try {
@@ -52,7 +53,7 @@ publicationsController.get('/edit/:id', isAuth, async (req, res) => {
 
 // UPDATE page (authenticated users that are owners only)
 // PUT method
-publicationsController.put('/edit/:id', isAuth, async (req, res) => {
+publicationsController.put('/edit/:id', isAuth, authorize(['admin']), async (req, res) => {
     const publicationId = req.params.id;
     const userId = req.user._id;
     const data = req.body;
@@ -70,7 +71,7 @@ publicationsController.put('/edit/:id', isAuth, async (req, res) => {
 
 // DELETE (authenticated users that are owners only)
 // DELETE method
-publicationsController.delete('/delete/:id', isAuth, async (req, res) => {
+publicationsController.delete('/delete/:id', isAuth, authorize(['admin']), async (req, res) => {
     const publicationId = req.params.id;
     const userId = req.user._id;
     const publication = await publicationsService.getPublicationById(publicationId);

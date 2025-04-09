@@ -23,7 +23,7 @@ const authController = Router();
 // Endpoint to check authentication status
 authController.get('/status', auth, (req, res) => {
     if (req.user) {
-        return res.json({ isAuthenticated: true });
+        return res.json({ isAuthenticated: true, userRole: req.user.userRole });
     } else {
         return res.json({ isAuthenticated: false });
     }
