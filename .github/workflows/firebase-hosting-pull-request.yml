@@ -1,4 +1,48 @@
 # 
+# name: Deploy to Firebase Hosting on PR
+
+# on:
+#   pull_request:
+#     branches:
+#       - main
+
+# permissions:
+#   checks: write
+#   contents: read
+#   pull-requests: write
+
+# jobs:
+#   build_and_preview:
+#     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+#     runs-on: ubuntu-latest
+#     steps:
+#       # Step 1: Checkout the repository
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
+
+#       # Step 2: Clean and install dependencies
+#       - name: Clean and install dependencies
+#         working-directory: ./client
+#         run: |
+#           rm -rf node_modules package-lock.json
+#           npm install
+
+#       # Step 3: Build the project
+#       - name: Build project
+#         working-directory: ./client
+#         run: npm run build
+
+#       # Step 4: Deploy to Firebase Hosting Preview Channel
+#       - name: Deploy to Firebase Hosting Preview Channel
+#         uses: FirebaseExtended/action-hosting-deploy@v0
+#         with:
+#           repoToken: ${{ secrets.GITHUB_TOKEN }}
+#           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KINETIC_PHYSICS_455419_C3 }}
+#           projectId: kinetic-physics-455419-c3
+#           channelId: pr-${{ github.event.pull_request.number }}
+#           expires: 7d
+#           entryPoint: ./client/dist
+
 name: Deploy to Firebase Hosting on PR
 
 on:
@@ -41,4 +85,4 @@ jobs:
           projectId: kinetic-physics-455419-c3
           channelId: pr-${{ github.event.pull_request.number }}
           expires: 7d
-          entryPoint: ./client/dist
+          entryPoint: ./client
